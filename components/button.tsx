@@ -8,7 +8,7 @@ const Button: React.FC<{children: React.ReactNode}> = ({children}) => {
 
     const styles = StyleSheet.create({
         pressable: { width: "auto", borderRadius: 50, backgroundColor: "#ffffff", padding: 20, margin: 20 },
-        text: { color: "black", fontSize: 16, fontFamily: "kronaOne" }
+        text: { color: "black", fontSize: 16, fontFamily: "kronaOne", textAlign: "center" }
     })
 
     return (

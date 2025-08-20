@@ -1,22 +1,26 @@
 import { ReactNode } from "react";
-import { View, Image, StyleSheet, ImageBackground } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ScreenContainerProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 const ScreenContainer = ({children}: ScreenContainerProps) => {
+
+    const { width, height } = Dimensions.get("window");
+
     const styles = StyleSheet.create({
-        container: { flex: 1, justifyContent: "flex-start", alignItems: "center", flexDirection: "column" },
-        image: { flex: 1, justifyContent: "flex-start", alignItems: "center", flexDirection: "column" }
+        container: { flex: 1 },
+        image: { width: width, alignItems: "stretch", flexDirection: "column" }
     });
 
     return (
-        <ImageBackground style={styles.image} src="../assets/images/backgroundImage.jpeg" resizeMode="cover">
-            <View style={styles.container}>
+        <SafeAreaView>
+            <ImageBackground style={styles.image} source={require("../assets/images/backgroundImage.jpeg")} resizeMode="cover">
                 {children}
-            </View>
-        </ImageBackground>
+            </ImageBackground>
+        </SafeAreaView>
     )
 }
 

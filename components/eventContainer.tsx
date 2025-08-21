@@ -1,5 +1,5 @@
 import Event from "@/models/Event";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Dimensions, Pressable, StyleSheet, View } from "react-native";
 import Checkbox from 'expo-checkbox';
 import HeaderText from "./text/headerText";
 import RegularText from "./text/regularText";
@@ -12,11 +12,12 @@ interface EventProps {
 const EventContainer = ({event}: EventProps) => {
 
     const [activeEvent, setActiveEvent] = useState<Event>(event);
+    const { width, height }= Dimensions.get("screen");
     
     const styles = StyleSheet.create({
         container: { borderRadius: 25, backgroundColor: "#FBFBFD", padding: 20, 
-            marginTop: 7.5, marginBottom: 7.5, boxShadow: "2px 2px 6px gray", },
-        checkbox: { borderRadius: 50, height: 40, width: 40 },
+            marginTop: 7.5, marginBottom: 7.5, boxShadow: "2px 2px 6px gray", width: width - 20 },
+        checkbox: { borderRadius: 50, height: 50, width: 50, borderWidth: 2 },
         topContainer: { display: "flex", flexDirection: "row", justifyContent: "space-between" }
     })
 
@@ -25,7 +26,7 @@ const EventContainer = ({event}: EventProps) => {
             <View style={styles.container}>
                 <View style={styles.topContainer}>
                     <HeaderText>{event.title}</HeaderText>
-                    <Checkbox style={styles.checkbox} value={activeEvent.isCompleted} 
+                    <Checkbox color={"#007AFF"} style={styles.checkbox} value={activeEvent.isCompleted} 
                     onValueChange={(checked) => { setActiveEvent((prev) => ({...prev, isCompleted: checked})) }}
                     />
                 </View>

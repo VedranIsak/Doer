@@ -1,19 +1,25 @@
 import { useFonts } from "expo-font";
+import { ReactNode } from "react";
 import { Pressable, StyleSheet, View, Text } from "react-native";
 
-const Button: React.FC<{children: React.ReactNode}> = ({children}) => {
+interface ButtonProps {
+    children: ReactNode;
+    buttonPress: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({children, buttonPress}: ButtonProps) => {
     const [fontsLoaded] = useFonts({
-        kronaOne: require("../assets/fonts/KronaOne-Regular.ttf")
+        roboto: require("../assets/fonts/Roboto-VariableFont_wdth,wght.ttf")
     });
 
     const styles = StyleSheet.create({
-        pressable: { width: "auto", borderRadius: 50, backgroundColor: "#ffffff", padding: 20, margin: 20 },
-        text: { color: "black", fontSize: 16, fontFamily: "kronaOne", textAlign: "center" }
+        pressable: { borderRadius: 50, backgroundColor: "#007AFF", padding: 20 },
+        text: { color: "white", fontSize: 20, fontWeight: "bold", fontFamily: "roboto", textAlign: "center" }
     })
 
     return (
         <View>
-            <Pressable style={styles.pressable}>
+            <Pressable style={styles.pressable} onPress={buttonPress}>
                 <Text style={styles.text}>{children}</Text>
             </Pressable>
         </View>

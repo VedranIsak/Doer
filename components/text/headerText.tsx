@@ -7,7 +7,7 @@ const HeaderText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
 
     const styles = StyleSheet.create({
-        text: { fontFamily: "roboto", color: "#000000", fontSize: 20 }
+        text: { fontFamily: "roboto", fontWeight: "bold", color: "#000000", fontSize: 24 }
     })
 
     return (

@@ -8,7 +8,7 @@ const RegularText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
 
     const styles = StyleSheet.create({
-        text: { fontFamily: "roboto", color: "#000000", fontSize: 16 }
+        text: { fontFamily: "roboto", color: "#000000", fontSize: 20 }
     })
 
 

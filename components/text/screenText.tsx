@@ -7,7 +7,7 @@ const ScreenText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     });
 
     const styles = StyleSheet.create({
-        text: { fontFamily: "roboto", color: "white", fontSize: 24, margin: 25 }
+        text: { fontFamily: "roboto", color: "white", fontWeight: "bold", fontSize: 32, margin: 25 }
     })
 
     return (

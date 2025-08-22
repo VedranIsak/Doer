@@ -3,7 +3,7 @@ import Event from '../models/Event';
 const events: Event[] = [
   {
     id: 1,
-    date: new Date("2025-08-20"),
+    date: "2025-08-20",
     time: "10:00",
     title: "Team Meeting",
     description: "Weekly project sync",
@@ -12,7 +12,7 @@ const events: Event[] = [
   },
   {
     id: 2,
-    date: new Date("2025-08-21"),
+    date: "2025-08-21",
     time: "14:30",
     title: "Doctor Appointment",
     description: "Routine check-up",
@@ -21,7 +21,7 @@ const events: Event[] = [
   },
   {
     id: 3,
-    date: new Date("2025-08-22"),
+    date: "2025-08-22",
     time: "09:00",
     title: "Workshop",
     description: "TypeScript basics",
@@ -30,7 +30,7 @@ const events: Event[] = [
   },
   {
     id: 4,
-    date: new Date("2025-08-23"),
+    date: "2025-08-23",
     time: "18:00",
     title: "Dinner with Friends",
     description: "Italian restaurant downtown",
@@ -39,7 +39,7 @@ const events: Event[] = [
   },
   {
     id: 5,
-    date: new Date("2025-08-24"),
+    date: "2025-08-24",
     time: undefined,
     title: "Day Off",
     description: "Relax and recharge",
@@ -48,7 +48,7 @@ const events: Event[] = [
   },
   {
     id: 6,
-    date: new Date("2025-08-25"),
+    date: "2025-08-25",
     time: "11:00",
     title: "Interview",
     description: "Frontend developer position",
@@ -57,7 +57,7 @@ const events: Event[] = [
   },
   {
     id: 7,
-    date: new Date("2025-08-26"),
+    date: "2025-08-26",
     time: "08:30",
     title: "Gym Session",
     description: undefined,
@@ -66,7 +66,7 @@ const events: Event[] = [
   },
   {
     id: 8,
-    date: new Date("2025-08-27"),
+    date: "2025-08-27",
     time: "13:00",
     title: "Client Call",
     description: "Discuss project requirements",
@@ -75,7 +75,7 @@ const events: Event[] = [
   },
   {
     id: 9,
-    date: new Date("2025-08-28"),
+    date: "2025-08-28",
     time: "19:00",
     title: "Concert",
     description: "Rock band live performance",
@@ -84,7 +84,7 @@ const events: Event[] = [
   },
   {
     id: 10,
-    date: new Date("2025-08-29"),
+    date: "2025-08-29",
     time: "16:00",
     title: "Workshop",
     description: "Advanced React Patterns",
@@ -93,7 +93,7 @@ const events: Event[] = [
   },
   {
     id: 11,
-    date: new Date("2025-08-10"),
+    date: "2025-08-10",
     time: "15:00",
     title: "Birthday Party",
     description: "John’s birthday celebration",
@@ -102,7 +102,7 @@ const events: Event[] = [
   },
   {
     id: 12,
-    date: new Date("2025-08-09"),
+    date: "2025-08-09",
     time: "09:30",
     title: "Car Service",
     description: "Oil change & maintenance",
@@ -111,7 +111,7 @@ const events: Event[] = [
   },
   {
     id: 13,
-    date: new Date("2025-08-08"),
+    date: "2025-08-08",
     time: undefined,
     title: "Reading Day",
     description: "Finish a book",
@@ -120,7 +120,7 @@ const events: Event[] = [
   },
   {
     id: 14,
-    date: new Date("2025-08-07"),
+    date: "2025-08-07",
     time: "20:00",
     title: "Movie Night",
     description: "Watch the new sci-fi release",
@@ -129,7 +129,7 @@ const events: Event[] = [
   },
   {
     id: 15,
-    date: new Date("2025-08-06"),
+    date: "2025-08-06",
     time: "07:00",
     title: "Morning Run",
     description: undefined,
@@ -138,7 +138,7 @@ const events: Event[] = [
   },
   {
     id: 16,
-    date: new Date("2025-08-05"),
+    date: "2025-08-05",
     time: "12:00",
     title: "Lunch with Mentor",
     description: "Career advice session",
@@ -147,7 +147,7 @@ const events: Event[] = [
   },
   {
     id: 17,
-    date: new Date("2025-08-04"),
+    date: "2025-08-04",
     time: "17:30",
     title: "Workshop",
     description: "UI/UX design principles",
@@ -156,7 +156,7 @@ const events: Event[] = [
   },
   {
     id: 18,
-    date: new Date("2025-08-03"),
+    date: "2025-08-03",
     time: "08:00",
     title: "Yoga Class",
     description: undefined,
@@ -165,7 +165,7 @@ const events: Event[] = [
   },
   {
     id: 19,
-    date: new Date("2025-08-02"),
+    date: "2025-08-02",
     time: "10:30",
     title: "Grocery Shopping",
     description: "Weekly supplies",
@@ -174,7 +174,7 @@ const events: Event[] = [
   },
   {
     id: 20,
-    date: new Date("2025-08-01"),
+    date: "2025-08-01",
     time: "19:30",
     title: "Dinner with Family",
     description: "Home-cooked meal",

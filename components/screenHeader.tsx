@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native"
-import HomeIcon from "./icons/homeIcon"
+import HomeIcon from "./pressable/homeIcon"
 import ScreenText from "./text/screenText"
 import { ReactNode } from "react"
 

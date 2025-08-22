@@ -15,9 +15,9 @@ const EventContainer = ({event}: EventProps) => {
     const { width, height }= Dimensions.get("screen");
     
     const styles = StyleSheet.create({
-        container: { borderRadius: 25, backgroundColor: "#FBFBFD", padding: 20, 
-            marginTop: 7.5, marginBottom: 7.5, boxShadow: "2px 2px 6px gray", width: width - 20 },
-        checkbox: { borderRadius: 50, height: 50, width: 50, borderWidth: 2 },
+        container: { borderRadius: 35, backgroundColor: "#FBFBFD", padding: 20, 
+            marginTop: 7.5, marginBottom: 7.5, width: width - 20 },
+        checkbox: { borderRadius: 50, height: 50, width: 50, borderWidth: 5 },
         topContainer: { display: "flex", flexDirection: "row", justifyContent: "space-between" }
     })
 
@@ -30,7 +30,7 @@ const EventContainer = ({event}: EventProps) => {
                     onValueChange={(checked) => { setActiveEvent((prev) => ({...prev, isCompleted: checked})) }}
                     />
                 </View>
-                <RegularText>{event.date.toDateString()}</RegularText>
+                <RegularText>{event.date}</RegularText>
                 <RegularText>{event.description}</RegularText>
             </View>
         </Pressable>

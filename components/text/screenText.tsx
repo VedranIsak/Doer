@@ -1,7 +1,13 @@
 import { useFonts } from 'expo-font';
+import { ReactNode } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 
-const ScreenText: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface ScreenTextProps {
+    children?: ReactNode;
+    color?: string;
+}
+
+const ScreenText = ({ children, color }: ScreenTextProps) => {
     const [fontsLoaded] = useFonts({
         roboto: require("../../assets/fonts/Roboto-VariableFont_wdth,wght.ttf")
     });

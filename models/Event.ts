@@ -1,16 +1,16 @@
 class Event {
     id: number;
-    date: Date;
+    date: string;
     time: string | undefined;
     title: string;
     description: string | undefined;
     isUpcoming: boolean;
     isCompleted: boolean;
 
-    constructor(id: number, date: Date, time: string | undefined, title: string, 
+    constructor(id: number, date: string, time: string | undefined, title: string, 
         description: string, isUpcoming: boolean, isCompleted: boolean) {
         this.id = id;
-        this.date = date;
+        this.date = new Intl.DateTimeFormat("en-CA").format(new Date(date));;
         this.time = time;
         this.title = title;
         this.description = description;

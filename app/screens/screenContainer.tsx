@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Dimensions, ImageBackground, StyleSheet, View } from "react-native";
+import { Dimensions, ImageBackground, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ScreenContainerProps {
@@ -11,13 +11,13 @@ const ScreenContainer = ({children}: ScreenContainerProps) => {
     const { width, height } = Dimensions.get("window");
 
     const styles = StyleSheet.create({
-        container: { flex: 1 },
-        image: { width: width, alignItems: "stretch", flexDirection: "column" }
+        container: { height: height, width: width },
+        image: { height: height, width: width }
     });
 
     return (
-        <SafeAreaView>
-            <ImageBackground style={styles.image} source={require("../assets/images/backgroundImage.jpeg")} resizeMode="cover">
+        <SafeAreaView style={styles.container}>
+            <ImageBackground style={styles.image} source={require("../../assets/images/backgroundImage.jpeg")} resizeMode="cover">
                 {children}
             </ImageBackground>
         </SafeAreaView>

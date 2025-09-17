@@ -1,4 +1,4 @@
-class Event {
+class Task {
     id: number;
     date: string;
     time: string | undefined;
@@ -23,4 +23,4 @@ class Event {
     }
 }
 
-export default Event;
+export default Task;

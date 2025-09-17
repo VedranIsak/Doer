@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import { ReactNode } from "react";
-import { Pressable, StyleSheet, View, Text, DimensionValue } from "react-native";
+import { Pressable, StyleSheet, Text, DimensionValue } from "react-native";
 
 interface ButtonProps {
     children?: ReactNode;
@@ -10,12 +10,19 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({children, buttonPress, width}: ButtonProps) => {
     const [fontsLoaded] = useFonts({
-        roboto: require("../../assets/fonts/Roboto-VariableFont_wdth,wght.ttf")
+        Akira: require("@/assets/fonts/Akira.otf")
     });
 
+    if(!fontsLoaded) {
+        return null;
+    }
+
     const styles = StyleSheet.create({
-        pressable: { borderRadius: 50, backgroundColor: "#007AFF", padding: 20, width: width ?? "auto" },
-        text: { color: "white", fontSize: 20, fontWeight: "bold", fontFamily: "roboto", textAlign: "center" }
+        pressable: { 
+            borderRadius: 50, backgroundColor: "rgb(173, 61, 111)", 
+            padding: 20, width: width ?? "auto", borderWidth: 3, borderColor: "rgba(255, 255, 255, 0.4)" 
+        },
+        text: { color: "white", fontSize: 20, fontFamily: "Akira", textAlign: "center" }
     })
 
     return (

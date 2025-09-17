@@ -1,24 +1,30 @@
-import Button from "@/components/pressable/button";
-import RegularText from "@/components/text/regularText";
-import Event from "@/models/Event";
+import ScreenContainer from "@/app/screenContainer";
+import Button from "@/components/button";
+import Paragraph from "@/components/paragraph";
+import Event from "@/models/Task";
 import { useState } from "react";
 import { Modal, StyleSheet, TextInput, View } from "react-native";
 
-const CreateEvent = () => {
+const Create = () => {
     const [newEvent, setNewEvent] = useState<Event>(new Event(
         100, new Date().toISOString().split('T')[0], "13.00", "Go to the store", "Go to the store", true, false
     ));
 
     const styles = StyleSheet.create({
-        container: { backgroundColor: "#FBFBFD", flex: 1, display: "flex", 
-            flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start" },
+        container: {  
+            flex: 1, flexDirection: "column", justifyContent: "flex-start", alignItems: "center" },
         buttonContainer: { width: "100%", flexDirection: "row", display: "flex", justifyContent: "space-evenly", alignItems: "center" },
-        textInput: { width: "90%", marginLeft: 5, fontSize: 20, height: "auto", borderWidth: 5, borderRadius: 50, borderColor: "#007AFF", padding: 20 }
+        textInput: { 
+            width: "90%", marginTop: 5, marginBottom: 10, fontSize: 18, height: "auto", 
+            borderWidth: 3, borderRadius: 15, borderColor: "rgba(255, 255, 255, 0.4)",
+            padding: 20, color: "white"
+        }
     })
 
     return ( 
+        <ScreenContainer title="New Task!" img="create">
         <View style={styles.container}>
-            <RegularText>Date</RegularText>
+            <Paragraph color={"white"} fontSize={18}>Date</Paragraph>
             <TextInput 
             style={styles.textInput} 
             placeholder="Date" 
@@ -26,7 +32,7 @@ const CreateEvent = () => {
             value={newEvent.date}
             onChangeText={text => setNewEvent(previous => ({...previous, date: text}))}
             />
-            <RegularText>Title</RegularText>
+            <Paragraph color={"white"} fontSize={18}>Title</Paragraph>
             <TextInput 
             style={styles.textInput} 
             placeholder="Title" 
@@ -34,7 +40,7 @@ const CreateEvent = () => {
             value={newEvent.title}
             onChangeText={text => setNewEvent(previous => ({...previous, title: text}))}
             />
-            <RegularText>Description</RegularText>
+            <Paragraph color={"white"} fontSize={18}>Description</Paragraph>
             <TextInput 
             style={styles.textInput} 
             multiline={true}
@@ -56,7 +62,8 @@ const CreateEvent = () => {
                 <Button buttonPress={() => { }} width={"45%"}>Cancel</Button>
             </View>
         </View>
+        </ScreenContainer>
     )
 }
 
-export default CreateEvent;
+export default Create;

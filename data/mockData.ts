@@ -1,9 +1,9 @@
-import Event from '../models/Event';
+import Task from '../models/Task';
 
-const events: Event[] = [
+const tasks: Task[] = [
   {
     id: 1,
-    date: "2025-08-20",
+    date: "2025-09-17",
     time: "10:00",
     title: "Team Meeting",
     description: "Weekly project sync",
@@ -12,7 +12,7 @@ const events: Event[] = [
   },
   {
     id: 2,
-    date: "2025-08-21",
+    date: "2025-09-17",
     time: "14:30",
     title: "Doctor Appointment",
     description: "Routine check-up",
@@ -21,7 +21,7 @@ const events: Event[] = [
   },
   {
     id: 3,
-    date: "2025-08-22",
+    date: "2025-09-17",
     time: "09:00",
     title: "Workshop",
     description: "TypeScript basics",
@@ -30,7 +30,7 @@ const events: Event[] = [
   },
   {
     id: 4,
-    date: "2025-08-23",
+    date: "2025-09-17",
     time: "18:00",
     title: "Dinner with Friends",
     description: "Italian restaurant downtown",
@@ -39,7 +39,7 @@ const events: Event[] = [
   },
   {
     id: 5,
-    date: "2025-08-24",
+    date: "2025-09-17",
     time: undefined,
     title: "Day Off",
     description: "Relax and recharge",
@@ -48,7 +48,7 @@ const events: Event[] = [
   },
   {
     id: 6,
-    date: "2025-08-25",
+    date: "2025-09-17",
     time: "11:00",
     title: "Interview",
     description: "Frontend developer position",
@@ -66,7 +66,7 @@ const events: Event[] = [
   },
   {
     id: 8,
-    date: "2025-08-27",
+    date: "2025-09-02",
     time: "13:00",
     title: "Client Call",
     description: "Discuss project requirements",
@@ -75,7 +75,7 @@ const events: Event[] = [
   },
   {
     id: 9,
-    date: "2025-08-28",
+    date: "2025-09-02",
     time: "19:00",
     title: "Concert",
     description: "Rock band live performance",
@@ -84,7 +84,7 @@ const events: Event[] = [
   },
   {
     id: 10,
-    date: "2025-08-29",
+    date: "2025-09-02",
     time: "16:00",
     title: "Workshop",
     description: "Advanced React Patterns",
@@ -183,4 +183,4 @@ const events: Event[] = [
   },
 ];
 
-export default events;
+export default tasks;

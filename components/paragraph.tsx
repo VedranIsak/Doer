@@ -17,12 +17,12 @@ const Paragraph = ({children, color = "black", fontSize = 16,
     marginBottom, marginTop, marginLeft, marginRight}: ParagraphProps) => {
     const [loaded] = useFonts({
         Akira: require("@/assets/fonts/Akira.otf"),
-        Fredoka: require("@/assets/fonts/Fredoka-Medium.ttf")
+        Roboto: require("@/assets/fonts/Roboto.ttf")
     });
 
     const getStyles = (fontSize: number) => (
         StyleSheet.create({
-            text: { fontFamily: (fontSize === 16 || fontSize === 18 ? "Fredoka" : "Akira"), 
+            text: { fontFamily: (fontSize === 22 ? "Akira" : "Roboto"), 
             color: color, fontSize: fontSize, marginTop: marginTop ?? 0, 
             marginBottom: marginBottom ?? 0, marginLeft: marginLeft ?? 0,
             marginRight: marginRight ?? 0

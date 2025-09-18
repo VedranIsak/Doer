@@ -6,11 +6,19 @@ interface ButtonProps {
     children?: ReactNode;
     buttonPress?: () => void;
     width?: DimensionValue;
+    backgroundColor?: string;
+    color?: string;
+    pressedColor?: string;
+    marginTop?: DimensionValue;
+    marginBottom?: DimensionValue;
 }
 
-const Button: React.FC<ButtonProps> = ({children, buttonPress, width}: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({children, buttonPress, width = "auto", 
+    backgroundColor = "white", color = "black",
+    pressedColor = "rgba(255, 255, 255, 0.4)",
+    marginTop = 0, marginBottom = 0} : ButtonProps) => {
     const [fontsLoaded] = useFonts({
-        Akira: require("@/assets/fonts/Akira.otf")
+        Roboto: require("@/assets/fonts/Roboto.ttf")
     });
 
     if(!fontsLoaded) {
@@ -19,14 +27,17 @@ const Button: React.FC<ButtonProps> = ({children, buttonPress, width}: ButtonPro
 
     const styles = StyleSheet.create({
         pressable: { 
-            borderRadius: 50, backgroundColor: "rgb(173, 61, 111)", 
-            padding: 20, width: width ?? "auto", borderWidth: 3, borderColor: "rgba(255, 255, 255, 0.4)" 
+            borderRadius: 25, padding: 20, width: width, borderWidth: 3,
+            backgroundColor: backgroundColor, borderColor: "rgba(255, 255, 255, .5)", 
+            marginBottom: marginBottom, marginTop: marginTop
         },
-        text: { color: "white", fontSize: 20, fontFamily: "Akira", textAlign: "center" }
+        text: { 
+            color: color, fontSize: 20, fontFamily: "Roboto", textAlign: "center"
+        }
     })
 
     return (
-        <Pressable style={styles.pressable} onPress={buttonPress}>
+        <Pressable style={({pressed}) => [ { backgroundColor: pressed ? pressedColor: backgroundColor }, styles.pressable ]} onPress={buttonPress}>
             <Text style={styles.text}>{children}</Text>
         </Pressable>
     )

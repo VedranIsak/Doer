@@ -22,8 +22,8 @@ const Task = ({task, tasks, setTasks}: TaskProps) => {
     };
     
     const styles = StyleSheet.create({
-        taskContainer: { borderRadius: 15, padding: 20, overflow: "hidden",
-            marginTop: 5, marginBottom: 5, width: width - 20, borderWidth: 3, borderColor: "rgba(255, 255, 255, 0.4)" },
+        taskContainer: { borderRadius: 25, padding: 20, overflow: "hidden",
+            marginTop: 5, marginBottom: 10, width: width - 20, borderWidth: 3, borderColor: "rgba(255, 255, 255, .5)" },
         checkbox: { borderRadius: 15, height: 50, width: 50, borderWidth: 3 },
         taskTopContainer: { display: "flex", flexDirection: "row", justifyContent: "space-between" }
     })

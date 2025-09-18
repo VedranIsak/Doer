@@ -3,48 +3,53 @@ import Task from '../models/Task';
 const tasks: Task[] = [
   {
     id: 1,
-    date: "2025-09-17",
+    date: "2025-09-18",
     time: "10:00",
     title: "Team Meeting",
     description: "Weekly project sync",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 2,
-    date: "2025-09-17",
+    date: "2025-09-18",
     time: "14:30",
     title: "Doctor Appointment",
     description: "Routine check-up",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 3,
-    date: "2025-09-17",
+    date: "2025-09-18",
     time: "09:00",
     title: "Workshop",
     description: "TypeScript basics",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 4,
-    date: "2025-09-17",
+    date: "2025-09-18",
     time: "18:00",
     title: "Dinner with Friends",
     description: "Italian restaurant downtown",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 5,
-    date: "2025-09-17",
+    date: "2025-09-18",
     time: undefined,
     title: "Day Off",
     description: "Relax and recharge",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 6,
@@ -54,6 +59,7 @@ const tasks: Task[] = [
     description: "Frontend developer position",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 7,
@@ -63,6 +69,7 @@ const tasks: Task[] = [
     description: undefined,
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 8,
@@ -72,6 +79,7 @@ const tasks: Task[] = [
     description: "Discuss project requirements",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 9,
@@ -81,6 +89,7 @@ const tasks: Task[] = [
     description: "Rock band live performance",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 10,
@@ -90,6 +99,7 @@ const tasks: Task[] = [
     description: "Advanced React Patterns",
     isUpcoming: true,
     isCompleted: false,
+    priorityLevel: 1
   },
   {
     id: 11,
@@ -99,6 +109,7 @@ const tasks: Task[] = [
     description: "John’s birthday celebration",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 12,
@@ -108,6 +119,7 @@ const tasks: Task[] = [
     description: "Oil change & maintenance",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 13,
@@ -117,6 +129,7 @@ const tasks: Task[] = [
     description: "Finish a book",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 14,
@@ -126,6 +139,7 @@ const tasks: Task[] = [
     description: "Watch the new sci-fi release",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 15,
@@ -135,6 +149,7 @@ const tasks: Task[] = [
     description: undefined,
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 16,
@@ -144,6 +159,7 @@ const tasks: Task[] = [
     description: "Career advice session",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 17,
@@ -153,6 +169,7 @@ const tasks: Task[] = [
     description: "UI/UX design principles",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 18,
@@ -162,6 +179,7 @@ const tasks: Task[] = [
     description: undefined,
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 19,
@@ -171,6 +189,7 @@ const tasks: Task[] = [
     description: "Weekly supplies",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
   {
     id: 20,
@@ -180,6 +199,7 @@ const tasks: Task[] = [
     description: "Home-cooked meal",
     isUpcoming: false,
     isCompleted: true,
+    priorityLevel: 1
   },
 ];
 

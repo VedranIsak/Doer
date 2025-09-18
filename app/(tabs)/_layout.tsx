@@ -7,10 +7,10 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: { 
-            backgroundColor: "rgb(173, 61, 111)",
-            borderColor: "rgba(255, 255, 255, 0.4)",
-            paddingBottom: 10,   // ⬅️ keep spacing below icons
-            paddingTop: 10,      // ⬅️ optional, to center better
+            backgroundColor: "white",
+            paddingTop: 10,
+            outline: "none",
+            borderWidth: 0
          } 
     }}
     >
@@ -19,7 +19,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: () => (
-            <Ionicons name="home-sharp" color={"white"} size={32}  />
+            <Ionicons name="home-sharp" color={"black"} size={28}  />
           )
         }}
       />
@@ -28,7 +28,25 @@ export default function TabLayout() {
         options={{
           title: "Create Task",
           tabBarIcon: () => (
-            <Ionicons name="add-circle-sharp" color={"white"} size={32}  />
+            <Ionicons name="add-circle-sharp" color={"black"} size={28}  />
+          )
+        }}
+      />
+      <Tabs.Screen
+        name="calendar"
+        options={{
+          title: "Calendar",
+          tabBarIcon: () => (
+            <Ionicons name="calendar-clear-sharp" color={"black"} size={28}  />
+          )
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: () => (
+            <Ionicons name="settings-sharp" color={"black"} size={28}  />
           )
         }}
       />

@@ -2,13 +2,13 @@ import ScreenContainer from "@/app/screenContainer";
 import Button from "@/components/button";
 import Paragraph from "@/components/paragraph";
 import TaskModel from "@/models/Task";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { Modal, Platform, StyleSheet, TextInput, View } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Create = () => {
-    const [newEvent, setNewEvent] = useState<TaskModel>(new TaskModel(
+    const [newTask, setNewTask] = useState<TaskModel>(new TaskModel(
         100, new Date().toISOString().split('T')[0], "13.00", "Go to the store", 
         "Go to the store", true, false, 1
     ));
@@ -16,7 +16,8 @@ const Create = () => {
     const [showPrioModal, setShowPrioModal] = useState<boolean>(false);
 
     const changePriorityLevel = (newLevel: number) => {
-        setNewEvent(previous => ({...previous, priorityLevel: newLevel}))
+        setNewTask(previous => ({...previous, priorityLevel: newLevel}));
+        setShowPrioModal(false);
     }
 
     const styles = StyleSheet.create({
@@ -47,13 +48,13 @@ const Create = () => {
                 <TextInput 
                 style={styles.textInput} 
                 keyboardType="default"
-                value={newEvent.title}
-                onChangeText={text => setNewEvent(previous => ({...previous, title: text}))}
+                value={newTask.title}
+                onChangeText={text => setNewTask(previous => ({...previous, title: text}))}
                 />
                 <Button backgroundColor="transparent" color="white" marginTop={5} 
                 marginBottom={5} buttonPress={() => setShowDate(true)} width={"90%"}
                 >
-                    {newEvent.date}
+                    {newTask.date}
                 </ Button>
                 {showDate && (
                     <DateTimePicker
@@ -62,25 +63,23 @@ const Create = () => {
                     display={Platform.OS === "ios" ? "spinner" : "default"}
                     onChange={(event, selectedDate) => {
                         setShowDate(false);
-                        if (selectedDate) setNewEvent(previous => ({...previous, date: selectedDate.toDateString()}));
+                        if (selectedDate) setNewTask(previous => ({...previous, date: selectedDate.toDateString()}));
                     }}
                     />
                 )}
                 <Button backgroundColor="transparent" color="white" marginTop={5} 
                 marginBottom={5} buttonPress={() => { setShowPrioModal(true) }} width={"90%"}
                 >
-                    Priority level: {newEvent.priorityLevel.toString()}
+                    Priority level: {newTask.priorityLevel.toString()}
                 </Button>
                 <Paragraph color={"white"} fontSize={20}>Description</Paragraph>
                 <TextInput 
                 style={[styles.textInput, { height: 250 }]} 
                 multiline={true}
-                numberOfLines={4}
-                value={newEvent.description}
-                onChangeText={text => setNewEvent(previous => ({...previous, description: text}))}
+                value={newTask.description}
+                onChangeText={text => setNewTask(previous => ({...previous, description: text}))}
                 />
                 <Button marginTop={5} marginBottom={5} buttonPress={() => { }} width={"90%"}>Create event</Button>
-                {/* <Button marginTop={5} marginBottom={5} buttonPress={() => { }} width={"90%"}>Cancel</Button> */}
                 <Modal 
                     backdropColor={"rgba(0, 0, 0, .5)"} 
                     visible={showPrioModal} 
@@ -95,10 +94,10 @@ const Create = () => {
                             end={{ x: 1, y: 0 }}
                             />
                             <Paragraph color={"white"} fontSize={18}>Priority level</Paragraph>
-                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(1); setShowPrioModal(false); }}>1</Button>
-                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(2); setShowPrioModal(false); }}>2</Button>
-                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(3); setShowPrioModal(false); }}>3</Button>
-                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(4); setShowPrioModal(false); }}>4</Button>
+                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(1); }}>1</Button>
+                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(2); }}>2</Button>
+                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(3); }}>3</Button>
+                            <Button marginTop={10} width={"95%"} buttonPress={() => { changePriorityLevel(4); }}>4</Button>
                             <Button marginTop={10} buttonPress={() => { setShowPrioModal(false); }}>Close</Button>
                         </View>
                     </View>

@@ -1,206 +1,180 @@
-import Task from '../models/Task';
+import SubTaskModel from "@/models/SubTask";
+import Task from "../models/Task";
 
 const tasks: Task[] = [
-  {
-    id: 1,
-    date: "2025-09-18",
-    time: "10:00",
-    title: "Team Meeting",
-    description: "Weekly project sync",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 2,
-    date: "2025-09-18",
-    time: "14:30",
-    title: "Doctor Appointment",
-    description: "Routine check-up",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 3,
-    date: "2025-09-18",
-    time: "09:00",
-    title: "Workshop",
-    description: "TypeScript basics",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 4,
-    date: "2025-09-18",
-    time: "18:00",
-    title: "Dinner with Friends",
-    description: "Italian restaurant downtown",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 5,
-    date: "2025-09-18",
-    time: undefined,
-    title: "Day Off",
-    description: "Relax and recharge",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 6,
-    date: "2025-09-17",
-    time: "11:00",
-    title: "Interview",
-    description: "Frontend developer position",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 7,
-    date: "2025-08-26",
-    time: "08:30",
-    title: "Gym Session",
-    description: undefined,
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 8,
-    date: "2025-09-02",
-    time: "13:00",
-    title: "Client Call",
-    description: "Discuss project requirements",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 9,
-    date: "2025-09-02",
-    time: "19:00",
-    title: "Concert",
-    description: "Rock band live performance",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 10,
-    date: "2025-09-02",
-    time: "16:00",
-    title: "Workshop",
-    description: "Advanced React Patterns",
-    isUpcoming: true,
-    isCompleted: false,
-    priorityLevel: 1
-  },
-  {
-    id: 11,
-    date: "2025-08-10",
-    time: "15:00",
-    title: "Birthday Party",
-    description: "John’s birthday celebration",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 12,
-    date: "2025-08-09",
-    time: "09:30",
-    title: "Car Service",
-    description: "Oil change & maintenance",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 13,
-    date: "2025-08-08",
-    time: undefined,
-    title: "Reading Day",
-    description: "Finish a book",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 14,
-    date: "2025-08-07",
-    time: "20:00",
-    title: "Movie Night",
-    description: "Watch the new sci-fi release",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 15,
-    date: "2025-08-06",
-    time: "07:00",
-    title: "Morning Run",
-    description: undefined,
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 16,
-    date: "2025-08-05",
-    time: "12:00",
-    title: "Lunch with Mentor",
-    description: "Career advice session",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 17,
-    date: "2025-08-04",
-    time: "17:30",
-    title: "Workshop",
-    description: "UI/UX design principles",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 18,
-    date: "2025-08-03",
-    time: "08:00",
-    title: "Yoga Class",
-    description: undefined,
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 19,
-    date: "2025-08-02",
-    time: "10:30",
-    title: "Grocery Shopping",
-    description: "Weekly supplies",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
-  {
-    id: 20,
-    date: "2025-08-01",
-    time: "19:30",
-    title: "Dinner with Family",
-    description: "Home-cooked meal",
-    isUpcoming: false,
-    isCompleted: true,
-    priorityLevel: 1
-  },
+  new Task(
+    1,
+    "2025-09-23",
+    "10:00",
+    "Team Meeting",
+    "Weekly project sync",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    2,
+    "2025-09-23",
+    "14:30",
+    "Doctor Appointment",
+    "Routine check-up",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    3,
+    "2025-09-23",
+    "09:00",
+    "Workshop",
+    "TypeScript basics",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    4,
+    "2025-09-23",
+    "18:00",
+    "Dinner with Friends",
+    "Italian restaurant downtown",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    5,
+    "2025-09-23",
+    undefined,
+    "Day Off",
+    "Relax and recharge",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    6,
+    "2025-09-17",
+    "11:00",
+    "Interview",
+    "Frontend developer position",
+    false,
+    1,
+    []
+  ),
+  new Task(7, "2025-08-26", "08:30", "Gym Session", "Legs", false, 1, []),
+  new Task(
+    8,
+    "2025-09-02",
+    "13:00",
+    "Client Call",
+    "Discuss project requirements",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    9,
+    "2025-09-02",
+    "19:00",
+    "Concert",
+    "Rock band live performance",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    10,
+    "2025-09-02",
+    "16:00",
+    "Workshop",
+    "Advanced React Patterns",
+    false,
+    1,
+    []
+  ),
+  new Task(
+    11,
+    "2025-08-10",
+    "15:00",
+    "Birthday Party",
+    "John’s birthday celebration",
+    true,
+    1,
+    []
+  ),
+  new Task(
+    12,
+    "2025-08-09",
+    "09:30",
+    "Car Service",
+    "Oil change & maintenance",
+    true,
+    1,
+    []
+  ),
+  new Task(
+    13,
+    "2025-08-08",
+    undefined,
+    "Reading Day",
+    "Finish a book",
+    true,
+    1,
+    []
+  ),
+  new Task(
+    14,
+    "2025-08-07",
+    "20:00",
+    "Movie Night",
+    "Watch the new sci-fi release",
+    true,
+    1,
+    []
+  ),
+  new Task(15, "2025-08-06", "07:00", "Morning Run", "45 min", true, 1, []),
+  new Task(
+    16,
+    "2025-08-05",
+    "12:00",
+    "Lunch with Mentor",
+    "Career advice session",
+    true,
+    1,
+    []
+  ),
+  new Task(
+    17,
+    "2025-08-04",
+    "17:30",
+    "Workshop",
+    "UI/UX design principles",
+    true,
+    1,
+    []
+  ),
+  new Task(18, "2025-08-03", "08:00", "Yoga Class", "At the gym", true, 1, []),
+  new Task(
+    19,
+    "2025-08-02",
+    "10:30",
+    "Grocery Shopping",
+    "Weekly supplies",
+    true,
+    1,
+    []
+  ),
+  new Task(
+    20,
+    "2025-08-01",
+    "19:30",
+    "Dinner with Family",
+    "Home-cooked meal",
+    true,
+    1,
+    []
+  ),
 ];
 
 export default tasks;

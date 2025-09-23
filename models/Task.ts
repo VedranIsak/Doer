@@ -1,28 +1,56 @@
+import SubTaskModel from "./SubTask";
+
 class TaskModel {
-    id: number;
-    date: string;
-    time: string | undefined;
-    title: string;
-    description: string | undefined;
-    isUpcoming: boolean;
-    isCompleted: boolean;
-    priorityLevel: number;
+  id: number;
+  dueDate: string;
+  time: string | undefined;
+  title: string;
+  description: string;
+  isCompleted: boolean;
+  priorityLevel: number;
+  subTasks: SubTaskModel[];
 
-    constructor(id: number, date: string, time: string | undefined, title: string, 
-        description: string, isUpcoming: boolean, isCompleted: boolean, priorityLevel: number) {
-        this.id = id;
-        this.date = new Intl.DateTimeFormat("en-CA").format(new Date(date));;
-        this.time = time;
-        this.title = title;
-        this.description = description;
-        this.isUpcoming = isUpcoming;
-        this.isCompleted = isCompleted;
-        this.priorityLevel = priorityLevel
+  constructor(
+    id: number,
+    dueDate: string,
+    time: string | undefined,
+    title: string,
+    description: string,
+    isCompleted: boolean,
+    priorityLevel: number,
+    subTasks: SubTaskModel[]
+  ) {
+    this.id = id;
+    this.dueDate = dueDate;
+    this.time = time;
+    this.title = title;
+    this.description = description;
+    this.isCompleted = isCompleted;
+    this.priorityLevel = priorityLevel;
+    this.subTasks = subTasks;
+  }
 
-        if(this.isUpcoming && this.isCompleted) {
-            throw new Error("Event cannot be upcoming and completed simultaneously.");
-        }
+  hasPassed(): boolean {
+    const currentDate = new Date().toISOString().split("T")[0];
+
+    if (this.dueDate < currentDate) {
+      return true;
     }
+    return false;
+  }
+
+  cloneWith(changes: Partial<TaskModel>): TaskModel {
+    return new TaskModel(
+      changes.id ?? this.id,
+      changes.dueDate ?? this.dueDate,
+      changes.time ?? this.time,
+      changes.title ?? this.title,
+      changes.description ?? this.description,
+      changes.isCompleted ?? this.isCompleted,
+      changes.priorityLevel ?? this.priorityLevel,
+      changes.subTasks ?? this.subTasks
+    );
+  }
 }
 
 export default TaskModel;

@@ -33,20 +33,21 @@ const Button: React.FC<ButtonProps> = ({
 
   const styles = StyleSheet.create({
     pressable: {
-      borderRadius: 25,
-      padding: 20,
+      borderRadius: 30,
+      padding: 10,
       width: width,
       borderWidth: 3,
-      backgroundColor: backgroundColor,
-      borderColor: "rgba(255, 255, 255, .5)",
+      backgroundColor: "rgba(255, 255, 255, .2)",
+      borderColor: "white",
       marginBottom: marginBottom,
-      marginTop: marginTop,
+      marginTop: marginTop
     },
     text: {
-      color: color,
+      color: "white",
       fontSize: 20,
       fontFamily: "CalSans",
       textAlign: "center",
+      marginBottom: 5
     },
   });
 

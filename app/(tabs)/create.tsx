@@ -1,6 +1,8 @@
 import ScreenContainer from "@/app/screenContainer";
 import Button from "@/components/button";
 import Paragraph from "@/components/paragraph";
+import SubTask from "@/components/subTask";
+import formatDate from "@/helpers/formatDate";
 import SubTaskModel from "@/models/SubTask";
 import TaskModel from "@/models/Task";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -12,7 +14,7 @@ const Create = () => {
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
       100,
-      new Date().toISOString().split("T")[0],
+      formatDate(new Date()),
       "13.00",
       ".....",
       ".....",
@@ -24,9 +26,45 @@ const Create = () => {
   const [showDate, setShowDate] = useState<boolean>(false);
   const [showPrioModal, setShowPrioModal] = useState<boolean>(false);
   const [showSubTaskModal, setShowSubTaskModal] = useState<boolean>(false);
+  const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
+  const [errorMessage, setShowErrorMessage] = useState<string>("");
+  const [subTaskTitle, setSubTaskTitle] = useState<string>("....");
+
+  const ErrorModal = () => (
+    <Modal
+      backdropColor={"rgba(0, 0, 0, .5)"}
+      visible={showErrorModal}
+      animationType="fade"
+    >
+      <View style={styles.modalBackdrop}>
+        <View style={styles.modalContainer}>
+          <LinearGradient
+            colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
+            style={StyleSheet.absoluteFillObject}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          />
+          <Paragraph color={"white"} fontSize={22}>
+            Error!
+          </Paragraph>
+          <Paragraph color="white" fontSize={18}>
+            {errorMessage}
+          </Paragraph>
+          <Button
+            marginTop={10}
+            buttonPress={() => {
+              setShowErrorModal(false);
+            }}
+          >
+            Ok
+          </Button>
+        </View>
+      </View>
+    </Modal>
+  );
 
   const changePriorityLevel = (newLevel: number) => {
-    setNewTask((previous) => (previous.cloneWith({ priorityLevel: newLevel })));
+    setNewTask((previous) => previous.cloneWith({ priorityLevel: newLevel }));
     setShowPrioModal(false);
   };
 
@@ -51,23 +89,22 @@ const Create = () => {
       marginBottom: 25,
       fontSize: 18,
       height: "auto",
-      borderWidth: 3,
-      borderRadius: 15,
-      borderColor: "rgba(255, 255, 255, .5)",
+      borderRadius: 10,
       padding: 20,
-      color: "white",
+      backgroundColor: "white",
+      color: "black",
       textAlign: "left",
     },
     subTaskContainer: {
       width: "90%",
-      borderWidth: 3,
-      borderRadius: 15,
-      borderColor: "rgba(255, 255, 255, .5)",
+      borderRadius: 10,
+      borderColor: "white",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       padding: 15,
       marginBottom: 5,
+      backgroundColor: "rgba(255, 255, 255, .1)"
     },
     modalBackdrop: { flex: 1, justifyContent: "center", alignItems: "center" },
     modalContainer: {
@@ -84,6 +121,7 @@ const Create = () => {
 
   return (
     <ScreenContainer title="New Task!" img="create">
+      <ErrorModal />
       <View style={styles.container}>
         <Paragraph color={"white"} fontSize={22} marginTop={10}>
           Title
@@ -94,7 +132,7 @@ const Create = () => {
           value={newTask.title}
           placeholder="....."
           onChangeText={(text) =>
-            setNewTask((previous) => (previous.cloneWith({ title: text })))
+            setNewTask((previous) => previous.cloneWith({ title: text }))
           }
         />
         <Paragraph color={"white"} fontSize={22}>
@@ -106,13 +144,20 @@ const Create = () => {
           value={newTask.description}
           placeholder="....."
           onChangeText={(text) =>
-            setNewTask((previous) => (previous.cloneWith({ description: text })))
+            setNewTask((previous) => previous.cloneWith({ description: text }))
           }
         />
         <View style={styles.subTaskContainer}>
           <Paragraph color="white" fontSize={22}>
             Sub Tasks:{" "}
           </Paragraph>
+          {newTask.subTasks.length > 0 ? 
+          newTask.subTasks.map((subTask) => (
+            <SubTask title={subTask.title} />
+          ))
+          :
+          <></>
+          }
           <Button
             marginTop={20}
             marginBottom={5}
@@ -142,7 +187,23 @@ const Create = () => {
                 <Paragraph fontSize={22} color="white">
                   Title
                 </Paragraph>
-                <TextInput placeholder="...." style={styles.textInput} />
+                <TextInput 
+                  style={styles.textInput}
+                  value={subTaskTitle}
+                 />
+                <Button
+                  width={200}
+                  marginBottom={5}
+                  buttonPress={() => {
+                    setNewTask((previous) => {
+                      const subTasks = newTask.subTasks;
+                      subTasks.push(new SubTaskModel(subTaskTitle, false, newTask.dueDate))
+                      return previous.cloneWith( { subTasks: subTasks } );
+                    });
+                  }}
+                >
+                  Add
+                </Button>
                 <Button
                   buttonPress={() => {
                     setShowSubTaskModal(false);
@@ -164,13 +225,24 @@ const Create = () => {
         </Button>
         {showDate && (
           <DateTimePicker
-            value={new Date()}
+            value={new Date(formatDate(new Date()))}
             mode="date"
             display={Platform.OS === "ios" ? "spinner" : "default"}
             onChange={(event, selectedDate) => {
               setShowDate(false);
-              if (selectedDate)
-            setNewTask((previous) => (previous.cloneWith({ dueDate: selectedDate.toISOString().split("T")[0] })))
+
+              if (selectedDate) {
+                if (formatDate(selectedDate) >= formatDate(new Date())) {
+                  setNewTask((previous) =>
+                    previous.cloneWith({
+                      dueDate: formatDate(selectedDate),
+                    })
+                  );
+                } else {
+                  setShowErrorMessage("Date has to be today or in the future");
+                  setShowErrorModal(true);
+                }
+              }
             }}
           />
         )}
@@ -188,7 +260,7 @@ const Create = () => {
           marginTop={5}
           marginBottom={5}
           buttonPress={() => {}}
-          width={"90%"}
+          width={250}
         >
           Create
         </Button>

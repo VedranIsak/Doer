@@ -1,3 +1,4 @@
+import formatDate from "@/helpers/formatDate";
 import SubTaskModel from "./SubTask";
 
 class TaskModel {
@@ -31,7 +32,10 @@ class TaskModel {
   }
 
   hasPassed(): boolean {
-    const currentDate = new Date().toISOString().split("T")[0];
+    const currentDate = formatDate(new Date());
+    if (this.isCompleted) {
+      return false;
+    }
 
     if (this.dueDate < currentDate) {
       return true;

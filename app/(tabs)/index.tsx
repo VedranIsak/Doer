@@ -2,17 +2,20 @@ import ScreenContainer from "@/app/screenContainer";
 import Paragraph from "@/components/paragraph";
 import Task from "@/components/task";
 import importedTasks from "@/data/mockData";
+import formatDate from "@/helpers/formatDate";
 import TaskModel from "@/models/Task";
 import { useState } from "react";
 
 const HomeScreen = () => {
-  const todayDate = new Date().toISOString().split("T")[0];
-  const [tasks, setTasks] = useState<TaskModel[]>(
+  const todayDate = formatDate(new Date());
+  const [allTasks, setAllTasks] = useState<TaskModel[]>(importedTasks)
+  const [todayTasks, setTodayTasks] = useState<TaskModel[]>( 
     (importedTasks ?? []).filter((task) => task.dueDate === todayDate)
   );
-  const completedTasks = tasks.filter((task) => task.isCompleted);
-  const notCompletedTasks = tasks.filter((task) => !task.isCompleted);
-  const passedTasks = tasks.filter((task) => task.hasPassed());
+  const completedTasks = todayTasks.filter((task) => task.isCompleted);
+  const notCompletedTasks = todayTasks.filter((task) => !task.isCompleted);
+  const unfinishedTasks = allTasks.filter((task) =>  task.hasPassed());
+  console.log(unfinishedTasks.length);
   return (
     <ScreenContainer title="Tasks!" img="index">
       {notCompletedTasks.length === 0 ? (
@@ -27,10 +30,10 @@ const HomeScreen = () => {
             color="white"
             fontSize={22}
           >
-            Todays tasks
+            {`Todays tasks (${formatDate(new Date())})`}
           </Paragraph>
           {notCompletedTasks.map((task) => (
-            <Task task={task} tasks={tasks} setTasks={setTasks} />
+            <Task task={task} tasks={todayTasks} setTasks={setTodayTasks} />
           ))}
         </>
       )}
@@ -45,13 +48,13 @@ const HomeScreen = () => {
             Done tasks
           </Paragraph>
           {completedTasks.map((task) => (
-            <Task task={task} tasks={tasks} setTasks={setTasks} />
+            <Task task={task} tasks={todayTasks} setTasks={setTodayTasks} />
           ))}
         </>
       ) : (
         <></>
       )}
-      {passedTasks.length > 0 ? (
+      {unfinishedTasks.length > 0 ? (
         <>
           <Paragraph
             marginBottom={20}
@@ -61,9 +64,9 @@ const HomeScreen = () => {
           >
             Unfinished tasks!
           </Paragraph>
-          {passedTasks.map((task) => {
-            <Task task={task} tasks={tasks} setTasks={setTasks} />;
-          })}
+          {unfinishedTasks.map((task) => (
+            <Task task={task} tasks={unfinishedTasks} setTasks={setAllTasks} />
+          ))}
         </>
       ) : (
         <></>

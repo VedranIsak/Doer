@@ -4,7 +4,7 @@ import Task from "../models/Task";
 const tasks: Task[] = [
   new Task(
     1,
-    "2025-09-23",
+    "2025-09-26",
     "10:00",
     "Team Meeting",
     "Weekly project sync",
@@ -14,7 +14,7 @@ const tasks: Task[] = [
   ),
   new Task(
     2,
-    "2025-09-23",
+    "2025-09-26",
     "14:30",
     "Doctor Appointment",
     "Routine check-up",
@@ -24,7 +24,7 @@ const tasks: Task[] = [
   ),
   new Task(
     3,
-    "2025-09-23",
+    "2025-09-26",
     "09:00",
     "Workshop",
     "TypeScript basics",
@@ -34,7 +34,7 @@ const tasks: Task[] = [
   ),
   new Task(
     4,
-    "2025-09-23",
+    "2025-09-26",
     "18:00",
     "Dinner with Friends",
     "Italian restaurant downtown",

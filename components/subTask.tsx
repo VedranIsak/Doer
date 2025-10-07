@@ -3,6 +3,10 @@ import Paragraph from "./paragraph";
 import Checkbox from "expo-checkbox";
 import SubTaskModel from "@/models/SubTask";
 
+interface SubTaskProps {
+  task: SubTaskModel;
+}
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 10,
@@ -20,7 +24,7 @@ const handleCheck = (task: SubTaskModel, checked: boolean) => {
     
 }
 
-const SubTask = (task: SubTaskModel) => (
+const SubTask = ({task}: SubTaskProps) => (
   <View style={styles.container}>
     <Paragraph>{task.title}</Paragraph>
     <Checkbox

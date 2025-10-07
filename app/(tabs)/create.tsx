@@ -1,19 +1,19 @@
+import CreatePrioModal from "@/app/create/createPrioModal";
+import CreateSubTaskView from "@/app/create/createSubTaskView";
 import ScreenContainer from "@/app/screenContainer";
 import Button from "@/components/button";
 import Paragraph from "@/components/paragraph";
-import SubTask from "@/components/subTask";
 import formatDate from "@/helpers/formatDate";
 import SubTaskModel from "@/models/SubTask";
 import TaskModel from "@/models/Task";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { Modal, Platform, StyleSheet, TextInput, View } from "react-native";
+import { Platform, StyleSheet, TextInput, View } from "react-native";
+import ErrorModal from "../../components/errorModal";
 
 const Create = () => {
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
-      100,
       formatDate(new Date()),
       "13.00",
       ".....",
@@ -24,49 +24,10 @@ const Create = () => {
     )
   );
   const [showDate, setShowDate] = useState<boolean>(false);
-  const [showPrioModal, setShowPrioModal] = useState<boolean>(false);
-  const [showSubTaskModal, setShowSubTaskModal] = useState<boolean>(false);
+  const [showCreatePrioModal, setShowCreatePrioModal] =
+    useState<boolean>(false);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
   const [errorMessage, setShowErrorMessage] = useState<string>("");
-  const [subTaskTitle, setSubTaskTitle] = useState<string>("....");
-
-  const ErrorModal = () => (
-    <Modal
-      backdropColor={"rgba(0, 0, 0, .5)"}
-      visible={showErrorModal}
-      animationType="fade"
-    >
-      <View style={styles.modalBackdrop}>
-        <View style={styles.modalContainer}>
-          <LinearGradient
-            colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
-            style={StyleSheet.absoluteFillObject}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-          />
-          <Paragraph color={"white"} fontSize={22}>
-            Error!
-          </Paragraph>
-          <Paragraph color="white" fontSize={18}>
-            {errorMessage}
-          </Paragraph>
-          <Button
-            marginTop={10}
-            buttonPress={() => {
-              setShowErrorModal(false);
-            }}
-          >
-            Ok
-          </Button>
-        </View>
-      </View>
-    </Modal>
-  );
-
-  const changePriorityLevel = (newLevel: number) => {
-    setNewTask((previous) => previous.cloneWith({ priorityLevel: newLevel }));
-    setShowPrioModal(false);
-  };
 
   const styles = StyleSheet.create({
     container: {
@@ -95,33 +56,15 @@ const Create = () => {
       color: "black",
       textAlign: "left",
     },
-    subTaskContainer: {
-      width: "90%",
-      borderRadius: 10,
-      borderColor: "white",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 15,
-      marginBottom: 5,
-      backgroundColor: "rgba(255, 255, 255, .1)"
-    },
-    modalBackdrop: { flex: 1, justifyContent: "center", alignItems: "center" },
-    modalContainer: {
-      height: "auto",
-      justifyContent: "space-between",
-      alignItems: "center",
-      backgroundColor: "#470047",
-      width: "90%",
-      borderRadius: 15,
-      padding: 15,
-      overflow: "hidden",
-    },
   });
 
   return (
     <ScreenContainer title="New Task!" img="create">
-      <ErrorModal />
+      <ErrorModal
+        errorMessage={errorMessage}
+        setShowErrorModal={setShowErrorModal}
+        showErrorModal={showErrorModal}
+      />
       <View style={styles.container}>
         <Paragraph color={"white"} fontSize={22} marginTop={10}>
           Title
@@ -147,74 +90,10 @@ const Create = () => {
             setNewTask((previous) => previous.cloneWith({ description: text }))
           }
         />
-        <View style={styles.subTaskContainer}>
-          <Paragraph color="white" fontSize={22}>
-            Sub Tasks:{" "}
-          </Paragraph>
-          {newTask.subTasks.length > 0 ? 
-          newTask.subTasks.map((subTask) => (
-            <SubTask title={subTask.title} />
-          ))
-          :
-          <></>
-          }
-          <Button
-            marginTop={20}
-            marginBottom={5}
-            width={200}
-            buttonPress={() => {
-              setShowSubTaskModal(true);
-            }}
-          >
-            + Add Sub Task
-          </Button>
-          <Modal
-            backdropColor={"rgba(0, 0, 0, .5)"}
-            animationType="fade"
-            visible={showSubTaskModal}
-          >
-            <View style={styles.modalBackdrop}>
-              <View style={styles.modalContainer}>
-                <LinearGradient
-                  colors={[
-                    "rgba(255, 255, 255, 0.2)",
-                    "rgba(173, 61, 111, 0.6)",
-                  ]}
-                  style={StyleSheet.absoluteFillObject}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                />
-                <Paragraph fontSize={22} color="white">
-                  Title
-                </Paragraph>
-                <TextInput 
-                  style={styles.textInput}
-                  value={subTaskTitle}
-                 />
-                <Button
-                  width={200}
-                  marginBottom={5}
-                  buttonPress={() => {
-                    setNewTask((previous) => {
-                      const subTasks = newTask.subTasks;
-                      subTasks.push(new SubTaskModel(subTaskTitle, false, newTask.dueDate))
-                      return previous.cloneWith( { subTasks: subTasks } );
-                    });
-                  }}
-                >
-                  Add
-                </Button>
-                <Button
-                  buttonPress={() => {
-                    setShowSubTaskModal(false);
-                  }}
-                >
-                  Close
-                </Button>
-              </View>
-            </View>
-          </Modal>
-        </View>
+        <CreateSubTaskView
+          newTask={newTask}
+          setNewTask={setNewTask}
+        />
         <Button
           marginTop={5}
           marginBottom={5}
@@ -250,7 +129,7 @@ const Create = () => {
           marginTop={5}
           marginBottom={5}
           buttonPress={() => {
-            setShowPrioModal(true);
+            setShowCreatePrioModal(true);
           }}
           width={200}
         >
@@ -264,69 +143,11 @@ const Create = () => {
         >
           Create
         </Button>
-        <Modal
-          backdropColor={"rgba(0, 0, 0, .5)"}
-          visible={showPrioModal}
-          animationType="fade"
-        >
-          <View style={styles.modalBackdrop}>
-            <View style={styles.modalContainer}>
-              <LinearGradient
-                colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
-                style={StyleSheet.absoluteFillObject}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              />
-              <Paragraph color={"white"} fontSize={22}>
-                Priority level
-              </Paragraph>
-              <Button
-                marginTop={10}
-                width={200}
-                buttonPress={() => {
-                  changePriorityLevel(1);
-                }}
-              >
-                1
-              </Button>
-              <Button
-                marginTop={10}
-                width={200}
-                buttonPress={() => {
-                  changePriorityLevel(2);
-                }}
-              >
-                2
-              </Button>
-              <Button
-                marginTop={10}
-                width={200}
-                buttonPress={() => {
-                  changePriorityLevel(3);
-                }}
-              >
-                3
-              </Button>
-              <Button
-                marginTop={10}
-                width={200}
-                buttonPress={() => {
-                  changePriorityLevel(4);
-                }}
-              >
-                4
-              </Button>
-              <Button
-                marginTop={10}
-                buttonPress={() => {
-                  setShowPrioModal(false);
-                }}
-              >
-                Close
-              </Button>
-            </View>
-          </View>
-        </Modal>
+        <CreatePrioModal
+          showCreatePrioModal={showCreatePrioModal}
+          setShowCreatePrioModal={setShowCreatePrioModal}
+          setNewTask={setNewTask}
+        />
       </View>
     </ScreenContainer>
   );

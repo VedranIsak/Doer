@@ -1,4 +1,5 @@
 import formatDate from "@/helpers/formatDate";
+import { incrementTaskId } from "@/helpers/incrementer";
 import SubTaskModel from "./SubTask";
 
 class TaskModel {
@@ -12,7 +13,6 @@ class TaskModel {
   subTasks: SubTaskModel[];
 
   constructor(
-    id: number,
     dueDate: string,
     time: string | undefined,
     title: string,
@@ -21,7 +21,7 @@ class TaskModel {
     priorityLevel: number,
     subTasks: SubTaskModel[]
   ) {
-    this.id = id;
+    this.id = incrementTaskId();
     this.dueDate = dueDate;
     this.time = time;
     this.title = title;
@@ -45,7 +45,6 @@ class TaskModel {
 
   cloneWith(changes: Partial<TaskModel>): TaskModel {
     return new TaskModel(
-      changes.id ?? this.id,
       changes.dueDate ?? this.dueDate,
       changes.time ?? this.time,
       changes.title ?? this.title,

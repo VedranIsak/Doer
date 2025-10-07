@@ -1,4 +1,5 @@
 import Paragraph from "@/components/paragraph";
+import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode } from "react";
 import {
   Dimensions,
@@ -34,12 +35,12 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
     image: { width: width, height: 200, marginBottom: 50 },
     headerContainer: {
       position: "absolute",
-      width: "50%",
+      width: "45%",
       height: "auto",
       borderRadius: 25,
       backgroundColor: "white",
       top: 140,
-      left: "25%",
+      left: "27.5%",
       paddingTop: 30,
       paddingBottom: 30,
       alignItems: "center",
@@ -53,6 +54,12 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <LinearGradient
+        colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
+        style={StyleSheet.absoluteFillObject}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      />
       <StatusBar backgroundColor={"light-content"}></StatusBar>
       <ScrollView
         style={styles.contentContainer}
@@ -64,7 +71,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
           style={styles.image}
         />
         <View style={styles.headerContainer}>
-          <Paragraph fontSize={24} color="black">
+          <Paragraph fontSize={28} color="black">
             {title}
           </Paragraph>
         </View>

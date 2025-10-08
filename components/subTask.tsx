@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import Paragraph from "./paragraph";
 import Checkbox from "expo-checkbox";
 import SubTaskModel from "@/models/SubTask";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface SubTaskProps {
   task: SubTaskModel;
@@ -10,23 +11,32 @@ interface SubTaskProps {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 10,
-    borderWidth: 3,
-    borderColor: "white",
-    backgroundColor: "rgba(255, 255, 255 .1)",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
+    width: "70%",
+    height: 70,
+    margin: 7.5,
+    overflow: "hidden"
   },
-  checkbox: { borderRadius: 10, height: 50, width: 50, borderWidth: 3 },
+  checkbox: {
+    position: "absolute",
+    top: 7.5,
+    right: 7.5,
+    borderRadius: 10,
+    height: 30,
+    width: 30,
+    borderWidth: 3,
+    borderColor: "black"
+  },
 });
 
-const handleCheck = (task: SubTaskModel, checked: boolean) => {
-    
-}
+const handleCheck = (task: SubTaskModel, checked: boolean) => {};
 
-const SubTask = ({task}: SubTaskProps) => (
+const SubTask = ({ task }: SubTaskProps) => (
   <View style={styles.container}>
-    <Paragraph>{task.title}</Paragraph>
+    <Paragraph textAlign="center" width={"70%"}>{task.title}</Paragraph>
     <Checkbox
       style={styles.checkbox}
       value={task.isCompleted}

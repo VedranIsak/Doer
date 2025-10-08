@@ -37,7 +37,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
       position: "absolute",
       width: "45%",
       height: "auto",
-      borderRadius: 25,
+      borderRadius: 40,
       backgroundColor: "white",
       top: 140,
       left: "27.5%",
@@ -55,7 +55,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <LinearGradient
-        colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
+        colors={["#6a1a74", "#b3206c"]}
         style={StyleSheet.absoluteFillObject}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -71,7 +71,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
           style={styles.image}
         />
         <View style={styles.headerContainer}>
-          <Paragraph fontSize={28} color="black">
+          <Paragraph fontSize={26} color="black">
             {title}
           </Paragraph>
         </View>

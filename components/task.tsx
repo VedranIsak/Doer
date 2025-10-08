@@ -27,8 +27,9 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
       marginTop: 5,
       marginBottom: 10,
       width: width - 20,
+      backgroundColor: "white"
     },
-    checkbox: { borderRadius: 10, height: 50, width: 50, borderWidth: 3 },
+    checkbox: { borderRadius: 10, height: 30, width: 30, borderWidth: 3, borderColor: "rgba(255, 255, 255, .8)" },
     taskTopContainer: {
       display: "flex",
       flexDirection: "row",
@@ -39,25 +40,25 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
   return (
     <Pressable key={task.id.toString()}>
       <View style={styles.taskContainer}>
-        <LinearGradient
+        {/* <LinearGradient
           colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
           style={StyleSheet.absoluteFillObject}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-        />
+        /> */}
         <View style={styles.taskTopContainer}>
-          <Paragraph color={"white"} fontSize={18}>
+          <Paragraph fontSize={18}>
             {task.title}
           </Paragraph>
           <Checkbox
-            color={"rgba(255, 255, 255, 0.8)"}
+            color={"black"}
             style={styles.checkbox}
             value={task.isCompleted}
             onValueChange={(checked) => handleCheck(task, checked)}
           />
         </View>
-        <Paragraph color={"white"}>{task.dueDate}</Paragraph>
-        <Paragraph color={"white"}>{task.description}</Paragraph>
+        <Paragraph>{task.dueDate}</Paragraph>
+        <Paragraph>{task.description}</Paragraph>
       </View>
     </Pressable>
   );

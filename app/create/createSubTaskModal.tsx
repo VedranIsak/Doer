@@ -50,9 +50,9 @@ const CreateSubTaskModal = ({
       <TextInput
         style={styles.textInput}
         value={subTask.title}
-        onChange={() => {
+        onChangeText={(text) => {
           setSubTask((previous) =>
-            previous.cloneWith({ title: subTask.title })
+            previous.cloneWith({ title: text })
           );
         }}
       />
@@ -62,11 +62,10 @@ const CreateSubTaskModal = ({
         buttonPress={() => {
           setNewTask((previous) => {
             const subTasks = newTask.subTasks;
-            subTasks.push(
-              new SubTaskModel(subTask.title, false, newTask.dueDate)
-            );
+            subTasks.push(subTask);
             return previous.cloneWith({ subTasks: subTasks });
           });
+          setShowCreateSubTaskModal(false);
         }}
       >
         Add

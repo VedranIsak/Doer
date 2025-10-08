@@ -1,32 +1,56 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
+import { Platform, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+  const BASE = Platform.OS === "ios" ? 56 : 54; // visual height above the inset
+  const HEIGHT = BASE + Math.max(insets.bottom, 16); // add safe-area
+
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          paddingTop: 10,
-          outline: "none",
-          borderWidth: 0,
-          backgroundColor: "rgba(173, 61, 111, 0)"
+          height: HEIGHT,
+          paddingTop: 8,
+          paddingBottom: Math.max(insets.bottom, 16), // <- key line
+          // Use an opaque bg so the home indicator doesn't show through:
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+          overflow: "hidden",
+          backgroundColor: "transparent",
         },
+        tabBarBackground: () => (
+          <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
+            {/* Opaque base so nothing white bleeds through */}
+            <View
+              style={[
+                StyleSheet.absoluteFillObject,
+                { backgroundColor: "#6a1a74" },
+              ]}
+            />
+            {/* Avoid semi-transparent white; use two opaque purples instead */}
+            <LinearGradient
+              colors={["#6a1a74", "#b3206c"]}
+              style={StyleSheet.absoluteFillObject}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            />
+          </View>
+        ),
       }}
     >
-      {/* <LinearGradient
-        colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
-        style={StyleSheet.absoluteFillObject}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      /> */}
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
           tabBarIcon: () => (
-            <Ionicons name="home-sharp" color={"black"} size={28} />
+            <Ionicons name="home-sharp" color={"white"} size={30} />
           ),
         }}
       />
@@ -35,7 +59,7 @@ export default function TabLayout() {
         options={{
           title: "Create Task",
           tabBarIcon: () => (
-            <Ionicons name="add-circle-sharp" color={"black"} size={28} />
+            <Ionicons name="add-circle-sharp" color={"white"} size={30} />
           ),
         }}
       />
@@ -44,7 +68,7 @@ export default function TabLayout() {
         options={{
           title: "Calendar",
           tabBarIcon: () => (
-            <Ionicons name="calendar-clear-sharp" color={"black"} size={28} />
+            <Ionicons name="calendar-clear-sharp" color={"white"} size={30} />
           ),
         }}
       />
@@ -53,7 +77,7 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: () => (
-            <Ionicons name="settings-sharp" color={"black"} size={28} />
+            <Ionicons name="settings-sharp" color={"white"} size={30} />
           ),
         }}
       />

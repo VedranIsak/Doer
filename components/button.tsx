@@ -36,13 +36,14 @@ const Button: React.FC<ButtonProps> = ({
       padding: 10,
       width: width,
       borderWidth: 4,
-      backgroundColor: "rgba(255, 255, 255, .2)",
+      backgroundColor: "white",
+      // backgroundColor: "rgba(255, 255, 255, .2)",
       borderColor: "rgba(255, 255, 255, .8)",
       marginBottom: marginBottom,
       marginTop: marginTop
     },
     text: {
-      color: "white",
+      color: "black",
       fontSize: 20,
       fontFamily: "CalSans",
       textAlign: "center",

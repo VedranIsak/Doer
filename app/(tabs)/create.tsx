@@ -59,7 +59,7 @@ const Create = () => {
   });
 
   return (
-    <ScreenContainer title="New Task!" img="create">
+    <ScreenContainer title="New task" img="create">
       <ErrorModal
         errorMessage={errorMessage}
         setShowErrorModal={setShowErrorModal}
@@ -90,51 +90,52 @@ const Create = () => {
             setNewTask((previous) => previous.cloneWith({ description: text }))
           }
         />
-        <CreateSubTaskView
-          newTask={newTask}
-          setNewTask={setNewTask}
-        />
-        <Button
-          marginTop={5}
-          marginBottom={5}
-          buttonPress={() => setShowDate(true)}
-          width={200}
-        >
-          {newTask.dueDate}
-        </Button>
-        {showDate && (
-          <DateTimePicker
-            value={new Date(formatDate(new Date()))}
-            mode="date"
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            onChange={(event, selectedDate) => {
-              setShowDate(false);
+        <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
+        <View style={styles.buttonContainer}>
+          <Button
+            marginTop={5}
+            marginBottom={5}
+            buttonPress={() => setShowDate(true)}
+            width={"45%"}
+          >
+            {newTask.dueDate}
+          </Button>
+          {showDate && (
+            <DateTimePicker
+              value={new Date(formatDate(new Date()))}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={(event, selectedDate) => {
+                setShowDate(false);
 
-              if (selectedDate) {
-                if (formatDate(selectedDate) >= formatDate(new Date())) {
-                  setNewTask((previous) =>
-                    previous.cloneWith({
-                      dueDate: formatDate(selectedDate),
-                    })
-                  );
-                } else {
-                  setShowErrorMessage("Date has to be today or in the future");
-                  setShowErrorModal(true);
+                if (selectedDate) {
+                  if (formatDate(selectedDate) >= formatDate(new Date())) {
+                    setNewTask((previous) =>
+                      previous.cloneWith({
+                        dueDate: formatDate(selectedDate),
+                      })
+                    );
+                  } else {
+                    setShowErrorMessage(
+                      "Date has to be today or in the future"
+                    );
+                    setShowErrorModal(true);
+                  }
                 }
-              }
+              }}
+            />
+          )}
+          <Button
+            marginTop={5}
+            marginBottom={5}
+            buttonPress={() => {
+              setShowCreatePrioModal(true);
             }}
-          />
-        )}
-        <Button
-          marginTop={5}
-          marginBottom={5}
-          buttonPress={() => {
-            setShowCreatePrioModal(true);
-          }}
-          width={200}
-        >
-          Priority level: {newTask.priorityLevel.toString()}
-        </Button>
+            width={"45%"}
+          >
+            Priority level: {newTask.priorityLevel.toString()}
+          </Button>
+        </View>
         <Button
           marginTop={5}
           marginBottom={5}

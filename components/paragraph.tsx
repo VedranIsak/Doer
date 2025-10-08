@@ -1,7 +1,8 @@
 import { useFonts } from "expo-font";
 import { ReactNode } from "react";
-import { StyleSheet, Text } from "react-native";
+import { DimensionValue, StyleSheet, Text } from "react-native";
 
+type TextAlignType = "auto" | "left" | "right" | "center" | "justify";
 interface ParagraphProps {
   children: ReactNode;
   color?: string;
@@ -11,6 +12,8 @@ interface ParagraphProps {
   marginTop?: number;
   marginLeft?: number;
   marginRight?: number;
+  width?: DimensionValue;
+  textAlign?: TextAlignType;
 }
 
 const Paragraph = ({
@@ -21,6 +24,8 @@ const Paragraph = ({
   marginTop,
   marginLeft,
   marginRight,
+  width,
+  textAlign,
 }: ParagraphProps) => {
   const [loaded] = useFonts({
     CalSans: require("@/assets/fonts/CalSans.ttf"),
@@ -36,6 +41,8 @@ const Paragraph = ({
         marginBottom: marginBottom ?? 0,
         marginLeft: marginLeft ?? 0,
         marginRight: marginRight ?? 0,
+        width: width ?? "auto",
+        textAlign: textAlign ?? "auto",
       },
     });
 

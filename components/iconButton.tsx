@@ -2,10 +2,12 @@ import { useFonts } from "expo-font";
 import { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, DimensionValue } from "react-native";
 
-interface ButtonProps {
+interface IconButtonProps {
+  title: string;
   children?: ReactNode;
   buttonPress?: () => void;
   width?: DimensionValue;
+  borderRadius?: DimensionValue;
   backgroundColor?: string;
   color?: string;
   pressedColor?: string;
@@ -13,15 +15,17 @@ interface ButtonProps {
   marginBottom?: DimensionValue;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const IconButton: React.FC<IconButtonProps> = ({
+  title,
   children,
   buttonPress,
   width = "auto",
+  borderRadius,
   backgroundColor,
   pressedColor,
   marginTop = 0,
   marginBottom = 0,
-}: ButtonProps) => {
+}: IconButtonProps) => {
   const [fontsLoaded] = useFonts({
     CalSans: require("@/assets/fonts/CalSans.ttf"),
   });
@@ -32,18 +36,23 @@ const Button: React.FC<ButtonProps> = ({
 
   const styles = StyleSheet.create({
     pressable: {
-      borderRadius: 50,
-      padding: 12.5,
+      borderRadius: borderRadius ?? 50,
+      padding: 10,
       width: width,
       marginBottom: marginBottom,
-      marginTop: marginTop
+      marginTop: marginTop,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between"
     },
     text: {
       color: "black",
       fontSize: 20,
       fontFamily: "CalSans",
       textAlign: "center",
-      marginBottom: 5
+      marginBottom: 5,
+      marginRight: 10,
+      marginLeft: 10
     },
   });
 
@@ -55,9 +64,10 @@ const Button: React.FC<ButtonProps> = ({
       ]}
       onPress={buttonPress}
     >
-      <Text style={styles.text}>{children}</Text>
+      <Text style={styles.text}>{title}</Text>
+      {children}
     </Pressable>
   );
 };
 
-export default Button;
+export default IconButton;

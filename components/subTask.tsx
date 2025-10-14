@@ -10,7 +10,7 @@ interface SubTaskProps {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
+    borderRadius: 15,
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 7.5,
     right: 7.5,
-    borderRadius: 10,
+    borderRadius: 15,
     height: 30,
     width: 30,
     borderWidth: 3,

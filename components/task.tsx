@@ -21,7 +21,7 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
 
   const styles = StyleSheet.create({
     taskContainer: {
-      borderRadius: 10,
+      borderRadius: 15,
       padding: 25,
       overflow: "hidden",
       marginTop: 5,
@@ -29,7 +29,7 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
       width: width - 20,
       backgroundColor: "white"
     },
-    checkbox: { borderRadius: 10, height: 30, width: 30, borderWidth: 3, borderColor: "rgba(255, 255, 255, .8)" },
+    checkbox: { borderRadius: 15, height: 30, width: 30, borderWidth: 3, borderColor: "rgba(255, 255, 255, .8)" },
     taskTopContainer: {
       display: "flex",
       flexDirection: "row",
@@ -40,12 +40,6 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
   return (
     <Pressable key={task.id.toString()}>
       <View style={styles.taskContainer}>
-        {/* <LinearGradient
-          colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
-          style={StyleSheet.absoluteFillObject}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-        /> */}
         <View style={styles.taskTopContainer}>
           <Paragraph fontSize={18}>
             {task.title}

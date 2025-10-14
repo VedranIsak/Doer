@@ -3,7 +3,7 @@ import Task from "../models/Task";
 
 const tasks: Task[] = [
   new Task(
-    "2025-09-26",
+    "2025-10-14",
     "10:00",
     "Team Meeting",
     "Weekly project sync",
@@ -12,7 +12,7 @@ const tasks: Task[] = [
     []
   ),
   new Task(
-    "2025-09-26",
+    "2025-10-14",
     "14:30",
     "Doctor Appointment",
     "Routine check-up",
@@ -21,7 +21,7 @@ const tasks: Task[] = [
     []
   ),
   new Task(
-    "2025-09-26",
+    "2025-10-14",
     "09:00",
     "Workshop",
     "TypeScript basics",

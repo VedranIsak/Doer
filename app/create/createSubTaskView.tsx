@@ -13,16 +13,13 @@ interface CreateSubTaskViewProps {
 
 const styles = StyleSheet.create({
   subTaskContainer: {
-    width: "95%",
-    borderRadius: 10,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 25,
-    marginBottom: 5,
-    overflow: "hidden",
-    borderWidth: 4,
-    borderColor: "rgba(255, 255, 255, .8)",
+      backgroundColor: "rgba(255, 255, 255, .3)",
+      width: "100%",
+      borderRadius: 15,
+      justifyContent: "center",
+      alignItems: "center",
+      margin: 10,
+      padding: 15
   },
 });
 

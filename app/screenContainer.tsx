@@ -1,6 +1,7 @@
 import Paragraph from "@/components/paragraph";
+import { ThemeContext } from "@/context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 import {
   Dimensions,
   Image,
@@ -17,14 +18,23 @@ interface ScreenContainerProps {
   title: string;
 }
 
+const getContext = () => {
+  const themeContext = useContext(ThemeContext);
+  if(!themeContext) {
+    return new Error("Context is undefined");
+  }
+  return themeContext;
+}
+
 const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   const { width, height } = Dimensions.get("window");
+  const themeContext = getContext();
 
   const styles = StyleSheet.create({
     mainContainer: {
       height: height,
       width: width,
-      backgroundColor: "#470047",
+      backgroundColor: themeContext.primaryBackColor,
     },
     contentContainer: { flex: 1, marginBottom: 50 },
     content: {
@@ -50,12 +60,13 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   const headerImages: Record<string, any> = {
     index: require("@/assets/images/index.png"),
     create: require("@/assets/images/create.jpeg"),
+    settings: require("@/assets/images/settings.jpg")
   };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <LinearGradient
-        colors={["#6a1a74", "#b3206c"]}
+        colors={[primaryBackColor, secondaryBackColor]}
         style={StyleSheet.absoluteFillObject}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}

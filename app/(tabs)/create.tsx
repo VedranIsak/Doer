@@ -37,12 +37,20 @@ const Create = () => {
       alignItems: "center",
       width: "100%",
     },
-    buttonContainer: {
+    subContainer: {
+      backgroundColor: "rgba(255, 255, 255, .3)",
       width: "100%",
+      borderRadius: 15,
+      justifyContent: "center",
+      alignItems: "center",
+      margin: 10,
+    },
+    buttonContainer: {
       flexDirection: "row",
       display: "flex",
       justifyContent: "space-evenly",
       alignItems: "center",
+      padding: 10
     },
     textInput: {
       width: "90%",
@@ -66,6 +74,7 @@ const Create = () => {
         showErrorModal={showErrorModal}
       />
       <View style={styles.container}>
+        <View style={styles.subContainer}>
         <Paragraph color={"white"} fontSize={22} marginTop={10}>
           Title
         </Paragraph>
@@ -90,8 +99,9 @@ const Create = () => {
             setNewTask((previous) => previous.cloneWith({ description: text }))
           }
         />
+        </View>
         <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
-        <View style={styles.buttonContainer}>
+        <View style={[styles.subContainer, styles.buttonContainer]}>
           <Button
             marginTop={5}
             marginBottom={5}

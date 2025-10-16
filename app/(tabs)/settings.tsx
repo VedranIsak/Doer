@@ -1,11 +1,10 @@
-import Paragraph from "@/components/paragraph";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet } from "react-native";
 import ScreenContainer from "@/app/screenContainer";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import SettingsDropdown from "../settings/settingsDropdown";
-import Button from "@/components/button";
-import IconButton from "@/components/iconButton";
-import { LinearGradient } from "expo-linear-gradient";
+import ThemeSettings from "../settings/themeSettings";
+import SoundSettings from '../settings/soundSettings';
+import React from "react";
+import OldTasksSettings from "../settings/oldTasksSettings";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,54 +31,15 @@ const styles = StyleSheet.create({
     borderColor: "white",
   },
 });
+
+
 const Settings = () => {
   return (
     <ScreenContainer title="Settings" img="settings">
       <View style={styles.container}>
-        <SettingsDropdown title="Themes">
-          <IconButton title="Dreamy" borderRadius={15} marginBottom={12.5} width={"90%"}>
-            <View style={styles.buttonIcon}>
-              <LinearGradient
-                colors={["#6a1a74", "#b3206c"]}
-                style={StyleSheet.absoluteFillObject}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              />
-            </View>
-          </IconButton>
-          <IconButton title="Oceanic" borderRadius={15} marginBottom={12.5}>
-            <View style={styles.buttonIcon}>
-              <LinearGradient
-                colors={["#1a1e74ff", "#2089b3ff"]}
-                style={StyleSheet.absoluteFillObject}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              />
-            </View>
-          </IconButton>
-          <IconButton title="Dim" borderRadius={15} marginBottom={12.5}>
-            <View style={styles.buttonIcon}>
-              <LinearGradient
-                colors={["#130415ff", "#545454ff"]}
-                style={StyleSheet.absoluteFillObject}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              />
-            </View>
-          </IconButton>
-          <IconButton title="Fiery" borderRadius={15} marginBottom={12.5}>
-            <View style={styles.buttonIcon}>
-              <LinearGradient
-                colors={["#ecc30cff", "#ec860aff"]}
-                style={StyleSheet.absoluteFillObject}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              />
-            </View>
-          </IconButton>
-        </SettingsDropdown>
-        <SettingsDropdown title="Sound"></SettingsDropdown>
-        <SettingsDropdown title="Old tasks"></SettingsDropdown>
+        <ThemeSettings />
+        <SoundSettings />
+        <OldTasksSettings />
         <SettingsDropdown title="Notifications"></SettingsDropdown>
       </View>
     </ScreenContainer>

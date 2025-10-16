@@ -29,7 +29,7 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
       width: width - 20,
       backgroundColor: "white"
     },
-    checkbox: { borderRadius: 15, height: 30, width: 30, borderWidth: 3, borderColor: "rgba(255, 255, 255, .8)" },
+    checkbox: { borderRadius: 30, height: 40, width: 40, borderWidth: 4, borderColor: "rgba(255, 255, 255, .8)" },
     taskTopContainer: {
       display: "flex",
       flexDirection: "row",

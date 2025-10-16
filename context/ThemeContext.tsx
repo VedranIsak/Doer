@@ -7,7 +7,12 @@ type ThemeContextType = {
   setSecondaryBackColor: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType>({
+  primaryBackColor: "#6a1a74",
+  secondaryBackColor: "#b3206c",
+  setPrimaryBackColor: () => {},
+  setSecondaryBackColor: () => {},
+});
 
 interface ContextProps {
   children: ReactNode;
@@ -32,5 +37,4 @@ const ThemeProvider = ({ children }: ContextProps) => {
   );
 };
 
-export default ThemeProvider;
-export { ThemeContext };
+export { ThemeProvider, ThemeContext };

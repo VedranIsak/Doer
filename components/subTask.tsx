@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 7.5,
     right: 7.5,
-    borderRadius: 15,
-    height: 30,
-    width: 30,
-    borderWidth: 3,
+    borderRadius: 25,
+    height: 40,
+    width: 40,
+    borderWidth: 4,
     borderColor: "black"
   },
 });

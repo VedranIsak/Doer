@@ -1,6 +1,8 @@
+import { ThemeContext } from "@/context/ThemeContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
+import { useContext } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -8,6 +10,7 @@ export default function TabLayout() {
   const insets = useSafeAreaInsets();
   const BASE = Platform.OS === "ios" ? 56 : 54; // visual height above the inset
   const HEIGHT = BASE + Math.max(insets.bottom, 16); // add safe-area
+  const { primaryBackColor, secondaryBackColor } = useContext(ThemeContext);
 
   return (
     <Tabs
@@ -31,12 +34,12 @@ export default function TabLayout() {
             <View
               style={[
                 StyleSheet.absoluteFillObject,
-                { backgroundColor: "#6a1a74" },
+                { backgroundColor: primaryBackColor },
               ]}
             />
             {/* Avoid semi-transparent white; use two opaque purples instead */}
             <LinearGradient
-              colors={["#6a1a74", "#b3206c"]}
+              colors={[primaryBackColor, secondaryBackColor]}
               style={StyleSheet.absoluteFillObject}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}

@@ -1,8 +1,10 @@
 import Paragraph from "@/components/paragraph";
 import { ThemeContext } from "@/context/ThemeContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useContext } from "react";
 import {
+  ColorValue,
   Dimensions,
   Image,
   ScrollView,
@@ -18,23 +20,15 @@ interface ScreenContainerProps {
   title: string;
 }
 
-const getContext = () => {
-  const themeContext = useContext(ThemeContext);
-  if(!themeContext) {
-    return new Error("Context is undefined");
-  }
-  return themeContext;
-}
-
 const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   const { width, height } = Dimensions.get("window");
-  const themeContext = getContext();
+  const { primaryBackColor, secondaryBackColor } = useContext(ThemeContext);
 
   const styles = StyleSheet.create({
     mainContainer: {
       height: height,
       width: width,
-      backgroundColor: themeContext.primaryBackColor,
+      backgroundColor: primaryBackColor
     },
     contentContainer: { flex: 1, marginBottom: 50 },
     content: {
@@ -42,25 +36,24 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
       justifyContent: "flex-start",
       flexDirection: "column",
     },
-    image: { width: width, height: 200, marginBottom: 50 },
+    image: { width: width, height: 200, marginBottom: 20 },
     headerContainer: {
       position: "absolute",
-      width: "45%",
+      width: "100%",
       height: "auto",
-      borderRadius: 40,
       backgroundColor: "white",
       top: 140,
-      left: "27.5%",
-      paddingTop: 30,
-      paddingBottom: 30,
-      alignItems: "center",
+      left: "0%",
+      paddingTop: 10,
+      paddingBottom: 20,
+      alignItems: "center"
     },
   });
 
   const headerImages: Record<string, any> = {
     index: require("@/assets/images/index.png"),
     create: require("@/assets/images/create.jpeg"),
-    settings: require("@/assets/images/settings.jpg")
+    settings: require("@/assets/images/settings.jpg"),
   };
 
   return (
@@ -71,7 +64,6 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       />
-      <StatusBar backgroundColor={"light-content"}></StatusBar>
       <ScrollView
         style={styles.contentContainer}
         contentContainerStyle={styles.content}

@@ -7,11 +7,16 @@ import formatDate from "@/helpers/formatDate";
 import SubTaskModel from "@/models/SubTask";
 import TaskModel from "@/models/Task";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import React, { useState } from "react";
-import { Platform, StyleSheet, TextInput, View } from "react-native";
+import React, { useContext, useState } from "react";
+import { ColorValue, Platform, StyleSheet, TextInput, View } from "react-native";
 import ErrorModal from "../../components/errorModal";
+import { ThemeContext } from '@/context/ThemeContext';
 
 const Create = () => {
+  const themeContext = useContext(ThemeContext);
+  const primaryBackColor = themeContext?.primaryBackColor as ColorValue;
+  const secondaryBackColor = themeContext?.secondaryBackColor as ColorValue;
+
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
       formatDate(new Date()),

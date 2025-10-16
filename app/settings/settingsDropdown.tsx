@@ -11,7 +11,6 @@ import {
   View,
 } from "react-native";
 
-// Enable LayoutAnimation on Android
 if (
   Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
 
 const SettingsDropdown = ({ title, children }: SettingsDropdownProps) => {
   const [open, setOpen] = useState(false);
-  const rotate = useRef(new Animated.Value(0)).current; // 0=down, 1=up
+  const rotate = useRef(new Animated.Value(0)).current; 
 
   const toggle = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

@@ -7,7 +7,6 @@ interface IconButtonProps {
   children?: ReactNode;
   buttonPress?: () => void;
   width?: DimensionValue;
-  borderRadius?: DimensionValue;
   backgroundColor?: string;
   color?: string;
   pressedColor?: string;
@@ -19,8 +18,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   title,
   children,
   buttonPress,
-  width = "auto",
-  borderRadius,
+  width,
   backgroundColor,
   pressedColor,
   marginTop = 0,
@@ -36,9 +34,9 @@ const IconButton: React.FC<IconButtonProps> = ({
 
   const styles = StyleSheet.create({
     pressable: {
-      borderRadius: borderRadius ?? 50,
       padding: 10,
-      width: width,
+      borderRadius: 50,
+      width: width ?? "auto",
       marginBottom: marginBottom,
       marginTop: marginTop,
       flexDirection: "row",

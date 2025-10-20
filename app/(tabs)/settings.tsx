@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import ScreenContainer from "@/app/screenContainer";
-import SettingsDropdown from "../settings/settingsDropdown";
+import NotificationSettings from "../settings/notificationSettings";
 import ThemeSettings from "../settings/themeSettings";
-import SoundSettings from '../settings/soundSettings';
+import SoundSettings from "../settings/soundSettings";
 import React from "react";
 import OldTasksSettings from "../settings/oldTasksSettings";
 
@@ -32,15 +32,14 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const Settings = () => {
   return (
     <ScreenContainer title="Settings" img="settings">
       <View style={styles.container}>
         <ThemeSettings />
         <SoundSettings />
+        <NotificationSettings />
         <OldTasksSettings />
-        <SettingsDropdown title="Notifications"></SettingsDropdown>
       </View>
     </ScreenContainer>
   );

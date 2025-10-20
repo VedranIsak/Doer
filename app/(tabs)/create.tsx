@@ -1,22 +1,18 @@
 import CreatePrioModal from "@/app/create/createPrioModal";
 import CreateSubTaskView from "@/app/create/createSubTaskView";
 import ScreenContainer from "@/app/screenContainer";
-import Button from "@/components/button";
+import IconButton from "@/components/iconButton";
 import Paragraph from "@/components/paragraph";
 import formatDate from "@/helpers/formatDate";
 import SubTaskModel from "@/models/SubTask";
 import TaskModel from "@/models/Task";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import React, { useContext, useState } from "react";
-import { ColorValue, Platform, StyleSheet, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Platform, StyleSheet, TextInput, View } from "react-native";
 import ErrorModal from "../../components/errorModal";
-import { ThemeContext } from '@/context/ThemeContext';
 
 const Create = () => {
-  const themeContext = useContext(ThemeContext);
-  const primaryBackColor = themeContext?.primaryBackColor as ColorValue;
-  const secondaryBackColor = themeContext?.secondaryBackColor as ColorValue;
-
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
       formatDate(new Date()),
@@ -51,11 +47,7 @@ const Create = () => {
       margin: 10,
     },
     buttonContainer: {
-      flexDirection: "row",
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      padding: 10
+      padding: 10,
     },
     textInput: {
       width: "90%",
@@ -80,41 +72,55 @@ const Create = () => {
       />
       <View style={styles.container}>
         <View style={styles.subContainer}>
-        <Paragraph color={"white"} fontSize={22} marginTop={10}>
-          Title
-        </Paragraph>
-        <TextInput
-          style={styles.textInput}
-          keyboardType="default"
-          value={newTask.title}
-          placeholder="....."
-          onChangeText={(text) =>
-            setNewTask((previous) => previous.cloneWith({ title: text }))
-          }
-        />
-        <Paragraph color={"white"} fontSize={22}>
-          Description
-        </Paragraph>
-        <TextInput
-          style={[styles.textInput]}
-          multiline={true}
-          value={newTask.description}
-          placeholder="....."
-          onChangeText={(text) =>
-            setNewTask((previous) => previous.cloneWith({ description: text }))
-          }
-        />
+          <Paragraph color={"white"} fontSize={22} marginTop={10}>
+            Title
+          </Paragraph>
+          <TextInput
+            style={styles.textInput}
+            keyboardType="default"
+            value={newTask.title}
+            placeholder="....."
+            onChangeText={(text) =>
+              setNewTask((previous) => previous.cloneWith({ title: text }))
+            }
+          />
+          <Paragraph color={"white"} fontSize={22}>
+            Description
+          </Paragraph>
+          <TextInput
+            style={[styles.textInput]}
+            multiline={true}
+            value={newTask.description}
+            placeholder="....."
+            onChangeText={(text) =>
+              setNewTask((previous) =>
+                previous.cloneWith({ description: text })
+              )
+            }
+          />
         </View>
         <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
         <View style={[styles.subContainer, styles.buttonContainer]}>
-          <Button
+          <IconButton
             marginTop={5}
             marginBottom={5}
-            buttonPress={() => setShowDate(true)}
-            width={"45%"}
+            buttonPress={() => {
+              setShowCreatePrioModal(true);
+            }}
+            title={`Priority level: ${newTask.priorityLevel.toString()}`}
           >
-            {newTask.dueDate}
-          </Button>
+            <Ionicons name="flag-sharp" color={"black"} size={26} />
+          </IconButton>
+                    <IconButton
+            buttonPress={() => {
+              () => setShowDate(true);
+            }}
+            title={`${newTask.dueDate}`}
+            marginTop={7.5}
+            marginBottom={5}
+          >
+            <Ionicons name="calendar-clear-sharp" color={"black"} size={26} />
+          </IconButton>
           {showDate && (
             <DateTimePicker
               value={new Date(formatDate(new Date()))}
@@ -140,25 +146,15 @@ const Create = () => {
               }}
             />
           )}
-          <Button
+          <IconButton
+            buttonPress={() => {}}
+            title={"Create task"}
             marginTop={5}
             marginBottom={5}
-            buttonPress={() => {
-              setShowCreatePrioModal(true);
-            }}
-            width={"45%"}
           >
-            Priority level: {newTask.priorityLevel.toString()}
-          </Button>
+            <Ionicons name="add-circle-sharp" color={"black"} size={26} />
+          </IconButton>
         </View>
-        <Button
-          marginTop={5}
-          marginBottom={5}
-          buttonPress={() => {}}
-          width={250}
-        >
-          Create
-        </Button>
         <CreatePrioModal
           showCreatePrioModal={showCreatePrioModal}
           setShowCreatePrioModal={setShowCreatePrioModal}

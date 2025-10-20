@@ -39,12 +39,13 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
     image: { width: width, height: 200, marginBottom: 20 },
     headerContainer: {
       position: "absolute",
-      width: "100%",
+      width: "70%",
       height: "auto",
       backgroundColor: "white",
-      top: 140,
-      left: "0%",
-      paddingTop: 10,
+      top: 145,
+      borderRadius: 50,
+      left: "15%",
+      paddingTop: 15,
       paddingBottom: 20,
       alignItems: "center"
     },

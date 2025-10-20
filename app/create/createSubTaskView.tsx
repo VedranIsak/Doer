@@ -1,10 +1,14 @@
 import TaskModel from "@/models/Task";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import Paragraph from "../../components/paragraph";
 import SubTask from "../../components/subTask";
 import CreateSubTaskModal from "./createSubTaskModal";
+import IconButton from "@/components/iconButton";
+import { LinearGradient } from "expo-linear-gradient";
+import { ThemeContext } from "@/context/ThemeContext";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface CreateSubTaskViewProps {
   newTask: TaskModel;
@@ -13,19 +17,21 @@ interface CreateSubTaskViewProps {
 
 const styles = StyleSheet.create({
   subTaskContainer: {
-      backgroundColor: "rgba(255, 255, 255, .3)",
-      width: "100%",
-      borderRadius: 15,
-      justifyContent: "center",
-      alignItems: "center",
-      margin: 10,
-      padding: 15
+    backgroundColor: "rgba(255, 255, 255, .3)",
+    width: "100%",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
+    padding: 15,
   },
 });
 
 const CreateSubTaskView = ({ newTask, setNewTask }: CreateSubTaskViewProps) => {
   const [showCreateSubTaskModal, setShowCreateSubTaskModal] =
     useState<boolean>(false);
+  const themeContext = useContext(ThemeContext);
+  const { primaryBackColor, secondaryBackColor } = themeContext;
 
   return (
     <View style={styles.subTaskContainer}>
@@ -37,16 +43,16 @@ const CreateSubTaskView = ({ newTask, setNewTask }: CreateSubTaskViewProps) => {
       ) : (
         <></>
       )}
-      <Button
-        marginTop={20}
-        marginBottom={5}
-        width={200}
+      <IconButton
         buttonPress={() => {
           setShowCreateSubTaskModal(true);
         }}
+        title={"Add Subtask"}
+        marginTop={7.5}
+        marginBottom={5}
       >
-        + Add Sub Task
-      </Button>
+        <Ionicons name="add-circle-sharp" color={"black"} size={26} />
+      </IconButton>
       <CreateSubTaskModal
         showCreateSubTaskModal={showCreateSubTaskModal}
         setShowCreateSubTaskModal={setShowCreateSubTaskModal}

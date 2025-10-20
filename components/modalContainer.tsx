@@ -1,6 +1,12 @@
+import { ThemeContext } from "@/context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
-import { ReactNode } from "react";
-import { Modal, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { ReactNode, useContext } from "react";
+import {
+  Modal,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
 interface ModalContainerProps {
   showModalContainer: boolean;
@@ -22,28 +28,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const ModalContainer = ({showModalContainer, setShowModalContainer, children}: ModalContainerProps) => (
-  <Modal
-    backdropColor={"rgba(0, 0, 0, .5)"}
-    visible={showModalContainer}
-    animationType="fade"
-  >
-    <TouchableWithoutFeedback onPress={() => setShowModalContainer(false)}>
-      <View style={styles.modalBackdrop}>
-        <TouchableWithoutFeedback>
-          <View style={styles.modalContainer}>
-            <LinearGradient
-              colors={["rgba(255, 255, 255, 0.2)", "rgba(173, 61, 111, 0.6)"]}
-              style={StyleSheet.absoluteFillObject}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            />
-            {children}
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    </TouchableWithoutFeedback>
-  </Modal>
-);
+const ModalContainer = ({
+  showModalContainer,
+  setShowModalContainer,
+  children,
+}: ModalContainerProps) => {
+  const { primaryBackColor, secondaryBackColor } = useContext(ThemeContext);
+
+  return (
+    <Modal
+      backdropColor={"rgba(0, 0, 0, .5)"}
+      visible={showModalContainer}
+      animationType="fade"
+    >
+      <TouchableWithoutFeedback onPress={() => setShowModalContainer(false)}>
+        <View style={styles.modalBackdrop}>
+          <TouchableWithoutFeedback>
+            <View style={styles.modalContainer}>
+              <LinearGradient
+                colors={[primaryBackColor, secondaryBackColor]}
+                style={StyleSheet.absoluteFillObject}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              />
+              {children}
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+      </TouchableWithoutFeedback>
+    </Modal>
+  );
+};
 
 export default ModalContainer;

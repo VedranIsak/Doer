@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginBottom: 15,
+    minWidth: "100%"
   },
 });
 

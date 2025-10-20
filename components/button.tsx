@@ -16,7 +16,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   buttonPress,
-  width = "auto",
+  width,
   backgroundColor,
   pressedColor,
   marginTop = 0,
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     pressable: {
       borderRadius: 50,
       padding: 12.5,
-      width: width,
+      width: width ?? "auto",
       marginBottom: marginBottom,
       marginTop: marginTop
     },

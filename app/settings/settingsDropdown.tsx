@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(255, 255, 255, .3)",
     margin: 5,
-    borderRadius: 15,
+    borderRadius: 10,
+    flex: 1
   },
   pressableContainer: {
     width: "100%",

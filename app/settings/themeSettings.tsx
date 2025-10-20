@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     height: 50,
     width: 50,
-    borderRadius: 15,
+    borderRadius: 50,
     borderColor: "white",
   },
 });
@@ -52,7 +52,6 @@ const ThemeSettings = () => {
         setBackColors(primColor, secColor);
       }}
       title={title}
-      borderRadius={15}
       marginBottom={12.5}
       width={"90%"}
     >

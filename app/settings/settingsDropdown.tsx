@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, .3)",
     margin: 5,
     borderRadius: 10,
-    flex: 1
+    flex: 1,
   },
   pressableContainer: {
     width: "100%",
@@ -40,11 +40,15 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: "row",
   },
+  infoIcon: {
+    position: "absolute",
+    left: "82.5%"
+  }
 });
 
 const SettingsDropdown = ({ title, children }: SettingsDropdownProps) => {
   const [open, setOpen] = useState(false);
-  const rotate = useRef(new Animated.Value(0)).current; 
+  const rotate = useRef(new Animated.Value(0)).current;
 
   const toggle = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -68,6 +72,7 @@ const SettingsDropdown = ({ title, children }: SettingsDropdownProps) => {
         <Paragraph marginBottom={5} marginLeft={5} color="white" fontSize={22}>
           {title}
         </Paragraph>
+          <Ionicons style={styles.infoIcon} name="information-circle-sharp" color={"white"} size={30} />
         <Animated.View style={{ transform: [{ rotate: rotation }] }}>
           <Ionicons name="arrow-down-circle-sharp" color={"white"} size={30} />
         </Animated.View>

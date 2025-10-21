@@ -6,6 +6,8 @@ import { StyleSheet, TextInput } from "react-native";
 import Button from "../../components/button";
 import ModalContainer from "../../components/modalContainer";
 import Paragraph from "../../components/paragraph";
+import IconButton from "@/components/iconButton";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface CreateSubTaskModalProps {
   showCreateSubTaskModal: boolean;
@@ -16,13 +18,13 @@ interface CreateSubTaskModalProps {
 
 const styles = StyleSheet.create({
   textInput: {
-    width: "90%",
+    width: "80%",
     marginTop: 5,
     marginBottom: 25,
     fontSize: 18,
     height: "auto",
     borderRadius: 10,
-    padding: 20,
+    padding: 12.5,
     backgroundColor: "white",
     color: "black",
     textAlign: "left",
@@ -51,14 +53,12 @@ const CreateSubTaskModal = ({
         style={styles.textInput}
         value={subTask.title}
         onChangeText={(text) => {
-          setSubTask((previous) =>
-            previous.cloneWith({ title: text })
-          );
+          setSubTask((previous) => previous.cloneWith({ title: text }));
         }}
       />
-      <Button
-        width={200}
+      <IconButton
         marginBottom={5}
+        title="Add"
         buttonPress={() => {
           setNewTask((previous) => {
             const subTasks = newTask.subTasks;
@@ -68,8 +68,8 @@ const CreateSubTaskModal = ({
           setShowCreateSubTaskModal(false);
         }}
       >
-        Add
-      </Button>
+        <Ionicons name="add-circle-sharp" color={"black"} size={26} />
+      </IconButton>
     </ModalContainer>
   );
 };

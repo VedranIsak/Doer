@@ -1,6 +1,8 @@
 import TaskModel from "@/models/Task";
 import Button from "../../components/button";
 import ModalContainer from "../../components/modalContainer";
+import IconButton from "@/components/iconButton";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface CreatePrioModalProps {
   showCreatePrioModal: boolean;
@@ -22,42 +24,42 @@ const CreatePrioModal = ({
       showModalContainer={showPrioModal}
       setShowModalContainer={setShowPrioModal}
     >
-      <Button
+      <IconButton
         marginTop={0}
-        width={200}
+        title="Priority level 1"
         buttonPress={() => {
           changePriorityLevel(1);
         }}
       >
-        Priority level 1
-      </Button>
-      <Button
+        <Ionicons name="flag-sharp" color={"black"} size={26} />
+      </IconButton>
+      <IconButton
         marginTop={10}
-        width={200}
         buttonPress={() => {
           changePriorityLevel(2);
         }}
+        title="Priority level 2"
       >
-        Priority level 2
-      </Button>
-      <Button
+        <Ionicons name="flag-sharp" color={"black"} size={26} />
+      </IconButton>
+      <IconButton
         marginTop={10}
-        width={200}
+        title="Priority level 3"
         buttonPress={() => {
           changePriorityLevel(3);
         }}
       >
-        Priority level 3
-      </Button>
-      <Button
+        <Ionicons name="flag-sharp" color={"black"} size={26} />
+      </IconButton>
+      <IconButton
         marginTop={10}
-        width={200}
         buttonPress={() => {
           changePriorityLevel(4);
         }}
+        title="Priority level 4"
       >
-        Priority level 4
-      </Button>
+        <Ionicons name="flag-sharp" color={"black"} size={26} />
+      </IconButton>
     </ModalContainer>
   );
 };

@@ -11,24 +11,25 @@ interface SubTaskProps {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 15,
-    backgroundColor: "white",
+    backgroundColor: "rgba(255, 255, 255, .325)",
     alignItems: "center",
     justifyContent: "center",
-    padding: 5,
-    width: "70%",
-    height: 70,
+    width: "60%",
+    height: 80,
     margin: 7.5,
-    overflow: "hidden"
+    overflow: "hidden",
+    marginTop: 2.5,
+    marginBottom: 5,
   },
   checkbox: {
     position: "absolute",
-    top: 7.5,
-    right: 7.5,
+    top: 10,
+    right: 10,
     borderRadius: 25,
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     borderWidth: 4,
-    borderColor: "black"
+    borderColor: "white",
   },
 });
 
@@ -36,7 +37,9 @@ const handleCheck = (task: SubTaskModel, checked: boolean) => {};
 
 const SubTask = ({ task }: SubTaskProps) => (
   <View style={styles.container}>
-    <Paragraph textAlign="center" width={"70%"}>{task.title}</Paragraph>
+    <Paragraph color="white" textAlign="center" width={"70%"}>
+      {task.title}
+    </Paragraph>
     <Checkbox
       style={styles.checkbox}
       value={task.isCompleted}

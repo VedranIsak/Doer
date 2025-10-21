@@ -24,12 +24,18 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
       borderRadius: 15,
       padding: 25,
       overflow: "hidden",
-      marginTop: 5,
-      marginBottom: 10,
-      width: width - 20,
-      backgroundColor: "white"
+      marginTop: 2.5,
+      marginBottom: 5,
+      width: width - 50,
+      backgroundColor: "rgba(255, 255, 255, .325)",
     },
-    checkbox: { borderRadius: 30, height: 40, width: 40, borderWidth: 4, borderColor: "rgba(255, 255, 255, .8)" },
+    checkbox: {
+      borderRadius: 30,
+      height: 40,
+      width: 40,
+      borderWidth: 4,
+      borderColor: "white",
+    },
     taskTopContainer: {
       display: "flex",
       flexDirection: "row",
@@ -41,18 +47,17 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
     <Pressable key={task.id.toString()}>
       <View style={styles.taskContainer}>
         <View style={styles.taskTopContainer}>
-          <Paragraph fontSize={18}>
+          <Paragraph color="white" fontSize={18}>
             {task.title}
           </Paragraph>
           <Checkbox
-            color={"black"}
             style={styles.checkbox}
             value={task.isCompleted}
             onValueChange={(checked) => handleCheck(task, checked)}
           />
         </View>
-        <Paragraph>{task.dueDate}</Paragraph>
-        <Paragraph>{task.description}</Paragraph>
+        <Paragraph color="white">{task.dueDate}</Paragraph>
+        <Paragraph color="white">{task.description}</Paragraph>
       </View>
     </Pressable>
   );

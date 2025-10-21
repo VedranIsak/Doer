@@ -50,6 +50,7 @@ const CreateSubTaskView = ({ newTask, setNewTask }: CreateSubTaskViewProps) => {
         title={"Add Subtask"}
         marginTop={7.5}
         marginBottom={5}
+        width={"50%"}
       >
         <Ionicons name="add-circle-sharp" color={"black"} size={26} />
       </IconButton>

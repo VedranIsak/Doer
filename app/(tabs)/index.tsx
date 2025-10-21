@@ -7,6 +7,8 @@ import TaskModel from "@/models/Task";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
+//Skapa ett eget komponentbibliotek för paragraph, iconButton, button etc
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "rgba(255, 255, 255, .3)",

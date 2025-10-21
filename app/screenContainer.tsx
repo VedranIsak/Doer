@@ -1,14 +1,11 @@
 import Paragraph from "@/components/paragraph";
 import { ThemeContext } from "@/context/ThemeContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useContext } from "react";
 import {
-  ColorValue,
   Dimensions,
   Image,
   ScrollView,
-  StatusBar,
   StyleSheet,
   View,
 } from "react-native";
@@ -39,12 +36,12 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
     image: { width: width, height: 200, marginBottom: 20 },
     headerContainer: {
       position: "absolute",
-      width: "70%",
+      width: "60%",
       height: "auto",
-      backgroundColor: "white",
+      backgroundColor: "rgb(240, 240, 240)",
       top: 145,
-      borderRadius: 50,
-      left: "15%",
+      borderRadius: 15,
+      left: "20%",
       paddingTop: 15,
       paddingBottom: 20,
       alignItems: "center"

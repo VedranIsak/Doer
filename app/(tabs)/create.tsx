@@ -50,13 +50,13 @@ const Create = () => {
       padding: 10,
     },
     textInput: {
-      width: "90%",
+      width: "80%",
       marginTop: 5,
       marginBottom: 25,
       fontSize: 18,
       height: "auto",
       borderRadius: 10,
-      padding: 20,
+      padding: 12.5,
       backgroundColor: "white",
       color: "black",
       textAlign: "left",
@@ -107,17 +107,19 @@ const Create = () => {
             buttonPress={() => {
               setShowCreatePrioModal(true);
             }}
+            width={"50%"}
             title={`Priority level: ${newTask.priorityLevel.toString()}`}
           >
             <Ionicons name="flag-sharp" color={"black"} size={26} />
           </IconButton>
-                    <IconButton
+          <IconButton
             buttonPress={() => {
               () => setShowDate(true);
             }}
             title={`${newTask.dueDate}`}
             marginTop={7.5}
             marginBottom={5}
+            width={"50%"}
           >
             <Ionicons name="calendar-clear-sharp" color={"black"} size={26} />
           </IconButton>
@@ -151,6 +153,7 @@ const Create = () => {
             title={"Create task"}
             marginTop={5}
             marginBottom={5}
+            width={"50%"}
           >
             <Ionicons name="add-circle-sharp" color={"black"} size={26} />
           </IconButton>

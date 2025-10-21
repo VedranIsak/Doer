@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import ScreenContainer from "@/app/screenContainer";
-import NotificationSettings from "../settings/notificationSettings";
+import NotificationsSettings from "../settings/notificationsSettings";
 import ThemeSettings from "../settings/themeSettings";
 import SoundSettings from "../settings/soundSettings";
 import React from "react";
@@ -38,7 +38,7 @@ const Settings = () => {
       <View style={styles.container}>
         <ThemeSettings />
         <SoundSettings />
-        <NotificationSettings />
+        <NotificationsSettings />
         <OldTasksSettings />
       </View>
     </ScreenContainer>

@@ -1,8 +1,10 @@
+import IconButton from "@/components/iconButton";
 import SettingsDropdown from "./settingsDropdown";
 import Button from "@/components/button";
 import ModalContainer from "@/components/modalContainer";
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,24 +15,41 @@ const styles = StyleSheet.create({
   },
 });
 
-const NotificationSettings = () => {
+const NotificationsSettings = () => {
   const [showNotificationModal, setShowNotificationModal] =
     useState<boolean>(false);
+
+  const [remindersActive, setRemindersActive] = useState<boolean>(false);
+
   return (
-    <SettingsDropdown title="Daily reminders">
+    <SettingsDropdown title="Daily notifications">
       <View style={styles.container}>
-        <Button width={"90%"} marginBottom={10} buttonPress={() => {}}>
-          Mute
-        </Button>
-        <Button
-          width={"90%"}
+        <IconButton
+          marginBottom={10}
+          buttonPress={() => {
+            setRemindersActive((prev) => !prev);
+          }}
+          title={`Turn ${remindersActive ? "off" : "on"}`}
+        >
+          <Ionicons
+            name={`notifications-${remindersActive ? "off-" : ""}sharp`}
+            color={"black"}
+            size={26}
+          />
+        </IconButton>
+        <IconButton
           marginBottom={15}
           buttonPress={() => {
             setShowNotificationModal(true);
           }}
+          title="Frequency"
         >
-          Reminder frequency
-        </Button>
+          <Ionicons
+            name="alert-circle-sharp"
+            color={"black"}
+            size={26}
+          />
+        </IconButton>
         <ModalContainer
           showModalContainer={showNotificationModal}
           setShowModalContainer={setShowNotificationModal}
@@ -44,4 +63,4 @@ const NotificationSettings = () => {
   );
 };
 
-export default NotificationSettings;
+export default NotificationsSettings;

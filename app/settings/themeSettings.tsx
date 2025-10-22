@@ -1,9 +1,11 @@
-import IconButton from "@/components/iconButton";
-import SettingsDropdown from "./settingsDropdown";
-import { View, StyleSheet } from "react-native";
+import IconButton from "@/app/components/iconButton";
+import { UserContext } from "../context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
-import { ThemeContext } from "@/context/ThemeContext";
+import { StyleSheet, View } from "react-native";
+import SettingsDropdown from "./settingsDropdown";
+import Settings from "../models/Settings";
+import User from "../models/User";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,12 +40,23 @@ interface ThemeButtonProps {
 }
 
 const ThemeSettings = () => {
-  const themeContext = useContext(ThemeContext);
-  const setPrimaryBackColor = themeContext.setPrimaryBackColor;
-  const setSecondaryBackColor = themeContext.setSecondaryBackColor;
+  const userContext = useContext(UserContext);
+  const { user, setUser } = userContext;
   const setBackColors = (prim: string, sec: string) => {
-    setPrimaryBackColor(prim);
-    setSecondaryBackColor(sec);
+    setUser(
+      new User(
+        user.tasks,
+        new Settings(
+          user.settings.sound,
+          prim,
+          sec,
+          user.settings.autoRemoveOldTasks,
+          user.settings.sendAlertsOldTasks,
+          user.settings.muteDailyNotifications,
+          user.settings.dailyNotifications
+        )
+      )
+    );
   };
 
   const ThemeButton = ({ primColor, secColor, title }: ThemeButtonProps) => (
@@ -67,7 +80,10 @@ const ThemeSettings = () => {
   );
 
   return (
-    <SettingsDropdown title="Themes">
+    <SettingsDropdown
+      title="Themes"
+      infoText="Manage and switch between different application themes"
+    >
       <ThemeButton primColor={"#6a1a74"} secColor={"#b3206c"} title="Dreamy" />
       <ThemeButton
         primColor={"#1a1e74ff"}
@@ -84,7 +100,7 @@ const ThemeSettings = () => {
         primColor={"#057621ff"}
         secColor={"#0cec5aff"}
         title="Earthly"
-      />{" "}
+      />
     </SettingsDropdown>
   );
 };

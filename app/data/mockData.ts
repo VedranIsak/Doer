@@ -1,4 +1,3 @@
-import SubTaskModel from "@/models/SubTask";
 import Task from "../models/Task";
 
 const tasks: Task[] = [

@@ -1,16 +1,17 @@
+import Container from "@/app/components/container";
+import IconButton from "@/app/components/iconButton";
+import Paragraph from "@/app/components/paragraph";
 import CreatePrioModal from "@/app/create/createPrioModal";
 import CreateSubTaskView from "@/app/create/createSubTaskView";
 import ScreenContainer from "@/app/screenContainer";
-import IconButton from "@/components/iconButton";
-import Paragraph from "@/components/paragraph";
-import formatDate from "@/helpers/formatDate";
-import SubTaskModel from "@/models/SubTask";
-import TaskModel from "@/models/Task";
+import formatDate from "../helpers/formatDate";
+import SubTaskModel from "../models/SubTask";
+import TaskModel from "../models/Task";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { Platform, StyleSheet, TextInput, View } from "react-native";
-import ErrorModal from "../../components/errorModal";
+import ErrorModal from "../components/errorModal";
 
 const Create = () => {
   const [newTask, setNewTask] = useState<TaskModel>(
@@ -38,17 +39,6 @@ const Create = () => {
       alignItems: "center",
       width: "100%",
     },
-    subContainer: {
-      backgroundColor: "rgba(255, 255, 255, .3)",
-      width: "100%",
-      borderRadius: 15,
-      justifyContent: "center",
-      alignItems: "center",
-      margin: 10,
-    },
-    buttonContainer: {
-      padding: 10,
-    },
     textInput: {
       width: "80%",
       marginTop: 5,
@@ -71,7 +61,7 @@ const Create = () => {
         showErrorModal={showErrorModal}
       />
       <View style={styles.container}>
-        <View style={styles.subContainer}>
+        <Container>
           <Paragraph color={"white"} fontSize={22} marginTop={10}>
             Title
           </Paragraph>
@@ -98,9 +88,9 @@ const Create = () => {
               )
             }
           />
-        </View>
+        </Container>
         <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
-        <View style={[styles.subContainer, styles.buttonContainer]}>
+        <Container padding={10}>
           <IconButton
             marginTop={5}
             marginBottom={5}
@@ -157,7 +147,7 @@ const Create = () => {
           >
             <Ionicons name="add-circle-sharp" color={"black"} size={26} />
           </IconButton>
-        </View>
+        </Container>
         <CreatePrioModal
           showCreatePrioModal={showCreatePrioModal}
           setShowCreatePrioModal={setShowCreatePrioModal}

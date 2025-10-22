@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/context/ThemeContext";
+import { ThemeContext } from "@/app/context/ThemeContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";

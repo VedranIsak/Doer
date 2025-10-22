@@ -1,8 +1,7 @@
-import { View, StyleSheet } from "react-native";
-import Paragraph from "./paragraph";
+import SubTaskModel from "@/app/models/SubTask";
 import Checkbox from "expo-checkbox";
-import SubTaskModel from "@/models/SubTask";
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, View } from "react-native";
+import Paragraph from "./paragraph";
 
 interface SubTaskProps {
   task: SubTaskModel;
@@ -11,7 +10,7 @@ interface SubTaskProps {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 15,
-    backgroundColor: "rgba(255, 255, 255, .325)",
+    backgroundColor: "rgba(240, 240, 240, .35)",
     alignItems: "center",
     justifyContent: "center",
     width: "60%",

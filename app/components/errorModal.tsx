@@ -1,4 +1,4 @@
-import Paragraph from "@/components/paragraph";
+import Paragraph from "@/app/components/paragraph";
 import ModalContainer from "./modalContainer";
 
 interface ErrorProps {

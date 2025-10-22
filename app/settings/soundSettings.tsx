@@ -1,8 +1,10 @@
-import IconButton from "@/components/iconButton";
-import { SoundContext } from "@/context/SoundContext";
+import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { StyleSheet, View } from "react-native";
+import { UserContext } from "../context/UserContext";
+import Settings from "../models/Settings";
+import User from "../models/User";
 import SettingsDropdown from "./settingsDropdown";
 
 const styles = StyleSheet.create({
@@ -15,15 +17,32 @@ const styles = StyleSheet.create({
 });
 
 const SoundSettings = () => {
-  const { soundActive, setSoundActive } = useContext(SoundContext);
+  const { user, setUser } = useContext(UserContext);
+  const soundActive = user.settings.sound;
 
   return (
-    <SettingsDropdown title="Sound">
+    <SettingsDropdown
+      title="Sound"
+      infoText="Manage whether or not the application should have sound or not"
+    >
       <View style={styles.container}>
         <IconButton
           title={`Turn ${soundActive ? "on" : "off"}`}
           buttonPress={() => {
-            setSoundActive((previous) => !previous);
+            setUser(
+              new User(
+                user.tasks,
+                new Settings(
+                  soundActive,
+                  user.settings.primaryBackColor,
+                  user.settings.secondaryBackColor,
+                  user.settings.autoRemoveOldTasks,
+                  user.settings.sendAlertsOldTasks,
+                  user.settings.muteDailyNotifications,
+                  user.settings.dailyNotifications
+                )
+              )
+            );
           }}
         >
           <Ionicons

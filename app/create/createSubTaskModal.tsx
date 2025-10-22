@@ -1,13 +1,12 @@
-import formatDate from "@/helpers/formatDate";
-import SubTaskModel from "@/models/SubTask";
-import TaskModel from "@/models/Task";
+import IconButton from "@/app/components/iconButton";
+import formatDate from "../helpers/formatDate";
+import SubTaskModel from "../models/SubTask";
+import TaskModel from "../models/Task";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
-import Button from "../../components/button";
-import ModalContainer from "../../components/modalContainer";
-import Paragraph from "../../components/paragraph";
-import IconButton from "@/components/iconButton";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import ModalContainer from "../components/modalContainer";
+import Paragraph from "../components/paragraph";
 
 interface CreateSubTaskModalProps {
   showCreateSubTaskModal: boolean;

@@ -1,11 +1,11 @@
-import { ThemeContext } from "@/context/ThemeContext";
+import { ThemeContext } from "@/app/context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useContext } from "react";
 import {
-  Modal,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
+    Modal,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    View,
 } from "react-native";
 
 interface ModalContainerProps {

@@ -1,8 +1,7 @@
-import TaskModel from "@/models/Task";
+import Paragraph from "./paragraph";
+import TaskModel from "../models/Task";
 import Checkbox from "expo-checkbox";
-import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions, Pressable, StyleSheet, View } from "react-native";
-import Paragraph from "@/components/paragraph";
 
 interface TaskProps {
   task: TaskModel;
@@ -24,10 +23,10 @@ const Task = ({ task, tasks, setTasks }: TaskProps) => {
       borderRadius: 15,
       padding: 25,
       overflow: "hidden",
-      marginTop: 2.5,
-      marginBottom: 5,
+      marginTop: .5,
+      marginBottom: 7.5,
       width: width - 50,
-      backgroundColor: "rgba(255, 255, 255, .325)",
+      backgroundColor: "rgba(240, 240, 240, .35)",
     },
     checkbox: {
       borderRadius: 30,

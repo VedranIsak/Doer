@@ -1,14 +1,8 @@
-import Paragraph from "@/components/paragraph";
-import { ThemeContext } from "@/context/ThemeContext";
+import Paragraph from "@/app/components/paragraph";
+import { UserContext } from "./context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useContext } from "react";
-import {
-  Dimensions,
-  Image,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Dimensions, Image, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ScreenContainerProps {
@@ -19,13 +13,15 @@ interface ScreenContainerProps {
 
 const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   const { width, height } = Dimensions.get("window");
-  const { primaryBackColor, secondaryBackColor } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
+  const primaryBackColor = user.settings.primaryBackColor;
+  const secondaryBackColor = user.settings.secondaryBackColor;
 
   const styles = StyleSheet.create({
     mainContainer: {
       height: height,
       width: width,
-      backgroundColor: primaryBackColor
+      backgroundColor: primaryBackColor,
     },
     contentContainer: { flex: 1, marginBottom: 50 },
     content: {
@@ -44,7 +40,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
       left: "20%",
       paddingTop: 15,
       paddingBottom: 20,
-      alignItems: "center"
+      alignItems: "center",
     },
   });
 

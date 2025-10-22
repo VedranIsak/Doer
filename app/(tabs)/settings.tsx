@@ -12,24 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
-  },
-  pressableContainer: {
-    backgroundColor: "rgba(255, 255, 255, .3)",
-    width: "90%",
-    borderRadius: 15,
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: 5,
-    padding: 15,
-    flexDirection: "row",
-  },
-  buttonIcon: {
-    overflow: "hidden",
-    height: 50,
-    width: 50,
-    borderRadius: 15,
-    borderColor: "white",
-  },
+  }
 });
 
 const Settings = () => {

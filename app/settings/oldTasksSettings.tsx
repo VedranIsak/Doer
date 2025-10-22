@@ -1,9 +1,8 @@
-import SettingsDropdown from "./settingsDropdown";
-import Button from "@/components/button";
-import IconButton from "@/components/iconButton";
+import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import SettingsDropdown from "./settingsDropdown";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +17,7 @@ const OldTasksSettings = () => {
   const [autoRemoveActive, setAutoRemoveActive] = useState<boolean>(false);
   const [sendAlertsActive, setSendAlertsActive] = useState<boolean>(false);
   return (
-    <SettingsDropdown title="Old tasks">
+    <SettingsDropdown title="Old tasks" infoText="Manage how old, uncompleted, tasks are to be dealt with">
       <View style={styles.container}>
         <IconButton
           width={210}

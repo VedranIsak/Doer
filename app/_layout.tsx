@@ -1,16 +1,13 @@
 // app/_layout.tsx
-import { SoundProvider } from "@/context/SoundContext";
-import { ThemeProvider } from "@/context/ThemeContext";
 import { Slot } from "expo-router";
 import { StatusBar } from "react-native";
+import { UserProvider } from "./context/UserContext";
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <SoundProvider>
+    <UserProvider>
         <StatusBar backgroundColor={"light-content"}></StatusBar>
         <Slot />
-      </SoundProvider>
-    </ThemeProvider>
+    </UserProvider>
   );
 }

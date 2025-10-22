@@ -1,24 +1,14 @@
-import ScreenContainer from "@/app/screenContainer";
-import Paragraph from "@/components/paragraph";
-import Task from "@/components/task";
-import importedTasks from "@/data/mockData";
-import formatDate from "@/helpers/formatDate";
-import TaskModel from "@/models/Task";
+import Container from "@/app/components/container";
+import Paragraph from "@/app/components/paragraph";
+import Task from "@/app/components/task";
+import TaskModel from "@/app/models/Task";
+import ScreenContainer from
+ "@/app/screenContainer";
+import importedTasks from "../data/mockData";
+import formatDate from "../helpers/formatDate";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
 
 //Skapa ett eget komponentbibliotek för paragraph, iconButton, button etc
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "rgba(255, 255, 255, .3)",
-    width: "100%",
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-  },
-});
 
 const HomeScreen = () => {
   const todayDate = formatDate(new Date());
@@ -43,7 +33,7 @@ const HomeScreen = () => {
             Nicely done! You've completed everything for today!
           </Paragraph>
         ) : (
-          <View style={styles.container}>
+          <Container>
             <Paragraph
               marginBottom={10}
               width={"90%"}
@@ -56,10 +46,10 @@ const HomeScreen = () => {
             {notCompletedTasks.map((task) => (
               <Task task={task} tasks={todayTasks} setTasks={setTodayTasks} />
             ))}
-          </View>
+          </Container>
         )}
         {completedTasks.length > 0 ? (
-          <View style={styles.container}>
+          <Container>
             <Paragraph
               marginBottom={10}
               marginTop={5}
@@ -73,12 +63,12 @@ const HomeScreen = () => {
             {completedTasks.map((task) => (
               <Task task={task} tasks={todayTasks} setTasks={setTodayTasks} />
             ))}
-          </View>
+          </Container>
         ) : (
           <></>
         )}
         {unfinishedTasks.length > 0 ? (
-          <View style={styles.container}>
+          <Container>
             <Paragraph
               marginBottom={10}
               marginTop={5}
@@ -96,7 +86,7 @@ const HomeScreen = () => {
                 setTasks={setAllTasks}
               />
             ))}
-          </View>
+          </Container>
         ) : (
           <></>
         )}

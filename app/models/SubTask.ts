@@ -1,4 +1,4 @@
-import { incrementSubTaskId } from "@/helpers/incrementer";
+import { incrementSubTaskId } from "../helpers/incrementer";
 
 class SubTaskModel {
   id: number;

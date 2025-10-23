@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   marginBottom = 0,
 }: ButtonProps) => {
   const [fontsLoaded] = useFonts({
-    CalSans: require("@/assets/fonts/CalSans.ttf"),
+    CalSans: require("../assets/fonts/CalSans.ttf"),
   });
 
   if (!fontsLoaded) {

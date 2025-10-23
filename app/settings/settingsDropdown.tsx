@@ -1,16 +1,17 @@
 import ModalContainer from "@/app/components/modalContainer";
 import Paragraph from "@/app/components/paragraph";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
-    Animated,
-    LayoutAnimation,
-    Platform,
-    Pressable,
-    StyleSheet,
-    UIManager,
-    View,
+  Animated,
+  LayoutAnimation,
+  Platform,
+  Pressable,
+  StyleSheet,
+  UIManager,
+  View,
 } from "react-native";
+import { UserContext } from "../context/UserContext";
 
 if (
   Platform.OS === "android" &&
@@ -53,6 +54,7 @@ const SettingsDropdown = ({
   infoText,
   children,
 }: SettingsDropdownProps) => {
+  const { user } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const rotate = useRef(new Animated.Value(0)).current;
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
@@ -76,14 +78,30 @@ const SettingsDropdown = ({
   return (
     <View style={styles.container}>
       <Pressable style={styles.pressableContainer} onPress={toggle}>
-        <Paragraph marginBottom={5} marginLeft={5} color="white" fontSize={22}>
+        <Paragraph
+          marginBottom={5}
+          marginLeft={5}
+          color={user.settings.textColor as string}
+          fontSize={22}
+        >
           {title}
         </Paragraph>
-        <Pressable onPress={() => setShowInfoModal(true) } style={styles.infoIcon}>
-          <Ionicons name="information-circle-sharp" color={"white"} size={30} />
+        <Pressable
+          onPress={() => setShowInfoModal(true)}
+          style={styles.infoIcon}
+        >
+          <Ionicons
+            name="information-circle-sharp"
+            color={user.settings.textColor as string}
+            size={30}
+          />
         </Pressable>
         <Animated.View style={{ transform: [{ rotate: rotation }] }}>
-          <Ionicons name="arrow-down-circle-sharp" color={"white"} size={30} />
+          <Ionicons
+            name="arrow-down-circle-sharp"
+            color={user.settings.textColor as string}
+            size={30}
+          />
         </Animated.View>
       </Pressable>
 
@@ -92,8 +110,10 @@ const SettingsDropdown = ({
         showModalContainer={showInfoModal}
         setShowModalContainer={setShowInfoModal}
       >
-        <View style={{padding: 10}}>
-          <Paragraph color="white">{infoText}</Paragraph>
+        <View style={{ padding: 10 }}>
+          <Paragraph color={user.settings.textColor as string}>
+            {infoText}
+          </Paragraph>
         </View>
       </ModalContainer>
     </View>

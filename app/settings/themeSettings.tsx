@@ -1,11 +1,11 @@
 import IconButton from "@/app/components/iconButton";
-import { UserContext } from "../context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
-import { StyleSheet, View } from "react-native";
-import SettingsDropdown from "./settingsDropdown";
+import { ColorValue, StyleSheet, View } from "react-native";
+import { UserContext } from "../context/UserContext";
 import Settings from "../models/Settings";
 import User from "../models/User";
+import SettingsDropdown from "./settingsDropdown";
 
 const styles = StyleSheet.create({
   container: {
@@ -34,22 +34,28 @@ const styles = StyleSheet.create({
 });
 
 interface ThemeButtonProps {
-  primColor: string;
-  secColor: string;
+  textColor: ColorValue;
+  primBackColor: ColorValue;
+  secBackColor: ColorValue;
   title: string;
 }
 
 const ThemeSettings = () => {
   const userContext = useContext(UserContext);
   const { user, setUser } = userContext;
-  const setBackColors = (prim: string, sec: string) => {
+  const setThemeColors = (
+    primBackColor: ColorValue,
+    secBackColor: ColorValue,
+    textColor: ColorValue
+  ) => {
     setUser(
       new User(
         user.tasks,
         new Settings(
           user.settings.sound,
-          prim,
-          sec,
+          textColor,
+          primBackColor,
+          secBackColor,
           user.settings.autoRemoveOldTasks,
           user.settings.sendAlertsOldTasks,
           user.settings.muteDailyNotifications,
@@ -59,10 +65,15 @@ const ThemeSettings = () => {
     );
   };
 
-  const ThemeButton = ({ primColor, secColor, title }: ThemeButtonProps) => (
+  const ThemeButton = ({
+    primBackColor,
+    secBackColor,
+    textColor,
+    title,
+  }: ThemeButtonProps) => (
     <IconButton
       buttonPress={() => {
-        setBackColors(primColor, secColor);
+        setThemeColors(primBackColor, secBackColor, textColor);
       }}
       title={title}
       marginBottom={12.5}
@@ -70,7 +81,7 @@ const ThemeSettings = () => {
     >
       <View style={styles.buttonIcon}>
         <LinearGradient
-          colors={[primColor, secColor]}
+          colors={[primBackColor, secBackColor]}
           style={StyleSheet.absoluteFillObject}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -84,22 +95,29 @@ const ThemeSettings = () => {
       title="Themes"
       infoText="Manage and switch between different application themes"
     >
-      <ThemeButton primColor={"#6a1a74"} secColor={"#b3206c"} title="Dreamy" />
       <ThemeButton
-        primColor={"#1a1e74ff"}
-        secColor={"#2089b3ff"}
+        primBackColor={"#6a1a74"}
+        secBackColor={"#b3206c"}
+        textColor={"white"}
+        title="Dreamy"
+      />
+      <ThemeButton
+        primBackColor={"#1a1e74ff"}
+        secBackColor={"#2c7b9aff"}
+        textColor={"white"}
         title="Oceanic"
       />
-      <ThemeButton primColor={"#130415ff"} secColor={"#545454ff"} title="Dim" />
       <ThemeButton
-        primColor={"#ec860aff"}
-        secColor={"#ecc30cff"}
-        title="Fiery"
+        primBackColor={"#130415ff"}
+        secBackColor={"#5b5b5bff"}
+        textColor={"white"}
+        title="Dim"
       />
       <ThemeButton
-        primColor={"#057621ff"}
-        secColor={"#0cec5aff"}
-        title="Earthly"
+        primBackColor={"#dededeff"}
+        secBackColor={"#c5c5c5ff"}
+        textColor={"black"}
+        title="Bright"
       />
     </SettingsDropdown>
   );

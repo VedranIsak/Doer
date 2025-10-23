@@ -1,10 +1,10 @@
-import { View, StyleSheet } from "react-native";
 import ScreenContainer from "@/app/screenContainer";
-import NotificationsSettings from "../settings/notificationsSettings";
-import ThemeSettings from "../settings/themeSettings";
-import SoundSettings from "../settings/soundSettings";
 import React from "react";
+import { StyleSheet, View } from "react-native";
+import NotificationsSettings from "../settings/notificationsSettings";
 import OldTasksSettings from "../settings/oldTasksSettings";
+import SoundSettings from "../settings/soundSettings";
+import ThemeSettings from "../settings/themeSettings";
 
 const styles = StyleSheet.create({
   container: {

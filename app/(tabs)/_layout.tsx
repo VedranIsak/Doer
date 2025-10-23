@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/app/context/ThemeContext";
+import { UserContext } from "../context/UserContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
@@ -10,7 +10,7 @@ export default function TabLayout() {
   const insets = useSafeAreaInsets();
   const BASE = Platform.OS === "ios" ? 56 : 54; // visual height above the inset
   const HEIGHT = BASE + Math.max(insets.bottom, 16); // add safe-area
-  const { primaryBackColor, secondaryBackColor } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
 
   return (
     <Tabs
@@ -34,12 +34,15 @@ export default function TabLayout() {
             <View
               style={[
                 StyleSheet.absoluteFillObject,
-                { backgroundColor: primaryBackColor },
+                { backgroundColor: user.settings.primaryBackColor },
               ]}
             />
             {/* Avoid semi-transparent white; use two opaque purples instead */}
             <LinearGradient
-              colors={[primaryBackColor, secondaryBackColor]}
+              colors={[
+                user.settings.primaryBackColor,
+                user.settings.secondaryBackColor,
+              ]}
               style={StyleSheet.absoluteFillObject}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
@@ -53,7 +56,11 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: () => (
-            <Ionicons name="home-sharp" color={"white"} size={30} />
+            <Ionicons
+              name="home-sharp"
+              color={user.settings.textColor as string}
+              size={30}
+            />
           ),
         }}
       />
@@ -62,7 +69,11 @@ export default function TabLayout() {
         options={{
           title: "Create Task",
           tabBarIcon: () => (
-            <Ionicons name="add-circle-sharp" color={"white"} size={30} />
+            <Ionicons
+              name="add-circle-sharp"
+              color={user.settings.textColor as string}
+              size={30}
+            />
           ),
         }}
       />
@@ -71,7 +82,11 @@ export default function TabLayout() {
         options={{
           title: "Calendar",
           tabBarIcon: () => (
-            <Ionicons name="calendar-clear-sharp" color={"white"} size={30} />
+            <Ionicons
+              name="calendar-clear-sharp"
+              color={user.settings.textColor as string}
+              size={30}
+            />
           ),
         }}
       />
@@ -80,7 +95,11 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: () => (
-            <Ionicons name="settings-sharp" color={"white"} size={30} />
+            <Ionicons
+              name="settings-sharp"
+              color={user.settings.textColor as string}
+              size={30}
+            />
           ),
         }}
       />

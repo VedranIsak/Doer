@@ -1,12 +1,15 @@
 import IconButton from "@/app/components/iconButton";
-import formatDate from "../helpers/formatDate";
-import SubTaskModel from "../models/SubTask";
-import TaskModel from "../models/Task";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import ModalContainer from "../components/modalContainer";
 import Paragraph from "../components/paragraph";
+import formatDate from "../helpers/formatDate";
+import SubTaskModel from "../models/SubTask";
+import TaskModel from "../models/Task";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
+import User from "../models/User";
 
 interface CreateSubTaskModalProps {
   showCreateSubTaskModal: boolean;
@@ -36,6 +39,9 @@ const CreateSubTaskModal = ({
   setNewTask,
   newTask,
 }: CreateSubTaskModalProps) => {
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+
   const [subTask, setSubTask] = useState<SubTaskModel>(
     new SubTaskModel("", false, formatDate(new Date()))
   );
@@ -45,7 +51,7 @@ const CreateSubTaskModal = ({
       showModalContainer={showCreateSubTaskModal}
       setShowModalContainer={setShowCreateSubTaskModal}
     >
-      <Paragraph fontSize={22} color="white">
+      <Paragraph fontSize={22} color={user.settings.textColor as string}>
         Title
       </Paragraph>
       <TextInput

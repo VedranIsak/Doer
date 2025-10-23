@@ -19,7 +19,7 @@ const Container = ({
 }: ContainerProps) => {
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: backgroundColor ?? "rgba(255, 255, 255, .25)",
+      backgroundColor: backgroundColor ?? "rgba(255, 255, 255, .2)",
       width: "95%",
       borderRadius: 15,
       justifyContent: "center",

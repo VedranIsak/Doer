@@ -4,16 +4,21 @@ import Paragraph from "@/app/components/paragraph";
 import CreatePrioModal from "@/app/create/createPrioModal";
 import CreateSubTaskView from "@/app/create/createSubTaskView";
 import ScreenContainer from "@/app/screenContainer";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import React, { useContext, useState } from "react";
+import { Platform, StyleSheet, TextInput, View } from "react-native";
+import ErrorModal from "../components/errorModal";
 import formatDate from "../helpers/formatDate";
 import SubTaskModel from "../models/SubTask";
 import TaskModel from "../models/Task";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import React, { useState } from "react";
-import { Platform, StyleSheet, TextInput, View } from "react-native";
-import ErrorModal from "../components/errorModal";
+import { UserContext } from "../context/UserContext";
+import User from "../models/User";
 
 const Create = () => {
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
       formatDate(new Date()),
@@ -62,7 +67,11 @@ const Create = () => {
       />
       <View style={styles.container}>
         <Container>
-          <Paragraph color={"white"} fontSize={22} marginTop={10}>
+          <Paragraph
+            color={user.settings.textColor as string}
+            fontSize={22}
+            marginTop={10}
+          >
             Title
           </Paragraph>
           <TextInput
@@ -74,7 +83,7 @@ const Create = () => {
               setNewTask((previous) => previous.cloneWith({ title: text }))
             }
           />
-          <Paragraph color={"white"} fontSize={22}>
+          <Paragraph color={user.settings.textColor as string} fontSize={22}>
             Description
           </Paragraph>
           <TextInput

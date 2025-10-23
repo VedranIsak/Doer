@@ -28,7 +28,7 @@ const Paragraph = ({
   textAlign,
 }: ParagraphProps) => {
   const [loaded] = useFonts({
-    CalSans: require("@/assets/fonts/CalSans.ttf"),
+    CalSans: require("../assets/fonts/CalSans.ttf"),
   });
 
   const getStyles = (fontSize: number) =>

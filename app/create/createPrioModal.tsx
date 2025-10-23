@@ -1,7 +1,7 @@
-import IconButton from @/app/models/Taskents/iconButton";
-import TaskModel from "@/models/Task";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import IconButton from "../components/iconButton";
 import ModalContainer from "../components/modalContainer";
+import TaskModel from "../models/Task";
 
 interface CreatePrioModalProps {
   showCreatePrioModal: boolean;

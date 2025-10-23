@@ -3,6 +3,7 @@ import Notification from "./Notification";
 
 class Settings {
   sound: boolean;
+  textColor: ColorValue;
   primaryBackColor: ColorValue;
   secondaryBackColor: ColorValue;
   autoRemoveOldTasks: boolean;
@@ -10,11 +11,12 @@ class Settings {
   muteDailyNotifications: boolean;
   dailyNotifications: Notification[];
 
-  constructor(sound: boolean, primaryBackColor: ColorValue, secondaryBackColor: ColorValue, 
+  constructor(sound: boolean, textColor: ColorValue, primaryBackColor: ColorValue, secondaryBackColor: ColorValue, 
     autoRemoveOldTasks: boolean, sendAlertsOldTasks: boolean, muteDailyNotifications: boolean,
     dailyNotifications: Notification[]
   ) {
     this.sound = sound;
+    this.textColor = textColor;
     this.primaryBackColor = primaryBackColor;
     this.secondaryBackColor = secondaryBackColor;
     this.autoRemoveOldTasks = autoRemoveOldTasks;

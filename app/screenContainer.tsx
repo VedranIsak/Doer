@@ -45,9 +45,9 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
   });
 
   const headerImages: Record<string, any> = {
-    index: require("@/assets/images/index.png"),
-    create: require("@/assets/images/create.jpeg"),
-    settings: require("@/assets/images/settings.jpg"),
+    index: require("./assets/images/index.png"),
+    create: require("./assets/images/create.jpeg"),
+    settings: require("./assets/images/settings.jpg"),
   };
 
   return (

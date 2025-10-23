@@ -10,7 +10,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType>({
   user: new User(
     [],
-    new Settings(true, "#6a1a74", "#b3206c", false, true, false, [])
+    new Settings(true, "white", "#6a1a74", "#b3206c", false, true, false, [])
   ),
   setUser: () => {},
 });
@@ -23,7 +23,7 @@ const UserProvider = ({ children }: ContextProps) => {
   const [user, setUser] = useState<User>(
     new User(
       [],
-      new Settings(true, "#6a1a74", "#b3206c", false, true, false, [])
+      new Settings(true, "white", "#6a1a74", "#b3206c", false, true, false, [])
     )
   );
   return (

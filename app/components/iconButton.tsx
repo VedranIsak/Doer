@@ -25,7 +25,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   marginBottom = 0,
 }: IconButtonProps) => {
   const [fontsLoaded] = useFonts({
-    CalSans: require("@/assets/fonts/CalSans.ttf"),
+    CalSans: require("../assets/fonts/CalSans.ttf"),
   });
 
   if (!fontsLoaded) {

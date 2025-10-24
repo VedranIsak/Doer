@@ -27,6 +27,7 @@ const Container = ({
       padding: padding ?? 0,
       margin: margin ?? 10,
       flexDirection: flexDirection ?? "column",
+      boxShadow: ".25px .25px 4px gray",
     },
   });
 

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ToDo",
-    "slug": "ToDo",
+    "name": "doer",
+    "slug": "doer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "todo",
+    "scheme": "doer",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

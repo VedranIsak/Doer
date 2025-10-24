@@ -1,11 +1,12 @@
 import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Audio } from "expo-av";
 import { useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import { UserContext } from "../context/UserContext";
-import Settings from "../models/Settings";
-import User from "../models/User";
-import SettingsDropdown from "./settingsDropdown";
+import { UserContext } from "../../context/UserContext";
+import Settings from "../../models/Settings";
+import User from "../../models/User";
+import SettingsDropdown from "./dropdown";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SoundSettings = () => {
+const Sound = () => {
   const { user, setUser } = useContext(UserContext);
   const soundActive = user.settings.sound;
 
@@ -27,13 +28,14 @@ const SoundSettings = () => {
     >
       <View style={styles.container}>
         <IconButton
-          title={`Turn ${soundActive ? "on" : "off"}`}
-          buttonPress={() => {
+          title={`Turn ${soundActive ? "off" : "on"}`}
+          buttonPress={async () => {
             setUser(
               new User(
                 user.tasks,
                 new Settings(
-                  soundActive,
+                  !soundActive,
+                  user.settings.textColor,
                   user.settings.primaryBackColor,
                   user.settings.secondaryBackColor,
                   user.settings.autoRemoveOldTasks,
@@ -43,6 +45,7 @@ const SoundSettings = () => {
                 )
               )
             );
+            await Audio.setIsEnabledAsync(soundActive);
           }}
         >
           <Ionicons
@@ -56,4 +59,4 @@ const SoundSettings = () => {
   );
 };
 
-export default SoundSettings;
+export default Sound;

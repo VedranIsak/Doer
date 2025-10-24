@@ -8,10 +8,10 @@ interface ParagraphProps {
   color?: string;
   fontSize?: number;
   fontWeight?: string;
-  marginBottom?: number;
-  marginTop?: number;
-  marginLeft?: number;
-  marginRight?: number;
+  marginBottom?: DimensionValue;
+  marginTop?: DimensionValue;
+  marginLeft?: DimensionValue;
+  marginRight?: DimensionValue;
   width?: DimensionValue;
   textAlign?: TextAlignType;
 }

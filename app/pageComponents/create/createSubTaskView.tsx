@@ -1,13 +1,12 @@
 import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
-import Container from "../components/container";
-import Paragraph from "../components/paragraph";
-import SubTask from "../components/subTask";
-import TaskModel from "../models/Task";
+import { useContext, useState } from "react";
+import Container from "../../components/container";
+import Paragraph from "../../components/paragraph";
+import SubTask from "../../components/subTask";
+import { UserContext } from "../../context/UserContext";
+import TaskModel from "../../models/Task";
 import CreateSubTaskModal from "./createSubTaskModal";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
 
 interface CreateSubTaskViewProps {
   newTask: TaskModel;
@@ -26,7 +25,9 @@ const CreateSubTaskView = ({ newTask, setNewTask }: CreateSubTaskViewProps) => {
         Sub Tasks:{" "}
       </Paragraph>
       {newTask.subTasks.length > 0 ? (
-        newTask.subTasks.map((subTask) => <SubTask task={subTask} />)
+        newTask.subTasks.map((subTask) => (
+          <SubTask marginTop={5} width={"50%"} showCheck={false} task={subTask} />
+        ))
       ) : (
         <></>
       )}

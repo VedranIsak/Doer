@@ -1,19 +1,18 @@
 import Container from "@/app/components/container";
 import IconButton from "@/app/components/iconButton";
 import Paragraph from "@/app/components/paragraph";
-import CreatePrioModal from "@/app/create/createPrioModal";
-import CreateSubTaskView from "@/app/create/createSubTaskView";
-import ScreenContainer from "@/app/screenContainer";
+import ScreenContainer from "@/app/components/screenContainer";
+import CreatePrioModal from "@/app/pageComponents/create/createPrioModal";
+import CreateSubTaskView from "@/app/pageComponents/create/createSubTaskView";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import React, { useContext, useState } from "react";
 import { Platform, StyleSheet, TextInput, View } from "react-native";
 import ErrorModal from "../components/errorModal";
+import { UserContext } from "../context/UserContext";
 import formatDate from "../helpers/formatDate";
 import SubTaskModel from "../models/SubTask";
 import TaskModel from "../models/Task";
-import { UserContext } from "../context/UserContext";
-import User from "../models/User";
 
 const Create = () => {
   const userContext = useContext(UserContext);
@@ -47,7 +46,7 @@ const Create = () => {
     textInput: {
       width: "80%",
       marginTop: 5,
-      marginBottom: 25,
+      marginBottom: 10,
       fontSize: 18,
       height: "auto",
       borderRadius: 10,
@@ -66,11 +65,10 @@ const Create = () => {
         showErrorModal={showErrorModal}
       />
       <View style={styles.container}>
-        <Container>
+        <Container padding={10}>
           <Paragraph
             color={user.settings.textColor as string}
             fontSize={22}
-            marginTop={10}
           >
             Title
           </Paragraph>

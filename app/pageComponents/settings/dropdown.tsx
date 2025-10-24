@@ -3,15 +3,15 @@ import Paragraph from "@/app/components/paragraph";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useContext, useRef, useState } from "react";
 import {
-  Animated,
-  LayoutAnimation,
-  Platform,
-  Pressable,
-  StyleSheet,
-  UIManager,
-  View,
+    Animated,
+    LayoutAnimation,
+    Platform,
+    Pressable,
+    StyleSheet,
+    UIManager,
+    View,
 } from "react-native";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 if (
   Platform.OS === "android" &&

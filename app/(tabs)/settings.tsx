@@ -1,10 +1,9 @@
-import ScreenContainer from "@/app/screenContainer";
+import ScreenContainer from "@/app/components/screenContainer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import NotificationsSettings from "../settings/notificationsSettings";
-import OldTasksSettings from "../settings/oldTasksSettings";
-import SoundSettings from "../settings/soundSettings";
-import ThemeSettings from "../settings/themeSettings";
+import ExpiredTasks from "../pageComponents/settings/expiredTasks";
+import Sound from "../pageComponents/settings/sound";
+import Themes from "../pageComponents/settings/themes";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,10 +18,10 @@ const Settings = () => {
   return (
     <ScreenContainer title="Settings" img="settings">
       <View style={styles.container}>
-        <ThemeSettings />
-        <SoundSettings />
-        <NotificationsSettings />
-        <OldTasksSettings />
+        <Themes />
+        <Sound />
+        {/* <Notifications /> */}
+        <ExpiredTasks />
       </View>
     </ScreenContainer>
   );

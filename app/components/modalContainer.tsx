@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface ModalContainerProps {
   showModalContainer: boolean;
@@ -29,9 +30,9 @@ const ModalContainer = ({
       alignItems: "center",
       backgroundColor: user.settings.primaryBackColor,
       width: "90%",
-      borderRadius: 25,
-      borderWidth: 10,
-      borderColor: "rgba(255, 255, 255, .5)",
+      borderRadius: 15,
+      borderWidth: 4,
+      borderColor: "rgba(255, 255, 255, .75)",
       padding: 15,
       overflow: "hidden",
     },
@@ -46,7 +47,19 @@ const ModalContainer = ({
       <TouchableWithoutFeedback onPress={() => setShowModalContainer(false)}>
         <View style={styles.modalBackdrop}>
           <TouchableWithoutFeedback>
-            <View style={styles.modalContainer}>{children}</View>
+            <View style={styles.modalContainer}>
+              <LinearGradient
+                colors={[
+                  user.settings.primaryBackColor,
+                  user.settings.secondaryBackColor,
+                ]}
+                style={StyleSheet.absoluteFillObject}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              />
+
+              {children}
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>

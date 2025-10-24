@@ -1,59 +1,72 @@
 import SubTaskModel from "@/app/models/SubTask";
-import Checkbox from "expo-checkbox";
-import { StyleSheet, View } from "react-native";
-import Paragraph from "./paragraph";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { DimensionValue, StyleSheet, View } from "react-native";
 import { UserContext } from "../context/UserContext";
+import Checkbox from "./checkbox";
+import Paragraph from "./paragraph";
 
 interface SubTaskProps {
   task: SubTaskModel;
+  width?: DimensionValue;
+  marginTop?: DimensionValue;
+  marginLeft?: DimensionValue;
+  marginRight?: DimensionValue;
+  marginBottom?: DimensionValue;
+  showCheck: boolean;
 }
 
-const handleCheck = (task: SubTaskModel, checked: boolean) => {};
-
-const SubTask = ({ task }: SubTaskProps) => {
+const SubTask = ({
+  task,
+  width,
+  marginTop,
+  marginLeft,
+  marginRight,
+  marginBottom,
+  showCheck,
+}: SubTaskProps) => {
   const { user } = useContext(UserContext);
+  const [subTask, setSubTask] = useState<SubTaskModel>(task);
 
+  const handleCheck = (checked: boolean) => {
+    setSubTask((prev) => prev.cloneWith({isCompleted: checked}));
+  };
   const styles = StyleSheet.create({
     container: {
-      borderRadius: 25,
+      borderRadius: 15,
+      flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
-      width: "60%",
-      height: 80,
-      margin: 7.5,
+      justifyContent: "space-evenly",
+      width: width ?? "auto",
+      marginTop: marginTop ?? 0,
+      marginLeft: marginLeft ?? 0,
+      marginRight: marginRight ?? 0,
+      marginBottom: marginBottom ?? 0,
       overflow: "hidden",
-      marginTop: 2.5,
-      marginBottom: 5,
+      padding: 10,
       backgroundColor: "rgba(255, 255, 255, .3)",
-      borderWidth: 7,
+      borderWidth: 3,
       borderColor: "rgba(255, 255, 255, .5)",
-    },
-    checkbox: {
-      position: "absolute",
-      top: 10,
-      right: 10,
-      borderRadius: 25,
-      height: 30,
-      width: 30,
-      borderWidth: 4,
-      borderColor: user.settings.textColor as string
-    },
+      boxShadow: ".25px .25px 4px gray",
+    }
   });
   return (
     <View style={styles.container}>
-      <Paragraph
-        color={user.settings.textColor as string}
-        textAlign="center"
-        width={"70%"}
-      >
+      <Paragraph color={user.settings.textColor as string} textAlign="center">
         {task.title}
       </Paragraph>
-      <Checkbox
-        style={styles.checkbox}
-        value={task.isCompleted}
-        onValueChange={(checked) => handleCheck(task, checked)}
-      />
+      {showCheck === false ? (
+        <></>
+      ) : (
+        <Checkbox
+        marginTop={2.5}
+        width={22.5}
+        height={22.5}
+        borderRadius={7.5}
+        borderWidth={3}
+          value={subTask.isCompleted}
+          handleCheck={handleCheck}
+        />
+      )}
     </View>
   );
 };

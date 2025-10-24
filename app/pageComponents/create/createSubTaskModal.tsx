@@ -1,15 +1,13 @@
 import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
-import ModalContainer from "../components/modalContainer";
-import Paragraph from "../components/paragraph";
-import formatDate from "../helpers/formatDate";
-import SubTaskModel from "../models/SubTask";
-import TaskModel from "../models/Task";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
-import User from "../models/User";
+import ModalContainer from "../../components/modalContainer";
+import Paragraph from "../../components/paragraph";
+import { UserContext } from "../../context/UserContext";
+import formatDate from "../../helpers/formatDate";
+import SubTaskModel from "../../models/SubTask";
+import TaskModel from "../../models/Task";
 
 interface CreateSubTaskModalProps {
   showCreateSubTaskModal: boolean;

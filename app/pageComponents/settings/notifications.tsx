@@ -4,7 +4,7 @@ import ModalContainer from "@/app/components/modalContainer";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import SettingsDropdown from "./settingsDropdown";
+import SettingsDropdown from "./dropdown";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const NotificationsSettings = () => {
+const Notifications = () => {
   const [showNotificationModal, setShowNotificationModal] =
     useState<boolean>(false);
 
@@ -61,4 +61,4 @@ const NotificationsSettings = () => {
   );
 };
 
-export default NotificationsSettings;
+export default Notifications;

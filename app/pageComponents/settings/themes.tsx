@@ -2,10 +2,10 @@ import IconButton from "@/app/components/iconButton";
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
 import { ColorValue, StyleSheet, View } from "react-native";
-import { UserContext } from "../context/UserContext";
-import Settings from "../models/Settings";
-import User from "../models/User";
-import SettingsDropdown from "./settingsDropdown";
+import { UserContext } from "../../context/UserContext";
+import Settings from "../../models/Settings";
+import User from "../../models/User";
+import SettingsDropdown from "./dropdown";
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +40,7 @@ interface ThemeButtonProps {
   title: string;
 }
 
-const ThemeSettings = () => {
+const Themes = () => {
   const userContext = useContext(UserContext);
   const { user, setUser } = userContext;
   const setThemeColors = (
@@ -123,4 +123,4 @@ const ThemeSettings = () => {
   );
 };
 
-export default ThemeSettings;
+export default Themes;

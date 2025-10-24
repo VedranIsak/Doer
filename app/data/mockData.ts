@@ -1,8 +1,10 @@
+import formatDate from "../helpers/formatDate";
+import SubTask from "../models/SubTask";
 import Task from "../models/Task";
 
 const tasks: Task[] = [
   new Task(
-    "2025-10-14",
+    "2025-10-24",
     "10:00",
     "Team Meeting",
     "Weekly project sync",
@@ -11,7 +13,7 @@ const tasks: Task[] = [
     []
   ),
   new Task(
-    "2025-10-14",
+    "2025-10-24",
     "14:30",
     "Doctor Appointment",
     "Routine check-up",
@@ -20,13 +22,13 @@ const tasks: Task[] = [
     []
   ),
   new Task(
-    "2025-10-14",
+    "2025-10-24",
     "09:00",
     "Workshop",
     "TypeScript basics",
     false,
     1,
-    []
+    [new SubTask("Clean clothes", false, "2025-10-24"), new SubTask("Wash dishes", false, "2025-10-24"), new SubTask("Wash dishes", false, "2025-10-24")]
   ),
   new Task(
     "2025-09-26",

@@ -1,9 +1,9 @@
 import Paragraph from "@/app/components/paragraph";
-import { UserContext } from "./context/UserContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useContext } from "react";
 import { Dimensions, Image, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { UserContext } from "../context/UserContext";
 
 interface ScreenContainerProps {
   children: ReactNode;
@@ -41,13 +41,14 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
       paddingTop: 15,
       paddingBottom: 20,
       alignItems: "center",
+      boxShadow: ".25px .25px 4px gray",
     },
   });
 
   const headerImages: Record<string, any> = {
-    index: require("./assets/images/index.png"),
-    create: require("./assets/images/create.jpeg"),
-    settings: require("./assets/images/settings.jpg"),
+    index: require("../assets/images/index.png"),
+    create: require("../assets/images/create.jpeg"),
+    settings: require("../assets/images/settings.jpg"),
   };
 
   return (

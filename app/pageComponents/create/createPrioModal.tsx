@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import IconButton from "../components/iconButton";
-import ModalContainer from "../components/modalContainer";
-import TaskModel from "../models/Task";
+import IconButton from "../../components/iconButton";
+import ModalContainer from "../../components/modalContainer";
+import TaskModel from "../../models/Task";
 
 interface CreatePrioModalProps {
   showCreatePrioModal: boolean;
@@ -47,15 +47,6 @@ const CreatePrioModal = ({
         buttonPress={() => {
           changePriorityLevel(3);
         }}
-      >
-        <Ionicons name="flag-sharp" color={"black"} size={26} />
-      </IconButton>
-      <IconButton
-        marginTop={10}
-        buttonPress={() => {
-          changePriorityLevel(4);
-        }}
-        title="Priority level 4"
       >
         <Ionicons name="flag-sharp" color={"black"} size={26} />
       </IconButton>

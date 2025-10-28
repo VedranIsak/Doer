@@ -7,22 +7,29 @@ class Settings {
   primaryBackColor: ColorValue;
   secondaryBackColor: ColorValue;
   autoRemoveOldTasks: boolean;
-  sendAlertsOldTasks: boolean;
-  muteDailyNotifications: boolean;
-  dailyNotifications: Notification[];
 
-  constructor(sound: boolean, textColor: ColorValue, primaryBackColor: ColorValue, secondaryBackColor: ColorValue, 
-    autoRemoveOldTasks: boolean, sendAlertsOldTasks: boolean, muteDailyNotifications: boolean,
-    dailyNotifications: Notification[]
+  constructor(
+    sound: boolean,
+    textColor: ColorValue,
+    primaryBackColor: ColorValue,
+    secondaryBackColor: ColorValue,
+    autoRemoveOldTasks: boolean,
   ) {
     this.sound = sound;
     this.textColor = textColor;
     this.primaryBackColor = primaryBackColor;
     this.secondaryBackColor = secondaryBackColor;
     this.autoRemoveOldTasks = autoRemoveOldTasks;
-    this.sendAlertsOldTasks = sendAlertsOldTasks;
-    this.muteDailyNotifications = muteDailyNotifications;
-    this.dailyNotifications = dailyNotifications;
+  }
+
+  cloneWith(changes: Partial<Settings>) {
+    return new Settings(
+      changes.sound ?? this.sound,
+      changes.textColor ?? this.textColor,
+      changes.primaryBackColor ?? this.primaryBackColor,
+      changes.secondaryBackColor ?? this.secondaryBackColor,
+      changes.autoRemoveOldTasks ?? this.autoRemoveOldTasks,
+    );
   }
 }
 

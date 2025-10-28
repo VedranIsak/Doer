@@ -14,6 +14,8 @@ import SubTaskModel from "../models/SubTask";
 import TaskModel from "../models/Task";
 import Paragraph from "./paragraph";
 import SubTask from "./subTask";
+import User from "../models/User";
+import { saveUser } from "../helpers/dataManager";
 
 interface TaskProps {
   taskData: TaskModel;
@@ -23,15 +25,19 @@ interface TaskProps {
 
 const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
   const { width } = Dimensions.get("screen");
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [task, setTask] = useState<TaskModel>(taskData);
   const [remove, setRemove] = useState<boolean>(false);
 
   const handleTaskCheck = (checked: boolean) => {
-    task.isCompleted = checked;
-    task.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
+    const newTask = task;
+    newTask.isCompleted = checked;
+    newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
+    setTask((prev) => prev.cloneWith(newTask));
 
     setTasks(tasks.map((t) => (t.id === task.id ? task : t)));
+    setUser((prev) => new User(tasks, prev.settings));
+    saveUser(user);
   };
 
   const renderSubTask: ListRenderItem<SubTaskModel> = useCallback(
@@ -42,6 +48,7 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
         width={"44%"}
         marginLeft={"4%"}
         marginBottom={"1%"}
+        marginTop={"1%"}
       />
     ),
     []
@@ -60,8 +67,6 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
       marginBottom: 7.5,
       width: width - 50,
       backgroundColor: "rgba(255, 255, 255, .3)",
-      borderWidth: 4,
-      borderColor: "rgba(255, 255, 255, .5)",
       boxShadow: ".25px .25px 4px gray",
     },
     taskTopContainer: {
@@ -104,14 +109,16 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
               onPress={() => {
                 setRemove(true);
                 setTimeout(() => {
-                  setTasks(tasks.filter((t) => t.id !== task.id));
-                }, 500);
+                  setTasks((prev) => prev.filter((t) => t.id !== task.id));
+                  setUser((prev) => new User(tasks, prev.settings));
+                  saveUser(user);
+                }, 250);
               }}
             >
               <Ionicons
                 style={{ marginLeft: 10 }}
                 name="trash-sharp"
-                color={remove ? "red" : "white"}
+                color={remove ? "red" : user.settings.textColor}
                 size={26}
               />
             </Pressable>

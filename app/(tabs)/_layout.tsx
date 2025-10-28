@@ -1,5 +1,6 @@
 import { UserContext } from "../context/UserContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import { useContext } from "react";
@@ -8,20 +9,29 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const BASE = Platform.OS === "ios" ? 56 : 54; // visual height above the inset
-  const HEIGHT = BASE + Math.max(insets.bottom, 16); // add safe-area
+  const BASE = Platform.OS === "ios" ? 56 : 54;
+  const HEIGHT = BASE + Math.max(insets.bottom, 16);
   const { user } = useContext(UserContext);
+  const [loaded] = useFonts({
+    CalSans: require("../assets/fonts/CalSans.ttf"),
+  });
 
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: false,
         headerShown: false,
+        tabBarActiveTintColor: user.settings.textColor as string,
+        tabBarInactiveTintColor: user.settings.textColor as string,
+        tabBarLabelStyle: {
+          fontSize: 16,
+          fontWeight: "600",
+          marginBottom: 4,
+          fontFamily: "CalSans",
+        },
         tabBarStyle: {
           height: HEIGHT,
           paddingTop: 8,
-          paddingBottom: Math.max(insets.bottom, 16), // <- key line
-          // Use an opaque bg so the home indicator doesn't show through:
+          paddingBottom: Math.max(insets.bottom, 16),
           borderTopWidth: 0,
           elevation: 0,
           shadowOpacity: 0,
@@ -30,14 +40,12 @@ export default function TabLayout() {
         },
         tabBarBackground: () => (
           <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
-            {/* Opaque base so nothing white bleeds through */}
             <View
               style={[
                 StyleSheet.absoluteFillObject,
                 { backgroundColor: user.settings.primaryBackColor },
               ]}
             />
-            {/* Avoid semi-transparent white; use two opaque purples instead */}
             <LinearGradient
               colors={[
                 user.settings.primaryBackColor,

@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import User from "../models/User";
 import Settings from "../models/Settings";
+import { loadUser, remove, saveUser } from "../helpers/dataManager";
 
 type UserContextType = {
   user: User;
@@ -8,10 +9,7 @@ type UserContextType = {
 };
 
 const UserContext = createContext<UserContextType>({
-  user: new User(
-    [],
-    new Settings(true, "white", "#6a1a74", "#b3206c", false, true, false, [])
-  ),
+  user: new User([], new Settings(true, "white", "#6a1a74", "#b3206c", false)),
   setUser: () => {},
 });
 
@@ -20,12 +18,27 @@ interface ContextProps {
 }
 
 const UserProvider = ({ children }: ContextProps) => {
-  const [user, setUser] = useState<User>(
-    new User(
-      [],
-      new Settings(true, "white", "#6a1a74", "#b3206c", false, true, false, [])
-    )
+  const defaultUser = new User(
+    [],
+    new Settings(true, "white", "#6a1a74", "#b3206c", false)
   );
+
+  const [user, setUser] = useState<User>(() => defaultUser);
+
+  useEffect(() => {
+    async function loadUserOnMount() {
+      try {
+        const loaded = await loadUser();
+        if (loaded) { setUser(loaded); };
+      } catch {
+        setUser(defaultUser);
+        saveUser(user);
+      }
+    }
+
+    loadUserOnMount();
+  }, []);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

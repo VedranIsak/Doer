@@ -42,10 +42,8 @@ const SubTask = ({
       marginRight: marginRight ?? 0,
       marginBottom: marginBottom ?? 0,
       overflow: "hidden",
-      padding: 10,
+      padding: 15,
       backgroundColor: "rgba(255, 255, 255, .3)",
-      borderWidth: 3,
-      borderColor: "rgba(255, 255, 255, .5)",
       boxShadow: ".25px .25px 4px gray",
     }
   });

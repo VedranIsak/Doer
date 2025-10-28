@@ -3,22 +3,42 @@ import Paragraph from "@/app/components/paragraph";
 import ScreenContainer from "@/app/components/screenContainer";
 import Task from "@/app/components/task";
 import TaskModel from "@/app/models/Task";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import importedTasks from "../data/mockData";
 import formatDate from "../helpers/formatDate";
+import User from "../models/User";
 
 const HomeScreen = () => {
-  const userContext = useContext(UserContext);
-  const { user } = userContext;
+  const { user, setUser } = useContext(UserContext);
+  const importedTasks = user.tasks;
+
   const todayDate = formatDate(new Date());
   const [allTasks, setAllTasks] = useState<TaskModel[]>(importedTasks);
-  const [todayTasks, setTodayTasks] = useState<TaskModel[]>(
-    (importedTasks ?? []).filter((task) => task.dueDate === todayDate)
+
+  useEffect(() => {
+    if (user) {
+      setUser((prevUser) => new User(allTasks, prevUser.settings));
+    }
+  }, [allTasks]);
+
+  useEffect(() => {
+    setAllTasks(importedTasks);
+  }, [importedTasks, todayDate]);
+
+  const completedTasks = useMemo(
+    () => allTasks.filter((task) => task.isCompleted && task.dueDate === todayDate),
+    [allTasks]
   );
-  const completedTasks = todayTasks.filter((task) => task.isCompleted);
-  const notCompletedTasks = todayTasks.filter((task) => !task.isCompleted);
-  const unfinishedTasks = allTasks.filter((task) => task.hasPassed());
+
+  const notCompletedTasks = useMemo(
+    () => allTasks.filter((task) => !task.isCompleted && task.dueDate === todayDate),
+    [allTasks]
+  );
+
+  const unfinishedTasks = useMemo(
+    () => allTasks.filter((task) => task.hasPassed()),
+    [allTasks]
+  );
 
   return (
     <ScreenContainer title="Today's tasks" img="index">
@@ -44,7 +64,12 @@ const HomeScreen = () => {
             {`Todays tasks (${formatDate(new Date())})`}
           </Paragraph>
           {notCompletedTasks.map((task) => (
-            <Task taskData={task} tasks={todayTasks} setTasks={setTodayTasks} />
+            <Task
+              key={task.id.toString() + "notComp"}
+              taskData={task}
+              tasks={allTasks}
+              setTasks={setAllTasks}
+            />
           ))}
         </Container>
       )}
@@ -61,7 +86,12 @@ const HomeScreen = () => {
             Today's completed tasks:
           </Paragraph>
           {completedTasks.map((task) => (
-            <Task taskData={task} tasks={todayTasks} setTasks={setTodayTasks} />
+            <Task
+              key={task.id.toString() + "comp"}
+              taskData={task}
+              tasks={allTasks}
+              setTasks={setAllTasks}
+            />
           ))}
         </Container>
       ) : (
@@ -81,8 +111,9 @@ const HomeScreen = () => {
           </Paragraph>
           {unfinishedTasks.map((task) => (
             <Task
+              key={task.id.toString() + "unf"}
               taskData={task}
-              tasks={unfinishedTasks}
+              tasks={allTasks}
               setTasks={setAllTasks}
             />
           ))}

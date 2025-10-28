@@ -13,10 +13,12 @@ import { UserContext } from "../context/UserContext";
 import formatDate from "../helpers/formatDate";
 import SubTaskModel from "../models/SubTask";
 import TaskModel from "../models/Task";
+import { saveUser } from "../helpers/dataManager";
+import User from "../models/User";
 
 const Create = () => {
   const userContext = useContext(UserContext);
-  const { user } = userContext;
+  const { user, setUser } = userContext;
 
   const [newTask, setNewTask] = useState<TaskModel>(
     new TaskModel(
@@ -66,10 +68,7 @@ const Create = () => {
       />
       <View style={styles.container}>
         <Container padding={10}>
-          <Paragraph
-            color={user.settings.textColor as string}
-            fontSize={22}
-          >
+          <Paragraph color={user.settings.textColor as string} fontSize={22}>
             Title
           </Paragraph>
           <TextInput
@@ -104,10 +103,20 @@ const Create = () => {
             buttonPress={() => {
               setShowCreatePrioModal(true);
             }}
-            width={"50%"}
+            width={"55%"}
             title={`Priority level: ${newTask.priorityLevel.toString()}`}
           >
-            <Ionicons name="flag-sharp" color={"black"} size={26} />
+            <Ionicons
+              name="flag-sharp"
+              color={
+                newTask.priorityLevel == 1
+                  ? "red"
+                  : newTask.priorityLevel == 2
+                  ? "yellow"
+                  : "green"
+              }
+              size={26}
+            />
           </IconButton>
           <IconButton
             buttonPress={() => {
@@ -116,7 +125,7 @@ const Create = () => {
             title={`${newTask.dueDate}`}
             marginTop={7.5}
             marginBottom={5}
-            width={"50%"}
+            width={"55%"}
           >
             <Ionicons name="calendar-clear-sharp" color={"black"} size={26} />
           </IconButton>
@@ -146,11 +155,14 @@ const Create = () => {
             />
           )}
           <IconButton
-            buttonPress={() => {}}
+            buttonPress={() => {
+              setUser(new User([...user.tasks, newTask], user.settings));
+              saveUser(user);
+            }}
             title={"Create task"}
             marginTop={5}
             marginBottom={5}
-            width={"50%"}
+            width={"55%"}
           >
             <Ionicons name="add-circle-sharp" color={"black"} size={26} />
           </IconButton>

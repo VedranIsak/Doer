@@ -3,13 +3,13 @@ import Paragraph from "@/app/components/paragraph";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React, { useContext, useRef, useState } from "react";
 import {
-    Animated,
-    LayoutAnimation,
-    Platform,
-    Pressable,
-    StyleSheet,
-    UIManager,
-    View,
+  Animated,
+  LayoutAnimation,
+  Platform,
+  Pressable,
+  StyleSheet,
+  UIManager,
+  View,
 } from "react-native";
 import { UserContext } from "../../context/UserContext";
 
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     flex: 1,
+    boxShadow: ".25px .25px 4px gray",
   },
   pressableContainer: {
     width: "100%",

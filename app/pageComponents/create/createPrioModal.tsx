@@ -30,7 +30,7 @@ const CreatePrioModal = ({
           changePriorityLevel(1);
         }}
       >
-        <Ionicons name="flag-sharp" color={"black"} size={26} />
+        <Ionicons name="flag-sharp" color={"red"} size={26} />
       </IconButton>
       <IconButton
         marginTop={10}
@@ -39,7 +39,7 @@ const CreatePrioModal = ({
         }}
         title="Priority level 2"
       >
-        <Ionicons name="flag-sharp" color={"black"} size={26} />
+        <Ionicons name="flag-sharp" color={"yellow"} size={26} />
       </IconButton>
       <IconButton
         marginTop={10}
@@ -48,7 +48,7 @@ const CreatePrioModal = ({
           changePriorityLevel(3);
         }}
       >
-        <Ionicons name="flag-sharp" color={"black"} size={26} />
+        <Ionicons name="flag-sharp" color={"green"} size={26} />
       </IconButton>
     </ModalContainer>
   );

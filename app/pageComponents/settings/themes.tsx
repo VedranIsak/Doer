@@ -6,13 +6,13 @@ import { UserContext } from "../../context/UserContext";
 import Settings from "../../models/Settings";
 import User from "../../models/User";
 import SettingsDropdown from "./dropdown";
+import { saveUser } from "@/app/helpers/dataManager";
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 10,
   },
   pressableContainer: {
     backgroundColor: "rgba(255, 255, 255, .3)",
@@ -56,13 +56,11 @@ const Themes = () => {
           textColor,
           primBackColor,
           secBackColor,
-          user.settings.autoRemoveOldTasks,
-          user.settings.sendAlertsOldTasks,
-          user.settings.muteDailyNotifications,
-          user.settings.dailyNotifications
+          user.settings.autoRemoveOldTasks
         )
       )
     );
+    saveUser(user);
   };
 
   const ThemeButton = ({
@@ -76,7 +74,7 @@ const Themes = () => {
         setThemeColors(primBackColor, secBackColor, textColor);
       }}
       title={title}
-      marginBottom={12.5}
+      marginBottom={15}
       width={"90%"}
     >
       <View style={styles.buttonIcon}>
@@ -95,30 +93,32 @@ const Themes = () => {
       title="Themes"
       infoText="Manage and switch between different application themes"
     >
-      <ThemeButton
-        primBackColor={"#6a1a74"}
-        secBackColor={"#b3206c"}
-        textColor={"white"}
-        title="Dreamy"
-      />
-      <ThemeButton
-        primBackColor={"#1a1e74ff"}
-        secBackColor={"#2c7b9aff"}
-        textColor={"white"}
-        title="Oceanic"
-      />
-      <ThemeButton
-        primBackColor={"#130415ff"}
-        secBackColor={"#5b5b5bff"}
-        textColor={"white"}
-        title="Dim"
-      />
-      <ThemeButton
-        primBackColor={"#dededeff"}
-        secBackColor={"#c5c5c5ff"}
-        textColor={"black"}
-        title="Bright"
-      />
+      <View style={styles.container}>
+        <ThemeButton
+          primBackColor={"#6a1a74"}
+          secBackColor={"#b3206c"}
+          textColor={"white"}
+          title="Dreamy"
+        />
+        <ThemeButton
+          primBackColor={"#1a1e74ff"}
+          secBackColor={"#2c7b9aff"}
+          textColor={"white"}
+          title="Oceanic"
+        />
+        <ThemeButton
+          primBackColor={"#130415ff"}
+          secBackColor={"#5b5b5bff"}
+          textColor={"white"}
+          title="Dim"
+        />
+        <ThemeButton
+          primBackColor={"#dededeff"}
+          secBackColor={"#c5c5c5ff"}
+          textColor={"black"}
+          title="Bright"
+        />
+      </View>
     </SettingsDropdown>
   );
 };

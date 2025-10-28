@@ -1,9 +1,9 @@
 import formatDate from "../helpers/formatDate";
-import { incrementTaskId } from "../helpers/incrementer";
+import generateId from "../helpers/idGenerator";
 import SubTaskModel from "./SubTask";
 
 class TaskModel {
-  id: number;
+  id: string;
   dueDate: string;
   time: string | undefined;
   title: string;
@@ -21,7 +21,7 @@ class TaskModel {
     priorityLevel: number,
     subTasks: SubTaskModel[]
   ) {
-    this.id = incrementTaskId();
+    this.id = generateId();
     this.dueDate = dueDate;
     this.time = time;
     this.title = title;

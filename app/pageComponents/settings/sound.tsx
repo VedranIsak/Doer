@@ -1,12 +1,13 @@
 import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Audio } from "expo-av";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { UserContext } from "../../context/UserContext";
 import Settings from "../../models/Settings";
 import User from "../../models/User";
 import SettingsDropdown from "./dropdown";
+import { saveUser } from "@/app/helpers/dataManager";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +20,7 @@ const styles = StyleSheet.create({
 
 const Sound = () => {
   const { user, setUser } = useContext(UserContext);
-  const soundActive = user.settings.sound;
-
+  const [soundActive, setSoundActive] = useState<boolean>(user.settings.sound);
   return (
     <SettingsDropdown
       title="Sound"
@@ -28,28 +28,30 @@ const Sound = () => {
     >
       <View style={styles.container}>
         <IconButton
-          title={`Turn ${soundActive ? "off" : "on"}`}
+          title={`Turn ${soundActive ? "off" : "on"} sound`}
           buttonPress={async () => {
-            setUser(
-              new User(
-                user.tasks,
-                new Settings(
-                  !soundActive,
-                  user.settings.textColor,
-                  user.settings.primaryBackColor,
-                  user.settings.secondaryBackColor,
-                  user.settings.autoRemoveOldTasks,
-                  user.settings.sendAlertsOldTasks,
-                  user.settings.muteDailyNotifications,
-                  user.settings.dailyNotifications
+            const next = !soundActive;
+            setSoundActive(next);
+            setUser((prev) =>
+              prev.cloneWith(
+                new User(
+                  user.tasks,
+                  new Settings(
+                    next,
+                    user.settings.textColor,
+                    user.settings.primaryBackColor,
+                    user.settings.secondaryBackColor,
+                    user.settings.autoRemoveOldTasks,
+                  )
                 )
               )
             );
+            saveUser(user);
             await Audio.setIsEnabledAsync(soundActive);
           }}
         >
           <Ionicons
-            name={`volume-${soundActive ? "high" : "mute"}`}
+            name={`volume-${soundActive ? "mute" : "high"}`}
             color={"black"}
             size={26}
           />

@@ -1,8 +1,12 @@
 import IconButton from "@/app/components/iconButton";
+import { UserContext } from "@/app/context/UserContext";
+import Settings from "@/app/models/Settings";
+import User from "@/app/models/User";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import SettingsDropdown from "./dropdown";
+import { saveUser } from "@/app/helpers/dataManager";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,11 +14,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     minWidth: "100%",
+    marginBottom: 15
   },
 });
 
 const ExpiredTasks = () => {
-  const [autoRemoveActive, setAutoRemoveActive] = useState<boolean>(false);
+  const { user, setUser } = useContext(UserContext);
+  const [autoRemoveActive, setAutoRemoveActive] = useState<boolean>(
+    user.settings.autoRemoveOldTasks
+  );
   return (
     <SettingsDropdown
       title="Expired tasks"
@@ -22,16 +30,28 @@ const ExpiredTasks = () => {
     >
       <View style={styles.container}>
         <IconButton
-          width={210}
-          title={`Autoremove: ${autoRemoveActive ? "on" : "off"}`}
-          marginBottom={10}
+          title={`Turn ${autoRemoveActive ? "off" : "on"} autoremove`}
           buttonPress={() => {
-            setAutoRemoveActive((prev) => !prev);
+            const next = !autoRemoveActive;
+            setAutoRemoveActive(next);
+            setUser(
+              new User(
+                user.tasks,
+                new Settings(
+                  user.settings.sound,
+                  user.settings.textColor,
+                  user.settings.primaryBackColor,
+                  user.settings.secondaryBackColor,
+                  next
+                )
+              )
+            );
+            saveUser(user);
           }}
         >
           <Ionicons
             name={`${
-              autoRemoveActive ? "checkmark-circle-sharp" : "close-circle-sharp"
+              autoRemoveActive ? "close-circle-sharp" : "checkmark-circle-sharp"
             }`}
             color={"black"}
             size={26}

@@ -1,17 +1,12 @@
-import { incrementSubTaskId } from "../helpers/incrementer";
-
+import generateId from "../helpers/idGenerator";
 class SubTaskModel {
-  id: number;
+  id: string;
   title: string;
   isCompleted: boolean;
   dueDate: string;
 
-  constructor(
-    title: string,
-    isCompleted: boolean,
-    dueDate: string
-  ) {
-    this.id = incrementSubTaskId();
+  constructor(title: string, isCompleted: boolean, dueDate: string) {
+    this.id = generateId();
     this.title = title;
     this.isCompleted = isCompleted;
     this.dueDate = dueDate;

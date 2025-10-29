@@ -19,7 +19,7 @@
     "web": {
       "bundler": "metro",
       "output": "static"
-  },
+    },
     "plugins": [
       "expo-router",
       [
@@ -30,7 +30,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true

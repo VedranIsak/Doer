@@ -4,8 +4,9 @@ import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import { useContext } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Paragraph from "../components/paragraph";
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -20,13 +21,13 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: user.settings.textColor as string,
         tabBarInactiveTintColor: user.settings.textColor as string,
-        tabBarLabelStyle: {
-          fontSize: 16,
-          fontWeight: "600",
-          marginBottom: 4,
-          fontFamily: "CalSans",
+        tabBarItemStyle: {
+          borderRadius: 15,
+          overflow: "hidden",
+          paddingTop: 2.5
         },
         tabBarStyle: {
           height: HEIGHT,
@@ -63,15 +64,21 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: () => (
-            <Ionicons
-              name="home-sharp"
-              color={user.settings.textColor as string}
-              size={30}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Ionicons
+                name={"home-sharp"}
+                size={26}
+                color={user.settings.textColor as string}
+              />
+              {focused ? (
+                <Paragraph width={"100%"} color={user.settings.textColor as string}>Home</Paragraph>
+              ) : null}
+            </View>
           ),
         }}
       />
+
       <Tabs.Screen
         name="create"
         options={{
@@ -111,6 +118,40 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      {/* <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarButton: (props) => (
+            <Pressable
+              onPress={props.onPress}
+              onLongPress={props.onLongPress}
+              accessibilityRole={props.accessibilityRole}
+              accessibilityState={props.accessibilityState}
+              accessibilityLabel={props.accessibilityLabel}
+              testID={props.testID}
+              style={({ pressed }) => [
+                props.style,
+                pressed && { backgroundColor: "rgba(200,200,200,0.2)" },
+              ]}
+              android_ripple={{
+                color: "rgba(200,200,200,0.18)",
+                borderless: false,
+              }}
+            >
+              {props.children}
+            </Pressable>
+          ),
+          tabBarIcon: () => (
+            <Ionicons
+              name="settings-sharp"
+              color={user.settings.textColor as string}
+              size={30}
+            />
+          ),
+        }}
+      /> */}
     </Tabs>
   );
 }

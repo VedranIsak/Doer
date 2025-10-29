@@ -26,7 +26,7 @@ const ExpiredTasks = () => {
   return (
     <SettingsDropdown
       title="Expired tasks"
-      infoText="Manage how old, uncompleted, tasks are to be dealt with"
+      infoText="Decide whether or not to automatically remove expired tasks"
     >
       <View style={styles.container}>
         <IconButton

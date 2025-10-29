@@ -29,13 +29,20 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
       justifyContent: "flex-start",
       flexDirection: "column",
     },
-    image: { width: width, height: 200, marginBottom: 20 },
+    image: {
+      width: width,
+      height: 175,
+      marginBottom: 20,
+      marginTop: 2.5,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15
+    },
     headerContainer: {
       position: "absolute",
       width: "60%",
       height: "auto",
       backgroundColor: "rgb(240, 240, 240)",
-      top: 145,
+      top: 125,
       borderRadius: 15,
       left: "20%",
       paddingTop: 15,
@@ -69,7 +76,7 @@ const ScreenContainer = ({ children, img, title }: ScreenContainerProps) => {
           style={styles.image}
         />
         <View style={styles.headerContainer}>
-          <Paragraph fontSize={26} color="black">
+          <Paragraph fontSize={24} color="black">
             {title}
           </Paragraph>
         </View>

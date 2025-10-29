@@ -24,8 +24,8 @@ const Create = () => {
     new TaskModel(
       formatDate(new Date()),
       "13.00",
-      ".....",
-      ".....",
+      "Title",
+      "Description",
       false,
       1,
       new Array<SubTaskModel>()
@@ -75,7 +75,6 @@ const Create = () => {
             style={styles.textInput}
             keyboardType="default"
             value={newTask.title}
-            placeholder="....."
             onChangeText={(text) =>
               setNewTask((previous) => previous.cloneWith({ title: text }))
             }
@@ -87,7 +86,6 @@ const Create = () => {
             style={[styles.textInput]}
             multiline={true}
             value={newTask.description}
-            placeholder="....."
             onChangeText={(text) =>
               setNewTask((previous) =>
                 previous.cloneWith({ description: text })
@@ -123,7 +121,7 @@ const Create = () => {
               () => setShowDate(true);
             }}
             title={`${newTask.dueDate}`}
-            marginTop={7.5}
+            marginTop={5}
             marginBottom={5}
             width={"55%"}
           >
@@ -158,6 +156,17 @@ const Create = () => {
             buttonPress={() => {
               setUser(new User([...user.tasks, newTask], user.settings));
               saveUser(user);
+              setNewTask(
+                new TaskModel(
+                  formatDate(new Date()),
+                  "13:00",
+                  "Title",
+                  "Description",
+                  false,
+                  1,
+                  new Array<SubTaskModel>()
+                )
+              );
             }}
             title={"Create task"}
             marginTop={5}

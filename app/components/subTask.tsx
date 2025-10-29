@@ -35,7 +35,7 @@ const SubTask = ({
       borderRadius: 15,
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-evenly",
+      justifyContent: "space-between",
       width: width ?? "auto",
       marginTop: marginTop ?? 0,
       marginLeft: marginLeft ?? 0,

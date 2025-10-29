@@ -1,6 +1,6 @@
 import IconButton from "@/app/components/iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Audio } from "expo-av";
+import { setIsAudioActiveAsync } from "expo-audio";
 import { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { UserContext } from "../../context/UserContext";
@@ -24,7 +24,7 @@ const Sound = () => {
   return (
     <SettingsDropdown
       title="Sound"
-      infoText="Manage whether or not the application should have sound or not"
+      infoText="Mure or unmute the application. Please note that OS restrictions may hinder some sounds from being toggled."
     >
       <View style={styles.container}>
         <IconButton
@@ -47,7 +47,7 @@ const Sound = () => {
               )
             );
             saveUser(user);
-            await Audio.setIsEnabledAsync(soundActive);
+            await setIsAudioActiveAsync(soundActive);
           }}
         >
           <Ionicons

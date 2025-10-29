@@ -3,7 +3,7 @@ import generateId from "../helpers/idGenerator";
 import SubTaskModel from "./SubTask";
 
 class TaskModel {
-  id: string;
+  id: number;
   dueDate: string;
   time: string | undefined;
   title: string;

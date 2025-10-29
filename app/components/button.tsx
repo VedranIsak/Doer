@@ -36,21 +36,26 @@ const Button: React.FC<ButtonProps> = ({
       padding: 12.5,
       width: width ?? "auto",
       marginBottom: marginBottom,
-      marginTop: marginTop
+      marginTop: marginTop,
+      boxShadow: ".25px .25px 4px gray",
     },
     text: {
       color: "black",
       fontSize: 20,
       fontFamily: "CalSans",
       textAlign: "center",
-      marginBottom: 5
+      marginBottom: 5,
     },
   });
 
   return (
     <Pressable
       style={({ pressed }) => [
-        { backgroundColor: pressed ? pressedColor ?? "white" : backgroundColor ?? "rgba(255, 255, 255, .75)" },
+        {
+          backgroundColor: pressed
+            ? pressedColor ?? "white"
+            : backgroundColor ?? "rgba(255, 255, 255, .75)",
+        },
         styles.pressable,
       ]}
       onPress={buttonPress}

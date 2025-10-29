@@ -22,11 +22,18 @@ const CreateSubTaskView = ({ newTask, setNewTask }: CreateSubTaskViewProps) => {
   return (
     <Container padding={10}>
       <Paragraph color={user.settings.textColor as string} fontSize={22}>
-        Sub Tasks:{" "}
+        Sub Tasks
       </Paragraph>
       {newTask.subTasks.length > 0 ? (
         newTask.subTasks.map((subTask) => (
-          <SubTask key={subTask.id} marginTop={7.5} marginBottom={7.5} width={"50%"} showCheck={false} task={subTask} />
+          <SubTask
+            key={subTask.id}
+            marginTop={7.5}
+            marginBottom={7.5}
+            width={"50%"}
+            showCheck={false}
+            task={subTask}
+          />
         ))
       ) : (
         <></>

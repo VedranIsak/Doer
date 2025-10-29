@@ -5,7 +5,6 @@ import { StyleSheet, TextInput } from "react-native";
 import ModalContainer from "../../components/modalContainer";
 import Paragraph from "../../components/paragraph";
 import { UserContext } from "../../context/UserContext";
-import formatDate from "../../helpers/formatDate";
 import SubTaskModel from "../../models/SubTask";
 import TaskModel from "../../models/Task";
 
@@ -41,7 +40,7 @@ const CreateSubTaskModal = ({
   const { user } = userContext;
 
   const [subTask, setSubTask] = useState<SubTaskModel>(
-    new SubTaskModel("", false, formatDate(new Date()))
+    new SubTaskModel("Title", false, newTask.dueDate)
   );
 
   return (
@@ -68,6 +67,7 @@ const CreateSubTaskModal = ({
             subTasks.push(subTask);
             return previous.cloneWith({ subTasks: subTasks });
           });
+          setSubTask(new SubTaskModel("Title", false, newTask.dueDate))
           setShowCreateSubTaskModal(false);
         }}
       >

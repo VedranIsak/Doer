@@ -91,7 +91,7 @@ const Themes = () => {
   return (
     <SettingsDropdown
       title="Themes"
-      infoText="Manage and switch between different application themes"
+      infoText="Switch between different themes for Doer"
     >
       <View style={styles.container}>
         <ThemeButton

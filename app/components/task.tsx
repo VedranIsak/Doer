@@ -1,6 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Checkbox from "./checkbox";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react"; // ← useRef
 import {
   Dimensions,
   FlatList,
@@ -8,6 +8,7 @@ import {
   Pressable,
   StyleSheet,
   View,
+  Animated,
 } from "react-native";
 import { UserContext } from "../context/UserContext";
 import SubTaskModel from "../models/SubTask";
@@ -29,16 +30,7 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
   const [task, setTask] = useState<TaskModel>(taskData);
   const [remove, setRemove] = useState<boolean>(false);
 
-  const handleTaskCheck = (checked: boolean) => {
-    const newTask = task;
-    newTask.isCompleted = checked;
-    newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
-    setTask((prev) => prev.cloneWith(newTask));
-
-    setTasks(tasks.map((t) => (t.id === task.id ? task : t)));
-    setUser((prev) => new User(tasks, prev.settings));
-    saveUser(user);
-  };
+  const opacity = useRef(new Animated.Value(1)).current;
 
   const renderSubTask: ListRenderItem<SubTaskModel> = useCallback(
     ({ item }) => (
@@ -73,12 +65,13 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      width: "90%",
-      marginLeft: "5%",
-      marginTop: 10,
+      width: "85%",
+      marginLeft: "7.5%",
+      marginTop: 15,
     },
     symbolContainer: {
       flexDirection: "row",
+      alignItems: "center",
     },
     subTaskList: {
       marginBottom: 10,
@@ -86,80 +79,121 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
     },
   });
 
+  const handleTaskCheck = (checked: boolean) => {
+    const newTask = new TaskModel(
+      task.dueDate,
+      task.time,
+      task.title,
+      task.description,
+      task.isCompleted,
+      task.priorityLevel,
+      task.subTasks
+    );
+    newTask.isCompleted = checked;
+    newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
+    setTask(newTask);
+
+      Animated.timing(opacity, {
+        toValue: 0,
+        delay: 500,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+      setTasks(tasks.map((t) => (t.id === task.id ? newTask : t)));
+      setUser((prev) => {
+        const updated = new User(
+          tasks.map((t) => (t.id === task.id ? newTask : t)),
+          prev.settings
+        );
+        saveUser(updated);
+        return updated;
+      });
+    });
+  };
+
+  const handleRemovePress = () => {
+    setRemove(true);
+    Animated.timing(opacity, {
+      toValue: 0,
+      delay: 500,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setTasks((prev) => {
+        const newTasks = prev.filter((t) => t.id !== task.id);
+        setUser((uPrev) => {
+          const updatedUser = new User(newTasks, uPrev.settings);
+          saveUser(updatedUser);
+          return updatedUser;
+        });
+        return newTasks;
+      });
+    });
+  };
+
   return (
-    <Pressable key={task.id.toString()}>
-      <View style={styles.taskContainer}>
-        <View style={styles.taskTopContainer}>
-          <Paragraph color={user.settings.textColor as string} fontSize={18}>
-            {task.title}
-          </Paragraph>
-          <View style={styles.symbolContainer}>
+    <Animated.View style={[styles.taskContainer, { opacity }]}>
+      <View style={styles.taskTopContainer}>
+        <Paragraph color={user.settings.textColor as string} fontSize={18}>
+          {task.title}
+        </Paragraph>
+        <View style={styles.symbolContainer}>
+          <Ionicons
+            name="flag-sharp"
+            color={
+              taskData.priorityLevel === 1
+                ? "red"
+                : taskData.priorityLevel === 2
+                ? "yellow"
+                : "green"
+            }
+            size={26}
+          />
+          <Pressable onPress={handleRemovePress}>
             <Ionicons
-              name="flag-sharp"
-              color={
-                taskData.priorityLevel === 1
-                  ? "red"
-                  : taskData.priorityLevel === 2
-                  ? "yellow"
-                  : "green"
-              }
+              style={{ marginLeft: 10 }}
+              name="trash-sharp"
+              color={remove ? "red" : (user.settings.textColor as string)}
               size={26}
             />
-            <Pressable
-              onPress={() => {
-                setRemove(true);
-                setTimeout(() => {
-                  setTasks((prev) => prev.filter((t) => t.id !== task.id));
-                  setUser((prev) => new User(tasks, prev.settings));
-                  saveUser(user);
-                }, 250);
-              }}
-            >
-              <Ionicons
-                style={{ marginLeft: 10 }}
-                name="trash-sharp"
-                color={remove ? "red" : user.settings.textColor}
-                size={26}
-              />
-            </Pressable>
-            <Checkbox
-              borderWidth={3}
-              borderRadius={10}
-              height={30}
-              width={30}
-              marginLeft={10}
-              value={task.isCompleted}
-              handleCheck={handleTaskCheck}
-            />
-          </View>
-        </View>
-        <Paragraph
-          marginLeft={"5%"}
-          marginBottom={2}
-          color={user.settings.textColor as string}
-        >
-          {task.dueDate}
-        </Paragraph>
-        <Paragraph
-          marginLeft={"5%"}
-          marginBottom={10}
-          color={user.settings.textColor as string}
-        >
-          {task.description}
-        </Paragraph>
-        {task.subTasks.length > 0 ? (
-          <FlatList
-            style={styles.subTaskList}
-            data={task.subTasks}
-            renderItem={renderSubTask}
-            keyExtractor={subTaskKeyExtractor}
-            numColumns={2}
+          </Pressable>
+          <Checkbox
+            borderWidth={3}
+            borderRadius={10}
+            height={30}
+            width={30}
+            marginLeft={10}
+            value={task.isCompleted}
+            handleCheck={handleTaskCheck}
           />
-        ) : (
-          <></>
-        )}
+        </View>
       </View>
-    </Pressable>
+
+      <Paragraph
+        marginLeft={"7.5%"}
+        marginBottom={2}
+        color={user.settings.textColor as string}
+      >
+        {task.dueDate}
+      </Paragraph>
+      <Paragraph
+        marginLeft={"7.5%"}
+        marginBottom={15}
+        color={user.settings.textColor as string}
+      >
+        {task.description}
+      </Paragraph>
+
+      {task.subTasks.length > 0 ? (
+        <FlatList
+          style={styles.subTaskList}
+          data={task.subTasks}
+          renderItem={renderSubTask}
+          keyExtractor={subTaskKeyExtractor}
+          numColumns={2}
+        />
+      ) : null}
+    </Animated.View>
   );
 };
 

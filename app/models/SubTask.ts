@@ -1,6 +1,6 @@
 import generateId from "../helpers/idGenerator";
 class SubTaskModel {
-  id: string;
+  id: number;
   title: string;
   isCompleted: boolean;
   dueDate: string;

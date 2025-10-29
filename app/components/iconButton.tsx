@@ -41,7 +41,8 @@ const IconButton: React.FC<IconButtonProps> = ({
       marginTop: marginTop,
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      boxShadow: ".25px .25px 4px gray",
     },
     text: {
       color: "black",
@@ -50,14 +51,18 @@ const IconButton: React.FC<IconButtonProps> = ({
       textAlign: "center",
       marginBottom: 5,
       marginRight: 10,
-      marginLeft: 10
+      marginLeft: 10,
     },
   });
 
   return (
     <Pressable
       style={({ pressed }) => [
-        { backgroundColor: pressed ? pressedColor ?? "white" : backgroundColor ?? "rgba(255, 255, 255, .75)" },
+        {
+          backgroundColor: pressed
+            ? pressedColor ?? "white"
+            : backgroundColor ?? "rgba(255, 255, 255, .75)",
+        },
         styles.pressable,
       ]}
       onPress={buttonPress}

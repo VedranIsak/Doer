@@ -22,7 +22,10 @@ const Notifications = () => {
   const [remindersActive, setRemindersActive] = useState<boolean>(false);
 
   return (
-    <SettingsDropdown title="Daily notifications" infoText="Manage how often you receive daily notifications regarding tasks to be done">
+    <SettingsDropdown
+      title="Daily notifications"
+      infoText="Manage how often you receive daily notifications regarding tasks to be done"
+    >
       <View style={styles.container}>
         <IconButton
           width={170}

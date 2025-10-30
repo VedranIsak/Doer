@@ -19,7 +19,6 @@ interface CheckBoxProps {
   width: DimensionValue;
   height: DimensionValue;
   borderWidth: number | undefined;
-  borderRadius: number;
   handleCheck: (checked: boolean) => void;
 }
 
@@ -37,7 +36,6 @@ const CheckBox = ({
   width,
   height,
   borderWidth,
-  borderRadius,
   handleCheck,
 }: CheckBoxProps) => {
   const { user } = useContext(UserContext);
@@ -55,8 +53,8 @@ const CheckBox = ({
       height: width,
       width: height,
       borderWidth: borderWidth,
-      borderRadius: borderRadius,
-      borderColor: user.settings.textColor as string,
+      borderRadius: 25,
+      borderColor: user.settings.textColor as string
     },
   });
 

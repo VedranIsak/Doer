@@ -10,26 +10,18 @@ import { saveUser } from "@/app/helpers/dataManager";
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 2.5,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-  },
-  pressableContainer: {
-    backgroundColor: "rgba(255, 255, 255, .3)",
-    width: "90%",
-    borderRadius: 15,
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: 5,
-    padding: 15,
-    flexDirection: "row",
   },
   buttonIcon: {
     overflow: "hidden",
     height: 50,
     width: 50,
     borderRadius: 50,
-    borderColor: "white",
+    borderColor: "lightgrey",
+    borderWidth: 4
   },
 });
 
@@ -74,7 +66,7 @@ const Themes = () => {
         setThemeColors(primBackColor, secBackColor, textColor);
       }}
       title={title}
-      marginBottom={15}
+      marginBottom={10}
       width={"90%"}
     >
       <View style={styles.buttonIcon}>
@@ -102,19 +94,19 @@ const Themes = () => {
         />
         <ThemeButton
           primBackColor={"#1a1e74ff"}
-          secBackColor={"#2c7b9aff"}
+          secBackColor={"#3644a3ff"}
           textColor={"white"}
           title="Oceanic"
         />
         <ThemeButton
           primBackColor={"#130415ff"}
-          secBackColor={"#5b5b5bff"}
+          secBackColor={"#3c3c3cff"}
           textColor={"white"}
           title="Dim"
         />
         <ThemeButton
-          primBackColor={"#dededeff"}
-          secBackColor={"#c5c5c5ff"}
+          primBackColor={"#ffffffff"}
+          secBackColor={"#e8e8e8ff"}
           textColor={"black"}
           title="Bright"
         />

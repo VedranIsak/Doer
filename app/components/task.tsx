@@ -93,12 +93,12 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
     newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
     setTask(newTask);
 
-      Animated.timing(opacity, {
-        toValue: 0,
-        delay: 500,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      delay: 500,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
       setTasks(tasks.map((t) => (t.id === task.id ? newTask : t)));
       setUser((prev) => {
         const updated = new User(
@@ -158,8 +158,7 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
             />
           </Pressable>
           <Checkbox
-            borderWidth={3}
-            borderRadius={10}
+            borderWidth={2}
             height={30}
             width={30}
             marginLeft={10}

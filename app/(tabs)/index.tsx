@@ -56,7 +56,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <ScreenContainer title="Today's tasks" img="index">
+    <ScreenContainer title="Home" img="index">
       {notCompletedTasks.length === 0 ? (
         <Paragraph
           marginTop={15}

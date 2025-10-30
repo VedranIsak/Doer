@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import ExpiredTasks from "../pageComponents/settings/expiredTasks";
 import Sound from "../pageComponents/settings/sound";
 import Themes from "../pageComponents/settings/themes";
+import Subtasks from "../pageComponents/settings/subTasks";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,8 +21,8 @@ const Settings = () => {
       <View style={styles.container}>
         <Themes />
         <Sound />
-        {/* <Notifications /> */}
         <ExpiredTasks />
+        <Subtasks />
       </View>
     </ScreenContainer>
   );

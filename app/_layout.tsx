@@ -1,13 +1,21 @@
 // app/_layout.tsx
 import { Slot } from "expo-router";
 import { StatusBar } from "react-native";
-import { UserProvider } from "./context/UserContext";
+import { UserContext, UserProvider } from "./context/UserContext";
+import { useContext } from "react";
 
+//Fixa detta med light-content, dark-content
 export default function RootLayout() {
+  const { user } = useContext(UserContext);
+  console.log(user.settings.textColor);
   return (
     <UserProvider>
-        <StatusBar backgroundColor={"light-content"}></StatusBar>
-        <Slot />
+      <StatusBar
+        backgroundColor={
+          user.settings.textColor === "white" ? "light-content" : "dark-content"
+        }
+      ></StatusBar>
+      <Slot />
     </UserProvider>
   );
 }

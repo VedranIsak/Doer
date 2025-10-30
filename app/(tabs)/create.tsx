@@ -35,7 +35,7 @@ const Create = () => {
   const [showCreatePrioModal, setShowCreatePrioModal] =
     useState<boolean>(false);
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false);
-  const [errorMessage, setShowErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const styles = StyleSheet.create({
     container: {
@@ -60,7 +60,7 @@ const Create = () => {
   });
 
   return (
-    <ScreenContainer title="New task" img="create">
+    <ScreenContainer title="Add task" img="create">
       <ErrorModal
         errorMessage={errorMessage}
         setShowErrorModal={setShowErrorModal}
@@ -72,7 +72,13 @@ const Create = () => {
             Title
           </Paragraph>
           <TextInput
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              {
+                borderWidth: newTask.title.length == 0 ? 3 : 0,
+                borderColor: newTask.title.length == 0 ? "red" : "transparent",
+              },
+            ]}
             keyboardType="default"
             value={newTask.title}
             onChangeText={(text) =>
@@ -83,7 +89,7 @@ const Create = () => {
             Description
           </Paragraph>
           <TextInput
-            style={[styles.textInput]}
+            style={styles.textInput}
             multiline={true}
             value={newTask.description}
             onChangeText={(text) =>
@@ -118,7 +124,7 @@ const Create = () => {
           </IconButton>
           <IconButton
             buttonPress={() => {
-              () => setShowDate(true);
+              setShowDate(true);
             }}
             title={`${newTask.dueDate}`}
             marginTop={5}
@@ -143,7 +149,7 @@ const Create = () => {
                       })
                     );
                   } else {
-                    setShowErrorMessage(
+                    setErrorMessage(
                       "Date has to be today or in the future"
                     );
                     setShowErrorModal(true);
@@ -154,6 +160,12 @@ const Create = () => {
           )}
           <IconButton
             buttonPress={() => {
+              if(newTask.title.length == 0) {
+                setErrorMessage("Your task needs a title")
+                setShowErrorModal(true);
+                return;
+              }
+
               setUser(new User([...user.tasks, newTask], user.settings));
               saveUser(user);
               setNewTask(

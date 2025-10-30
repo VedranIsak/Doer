@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import { useContext } from "react";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Paragraph from "../components/paragraph";
 
@@ -27,24 +27,27 @@ export default function TabLayout() {
         tabBarItemStyle: {
           borderRadius: 15,
           overflow: "hidden",
-          paddingTop: 2.5
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
         },
         tabBarStyle: {
           height: HEIGHT,
-          paddingTop: 8,
-          paddingBottom: Math.max(insets.bottom, 16),
+          paddingTop: 0,
           borderTopWidth: 0,
           elevation: 0,
           shadowOpacity: 0,
           overflow: "hidden",
           backgroundColor: "transparent",
+          justifyContent: "center",
+          alignItems: "center",
         },
         tabBarBackground: () => (
           <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
             <View
               style={[
                 StyleSheet.absoluteFillObject,
-                { backgroundColor: user.settings.primaryBackColor },
+                { backgroundColor: "transparent" },
               ]}
             />
             <LinearGradient
@@ -63,16 +66,26 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Ionicons
                 name={"home-sharp"}
                 size={26}
                 color={user.settings.textColor as string}
               />
               {focused ? (
-                <Paragraph width={"100%"} color={user.settings.textColor as string}>Home</Paragraph>
+                <Paragraph
+                  marginBottom={-27.5}
+                  width={"100%"}
+                  color={user.settings.textColor as string}
+                >
+                  Home
+                </Paragraph>
               ) : null}
             </View>
           ),
@@ -83,12 +96,28 @@ export default function TabLayout() {
         name="create"
         options={{
           title: "Create Task",
-          tabBarIcon: () => (
-            <Ionicons
-              name="add-circle-sharp"
-              color={user.settings.textColor as string}
-              size={30}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons
+                name={"add-circle-sharp"}
+                size={26}
+                color={user.settings.textColor as string}
+              />
+              {focused ? (
+                <Paragraph
+                  marginBottom={-27.5}
+                  width={"100%"}
+                  color={user.settings.textColor as string}
+                >
+                  Add task
+                </Paragraph>
+              ) : null}
+            </View>
           ),
         }}
       />
@@ -96,12 +125,28 @@ export default function TabLayout() {
         name="calendar"
         options={{
           title: "Calendar",
-          tabBarIcon: () => (
-            <Ionicons
-              name="calendar-clear-sharp"
-              color={user.settings.textColor as string}
-              size={30}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons
+                name={"calendar-clear-sharp"}
+                size={26}
+                color={user.settings.textColor as string}
+              />
+              {focused ? (
+                <Paragraph
+                  marginBottom={-45}
+                  width={"100%"}
+                  color={user.settings.textColor as string}
+                >
+                  Calendar
+                </Paragraph>
+              ) : null}
+            </View>
           ),
         }}
       />
@@ -109,49 +154,31 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: () => (
-            <Ionicons
-              name="settings-sharp"
-              color={user.settings.textColor as string}
-              size={30}
-            />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons
+                name={"settings-sharp"}
+                size={26}
+                color={user.settings.textColor as string}
+              />
+              {focused ? (
+                <Paragraph
+                  marginBottom={-25}
+                  width={"100%"}
+                  color={user.settings.textColor as string}
+                >
+                  Settings
+                </Paragraph>
+              ) : null}
+            </View>
           ),
         }}
       />
-
-      {/* <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarButton: (props) => (
-            <Pressable
-              onPress={props.onPress}
-              onLongPress={props.onLongPress}
-              accessibilityRole={props.accessibilityRole}
-              accessibilityState={props.accessibilityState}
-              accessibilityLabel={props.accessibilityLabel}
-              testID={props.testID}
-              style={({ pressed }) => [
-                props.style,
-                pressed && { backgroundColor: "rgba(200,200,200,0.2)" },
-              ]}
-              android_ripple={{
-                color: "rgba(200,200,200,0.18)",
-                borderless: false,
-              }}
-            >
-              {props.children}
-            </Pressable>
-          ),
-          tabBarIcon: () => (
-            <Ionicons
-              name="settings-sharp"
-              color={user.settings.textColor as string}
-              size={30}
-            />
-          ),
-        }}
-      /> */}
     </Tabs>
   );
 }

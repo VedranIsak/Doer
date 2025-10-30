@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     width: "95%",
     alignItems: "center",
     backgroundColor: "rgba(255, 255, 255, .25)",
-    margin: 5,
+    margin: 2.5,
     borderRadius: 10,
     boxShadow: ".25px .25px 4px gray",
   },

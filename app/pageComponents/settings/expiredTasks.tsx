@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     minWidth: "100%",
-    marginBottom: 15
+    marginBottom: 10,
+    marginTop: 2.5,
   },
 });
 
@@ -57,20 +58,6 @@ const ExpiredTasks = () => {
             size={26}
           />
         </IconButton>
-        {/* <IconButton
-          width={210}
-          marginBottom={15}
-          title={`Send alerts: ${sendAlertsActive ? "on" : "off"}`}
-          buttonPress={() => setSendAlertsActive((prev) => !prev)}
-        >
-          <Ionicons
-            name={`${
-              sendAlertsActive ? "checkmark-circle-sharp" : "close-circle-sharp"
-            }`}
-            color={"black"}
-            size={26}
-          />
-        </IconButton> */}
       </View>
     </SettingsDropdown>
   );

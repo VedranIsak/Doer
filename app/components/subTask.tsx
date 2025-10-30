@@ -59,8 +59,7 @@ const SubTask = ({
         marginTop={2.5}
         width={22.5}
         height={22.5}
-        borderRadius={7.5}
-        borderWidth={3}
+        borderWidth={2}
           value={subTask.isCompleted}
           handleCheck={handleCheck}
         />

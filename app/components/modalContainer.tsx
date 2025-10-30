@@ -6,6 +6,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import IconButton from "./iconButton";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface ModalContainerProps {
@@ -26,21 +28,30 @@ const ModalContainer = ({
     modalBackdrop: { flex: 1, justifyContent: "center", alignItems: "center" },
     modalContainer: {
       height: "auto",
-      justifyContent: "space-between",
+      flexDirection: "column",
+      justifyContent: "center",
       alignItems: "center",
-      backgroundColor: user.settings.primaryBackColor,
       width: "90%",
-      borderRadius: 15,
-      borderWidth: 4,
-      borderColor: "rgba(255, 255, 255, .75)",
-      padding: 15,
+      borderRadius: 25,
       overflow: "hidden",
+      boxShadow: ".25px .25px 4px gray",
+    },
+    modalSubContainer: {
+      marginTop: 7.5,
+      padding: 10,
+      height: "auto",
+      width: "95%",
+      borderRadius: 25,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(255, 255, 255, .3)",
+      boxShadow: ".25px .25px 4px gray",
     },
   });
 
   return (
     <Modal
-      backdropColor={"rgba(0, 0, 0, .25)"}
+      backdropColor={"rgba(0, 0, 0, .75)"}
       visible={showModalContainer}
       animationType="fade"
     >
@@ -58,7 +69,21 @@ const ModalContainer = ({
                 end={{ x: 1, y: 0 }}
               />
 
-              {children}
+              <View style={styles.modalSubContainer}>{children}</View>
+              <IconButton
+                title="Close"
+                marginBottom={15}
+                marginTop={15}
+                buttonPress={() => {
+                  setShowModalContainer(false);
+                }}
+              >
+                <Ionicons
+                  name={"close-circle-sharp"}
+                  color={"black"}
+                  size={26}
+                />
+              </IconButton>
             </View>
           </TouchableWithoutFeedback>
         </View>

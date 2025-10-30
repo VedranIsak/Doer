@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, DimensionValue } from "react-native";
 
 interface IconButtonProps {
-  title: string;
+  title?: string;
   children?: ReactNode;
   buttonPress?: () => void;
   width?: DimensionValue;
@@ -12,6 +12,8 @@ interface IconButtonProps {
   pressedColor?: string;
   marginTop?: DimensionValue;
   marginBottom?: DimensionValue;
+  marginLeft?: DimensionValue;
+  marginRight?: DimensionValue;
 }
 
 const IconButton: React.FC<IconButtonProps> = ({
@@ -23,6 +25,8 @@ const IconButton: React.FC<IconButtonProps> = ({
   pressedColor,
   marginTop = 0,
   marginBottom = 0,
+  marginLeft = 0,
+  marginRight = 0
 }: IconButtonProps) => {
   const [fontsLoaded] = useFonts({
     CalSans: require("../assets/fonts/CalSans.ttf"),
@@ -39,6 +43,8 @@ const IconButton: React.FC<IconButtonProps> = ({
       width: width ?? "auto",
       marginBottom: marginBottom,
       marginTop: marginTop,
+      marginRight: marginRight,
+      marginLeft: marginLeft,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
@@ -67,7 +73,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       ]}
       onPress={buttonPress}
     >
-      <Text style={styles.text}>{title}</Text>
+      {title ? <Text style={styles.text}>{title}</Text> : null}
       {children}
     </Pressable>
   );

@@ -11,9 +11,10 @@ import { saveUser } from "@/app/helpers/dataManager";
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 2.5,
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginBottom: 15,
+    marginBottom: 10,
     minWidth: "100%",
   },
 });
@@ -41,7 +42,7 @@ const Sound = () => {
                     user.settings.textColor,
                     user.settings.primaryBackColor,
                     user.settings.secondaryBackColor,
-                    user.settings.autoRemoveOldTasks,
+                    user.settings.autoRemoveOldTasks
                   )
                 )
               )

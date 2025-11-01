@@ -36,105 +36,134 @@ const styles = StyleSheet.create({
 
 const Subtasks = () => {
   const { user, setUser } = useContext(UserContext);
-  const [autoRemoveActive, setAutoRemoveActive] = useState<boolean>(
-    user.settings.autoRemoveOldTasks
-  );
   return (
     <SettingsDropdown
       title="Subtasks"
+      modalTitle="Subtasks"
       infoText="Configure how subtasks are dealt with"
     >
       <View style={styles.container}>
         <IconButton
-          title={`Toggle subtasks ${autoRemoveActive ? "on" : "off"}`}
+          title={`Subtasks: ${
+            user.settings.subTasksActive ? "on" : "off"
+          }`}
           buttonPress={() => {
-            setAutoRemoveActive((prev) => !prev);
+            setUser(
+              (prev) =>
+                new User(
+                  user.tasks,
+                  new Settings(
+                    user.settings.sound,
+                    user.settings.textColor,
+                    user.settings.primaryBackColor,
+                    user.settings.secondaryBackColor,
+                    user.settings.autoRemoveOldTasks,
+                    !prev.settings.subTasksActive,
+                    user.settings.autoMarkSubTasks,
+                    user.settings.autoAssignDateForSubTasks
+                  )
+                )
+            );
           }}
         >
           <Ionicons
             name={`${
-              autoRemoveActive ? "close-circle-sharp" : "checkmark-circle-sharp"
+              user.settings.subTasksActive
+                ? "checkmark-circle-sharp"
+                : "close-circle-sharp"
             }`}
             color={"black"}
             size={26}
           />
         </IconButton>
-        <View style={styles.contentContainer}>
-          <Paragraph
-            color={user.settings.textColor as string}
-            width={"70%"}
-            fontSize={20}
-          >
-            Mark subtasks as complete when main task is complete
-          </Paragraph>
-          <IconButton
-            buttonPress={() => {
-              const next = !autoRemoveActive;
-              setAutoRemoveActive(next);
-              setUser(
-                new User(
-                  user.tasks,
-                  new Settings(
-                    user.settings.sound,
-                    user.settings.textColor,
-                    user.settings.primaryBackColor,
-                    user.settings.secondaryBackColor,
-                    next
-                  )
-                )
-              );
-              saveUser(user);
-            }}
-          >
-            <Ionicons
-              name={`${
-                autoRemoveActive
-                  ? "close-circle-sharp"
-                  : "checkmark-circle-sharp"
-              }`}
-              color={"black"}
-              size={26}
-            />
-          </IconButton>
-        </View>
-        <View style={styles.contentContainer}>
-          <Paragraph
-            color={user.settings.textColor as string}
-            width={"70%"}
-            fontSize={20}
-          >
-            Automatically assign subtasks the same due date as the main task.
-          </Paragraph>
-          <IconButton
-            buttonPress={() => {
-              const next = !autoRemoveActive;
-              setAutoRemoveActive(next);
-              setUser(
-                new User(
-                  user.tasks,
-                  new Settings(
-                    user.settings.sound,
-                    user.settings.textColor,
-                    user.settings.primaryBackColor,
-                    user.settings.secondaryBackColor,
-                    next
-                  )
-                )
-              );
-              saveUser(user);
-            }}
-          >
-            <Ionicons
-              name={`${
-                autoRemoveActive
-                  ? "close-circle-sharp"
-                  : "checkmark-circle-sharp"
-              }`}
-              color={"black"}
-              size={26}
-            />
-          </IconButton>
-        </View>
+        {user.settings.subTasksActive ? (
+          <>
+            {" "}
+            <View style={styles.contentContainer}>
+              <Paragraph
+                color={user.settings.textColor as string}
+                width={"70%"}
+                fontSize={20}
+              >
+                Mark subtasks as complete when main task is complete
+              </Paragraph>
+              <IconButton
+                buttonPress={() => {
+                  setUser(
+                    (prev) =>
+                      new User(
+                        user.tasks,
+                        new Settings(
+                          user.settings.sound,
+                          user.settings.textColor,
+                          user.settings.primaryBackColor,
+                          user.settings.secondaryBackColor,
+                          user.settings.autoRemoveOldTasks,
+                          user.settings.subTasksActive,
+                          !prev.settings.autoMarkSubTasks,
+                          user.settings.autoAssignDateForSubTasks
+                        )
+                      )
+                  );
+                  saveUser(user);
+                }}
+              >
+                <Ionicons
+                  name={`${
+                    user.settings.autoMarkSubTasks
+                      ? "checkmark-circle-sharp"
+                      : "close-circle-sharp"
+                  }`}
+                  color={"black"}
+                  size={26}
+                />
+              </IconButton>
+            </View>
+            <View style={styles.contentContainer}>
+              <Paragraph
+                color={user.settings.textColor as string}
+                width={"70%"}
+                fontSize={20}
+              >
+                Automatically assign subtasks the same due date as the main
+                task.
+              </Paragraph>
+              <IconButton
+                buttonPress={() => {
+                  setUser(
+                    (prev) =>
+                      new User(
+                        user.tasks,
+                        new Settings(
+                          user.settings.sound,
+                          user.settings.textColor,
+                          user.settings.primaryBackColor,
+                          user.settings.secondaryBackColor,
+                          user.settings.autoRemoveOldTasks,
+                          user.settings.subTasksActive,
+                          user.settings.autoMarkSubTasks,
+                          !prev.settings.autoAssignDateForSubTasks
+                        )
+                      )
+                  );
+                  saveUser(user);
+                }}
+              >
+                <Ionicons
+                  name={`${
+                    user.settings.autoAssignDateForSubTasks
+                      ? "checkmark-circle-sharp"
+                      : "close-circle-sharp"
+                  }`}
+                  color={"black"}
+                  size={26}
+                />
+              </IconButton>
+            </View>
+          </>
+        ) : (
+          <></>
+        )}
       </View>
     </SettingsDropdown>
   );

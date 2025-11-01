@@ -21,21 +21,20 @@ const styles = StyleSheet.create({
 
 const ExpiredTasks = () => {
   const { user, setUser } = useContext(UserContext);
-  const [autoRemoveActive, setAutoRemoveActive] = useState<boolean>(
-    user.settings.autoRemoveOldTasks
-  );
+  
   return (
     <SettingsDropdown
       title="Expired tasks"
+      modalTitle="Expired tasks"
       infoText="Decide whether or not to automatically remove expired tasks"
     >
       <View style={styles.container}>
         <IconButton
-          title={`Turn ${autoRemoveActive ? "off" : "on"} autoremove`}
+          title={`Autoremove: ${user.settings.autoRemoveOldTasks ? "on" : "off"}`}
           buttonPress={() => {
-            const next = !autoRemoveActive;
-            setAutoRemoveActive(next);
+            const next = !user.settings.autoRemoveOldTasks;
             setUser(
+              (prev) =>
               new User(
                 user.tasks,
                 new Settings(
@@ -43,7 +42,10 @@ const ExpiredTasks = () => {
                   user.settings.textColor,
                   user.settings.primaryBackColor,
                   user.settings.secondaryBackColor,
-                  next
+                  prev.settings.autoRemoveOldTasks,
+                  user.settings.subTasksActive,
+                  user.settings.autoMarkSubTasks,
+                  user.settings.autoAssignDateForSubTasks
                 )
               )
             );
@@ -52,7 +54,7 @@ const ExpiredTasks = () => {
         >
           <Ionicons
             name={`${
-              autoRemoveActive ? "close-circle-sharp" : "checkmark-circle-sharp"
+              user.settings.autoRemoveOldTasks ? "checkmark-circle-sharp" : "close-circle-sharp"
             }`}
             color={"black"}
             size={26}

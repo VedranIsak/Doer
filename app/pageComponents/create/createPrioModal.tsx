@@ -20,6 +20,7 @@ const CreatePrioModal = ({
   };
   return (
     <ModalContainer
+    title="Priority levels"
       showModalContainer={showPrioModal}
       setShowModalContainer={setShowPrioModal}
     >

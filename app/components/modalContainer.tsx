@@ -9,14 +9,17 @@ import {
 import IconButton from "./iconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
+import Paragraph from "./paragraph";
 
 interface ModalContainerProps {
+  title: string;
   showModalContainer: boolean;
   setShowModalContainer: React.Dispatch<boolean>;
   children: ReactNode;
 }
 
 const ModalContainer = ({
+  title,
   showModalContainer,
   setShowModalContainer,
   children,
@@ -32,20 +35,19 @@ const ModalContainer = ({
       justifyContent: "center",
       alignItems: "center",
       width: "90%",
-      borderRadius: 25,
+      borderRadius: 15,
       overflow: "hidden",
       boxShadow: ".25px .25px 4px gray",
     },
     modalSubContainer: {
-      marginTop: 7.5,
       padding: 10,
       height: "auto",
-      width: "95%",
-      borderRadius: 25,
+      width: "100%",
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "rgba(255, 255, 255, .3)",
       boxShadow: ".25px .25px 4px gray",
+      borderRadius: 15,
     },
   });
 
@@ -68,22 +70,26 @@ const ModalContainer = ({
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
               />
-
-              <View style={styles.modalSubContainer}>{children}</View>
-              <IconButton
-                title="Close"
-                marginBottom={15}
-                marginTop={15}
-                buttonPress={() => {
-                  setShowModalContainer(false);
-                }}
-              >
-                <Ionicons
-                  name={"close-circle-sharp"}
-                  color={"black"}
-                  size={26}
-                />
-              </IconButton>
+              <Paragraph marginBottom={10} marginTop={2.5} color={user.settings.textColor as string} fontSize={22}>
+                {title}
+              </Paragraph>
+              <View style={styles.modalSubContainer}>
+                {children}
+                <IconButton
+                  title="Close"
+                  marginBottom={10}
+                  marginTop={10}
+                  buttonPress={() => {
+                    setShowModalContainer(false);
+                  }}
+                >
+                  <Ionicons
+                    name={"close-circle-sharp"}
+                    color={"black"}
+                    size={26}
+                  />
+                </IconButton>
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>

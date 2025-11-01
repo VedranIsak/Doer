@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 50,
     borderColor: "lightgrey",
-    borderWidth: 4
+    borderWidth: 4,
   },
 });
 
@@ -48,7 +48,10 @@ const Themes = () => {
           textColor,
           primBackColor,
           secBackColor,
-          user.settings.autoRemoveOldTasks
+          user.settings.autoRemoveOldTasks,
+          user.settings.subTasksActive,
+          user.settings.autoMarkSubTasks,
+          user.settings.autoAssignDateForSubTasks
         )
       )
     );
@@ -83,6 +86,7 @@ const Themes = () => {
   return (
     <SettingsDropdown
       title="Themes"
+      modalTitle="Themes"
       infoText="Switch between different themes for Doer"
     >
       <View style={styles.container}>

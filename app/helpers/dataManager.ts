@@ -25,7 +25,10 @@ function reviveSettings(rawSettings: any): Settings {
     rawSettings.textColor,
     rawSettings.primaryBackColor,
     rawSettings.secondaryBackColor,
-    rawSettings.autoRemoveOldTasks
+    rawSettings.autoRemoveOldTasks,
+    rawSettings.subTasksActive,
+    rawSettings.autoMarkSubTasks,
+    rawSettings.autoAssignDateForSubTasks
   );
 }
 
@@ -44,6 +47,6 @@ function reviveTasks(rawTasks: any[]): TaskModel[] {
   );
 }
 
-export async function remove(key: string) {
-  await AsyncStorage.removeItem(key);
+export async function remove() {
+  await AsyncStorage.removeItem("user");
 }

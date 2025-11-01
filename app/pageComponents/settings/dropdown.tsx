@@ -13,9 +13,10 @@ import { UserContext } from "../../context/UserContext";
 
 type SettingsDropdownProps = {
   title: string;
+  modalTitle: string;
   infoText: string;
   children?: React.ReactNode;
-  estimatedMaxHeight?: number; // default 600
+  estimatedMaxHeight?: number; 
   duration?: number; 
 };
 
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
 
 const SettingsDropdown = ({
   title,
+  modalTitle,
   infoText,
   children,
   estimatedMaxHeight = 600,
@@ -136,6 +138,7 @@ const SettingsDropdown = ({
       </Animated.View>
 
       <ModalContainer
+      title={modalTitle}
         showModalContainer={showInfoModal}
         setShowModalContainer={setShowInfoModal}
       >

@@ -21,38 +21,38 @@ const styles = StyleSheet.create({
 
 const Sound = () => {
   const { user, setUser } = useContext(UserContext);
-  const [soundActive, setSoundActive] = useState<boolean>(user.settings.sound);
   return (
     <SettingsDropdown
       title="Sound"
+      modalTitle="Sound"
       infoText="Mure or unmute the application. Please note that OS restrictions may hinder some sounds from being toggled."
     >
       <View style={styles.container}>
         <IconButton
-          title={`Turn ${soundActive ? "off" : "on"} sound`}
+          title={`Sound: ${user.settings.sound ? "on" : "off"}`}
           buttonPress={async () => {
-            const next = !soundActive;
-            setSoundActive(next);
-            setUser((prev) =>
-              prev.cloneWith(
+            setUser(
+              (prev) =>
                 new User(
                   user.tasks,
                   new Settings(
-                    next,
+                    prev.settings.sound,
                     user.settings.textColor,
                     user.settings.primaryBackColor,
                     user.settings.secondaryBackColor,
-                    user.settings.autoRemoveOldTasks
+                    user.settings.autoRemoveOldTasks,
+                    user.settings.subTasksActive,
+                    user.settings.autoMarkSubTasks,
+                    user.settings.autoAssignDateForSubTasks
                   )
                 )
-              )
             );
             saveUser(user);
-            await setIsAudioActiveAsync(soundActive);
+            await setIsAudioActiveAsync(user.settings.sound);
           }}
         >
           <Ionicons
-            name={`volume-${soundActive ? "mute" : "high"}`}
+            name={`volume-${user.settings.sound ? "high" : "mute"}`}
             color={"black"}
             size={26}
           />

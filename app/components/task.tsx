@@ -90,7 +90,8 @@ const Task = ({ taskData, tasks, setTasks }: TaskProps) => {
       task.subTasks
     );
     newTask.isCompleted = checked;
-    newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
+    if (user.settings.autoMarkSubTasks)
+      newTask.subTasks.forEach((subTask) => (subTask.isCompleted = checked));
     setTask(newTask);
 
     Animated.timing(opacity, {

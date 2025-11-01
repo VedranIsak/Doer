@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import User from "../models/User";
 import Settings from "../models/Settings";
-import { loadUser, remove, saveUser } from "../helpers/dataManager";
+import { loadUser, saveUser } from "../helpers/dataManager";
 
 type UserContextType = {
   user: User;
@@ -9,7 +9,10 @@ type UserContextType = {
 };
 
 const UserContext = createContext<UserContextType>({
-  user: new User([], new Settings(true, "white", "#6a1a74", "#b3206c", false)),
+  user: new User(
+    [],
+    new Settings(true, "white", "#6a1a74", "#b3206c", false, false, true, true)
+  ),
   setUser: () => {},
 });
 
@@ -20,7 +23,7 @@ interface ContextProps {
 const UserProvider = ({ children }: ContextProps) => {
   const defaultUser = new User(
     [],
-    new Settings(true, "white", "#6a1a74", "#b3206c", false)
+    new Settings(true, "white", "#6a1a74", "#b3206c", false, false, true, true)
   );
 
   const [user, setUser] = useState<User>(() => defaultUser);
@@ -29,13 +32,14 @@ const UserProvider = ({ children }: ContextProps) => {
     async function loadUserOnMount() {
       try {
         const loaded = await loadUser();
-        if (loaded) { setUser(loaded); };
+        if (loaded) {
+          setUser(loaded);
+        }
       } catch {
         setUser(defaultUser);
         saveUser(user);
       }
     }
-
     loadUserOnMount();
   }, []);
 

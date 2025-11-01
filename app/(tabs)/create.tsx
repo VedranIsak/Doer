@@ -99,7 +99,11 @@ const Create = () => {
             }
           />
         </Container>
-        <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
+        {user.settings.subTasksActive ? (
+          <CreateSubTaskView newTask={newTask} setNewTask={setNewTask} />
+        ) : (
+          <></>
+        )}
         <Container padding={10}>
           <IconButton
             marginTop={5}
@@ -149,9 +153,7 @@ const Create = () => {
                       })
                     );
                   } else {
-                    setErrorMessage(
-                      "Date has to be today or in the future"
-                    );
+                    setErrorMessage("Date has to be today or in the future");
                     setShowErrorModal(true);
                   }
                 }
@@ -160,8 +162,8 @@ const Create = () => {
           )}
           <IconButton
             buttonPress={() => {
-              if(newTask.title.length == 0) {
-                setErrorMessage("Your task needs a title")
+              if (newTask.title.length == 0) {
+                setErrorMessage("Your task needs a title");
                 setShowErrorModal(true);
                 return;
               }
